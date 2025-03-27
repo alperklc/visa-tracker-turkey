@@ -34,3 +34,39 @@ export type ApplicationStats = {
   totalAnnualCost: number; // in Euros
   worstCities: Array<{city: string, days: number}>;
 };
+
+// Table translations
+export interface TableTranslations {
+  country: string;
+  city: string;
+  purpose: string;
+  submissionDate: string;
+  appointmentDate: string;
+  returnDate: string;
+  processingTime: string;
+  result: string;
+  days: string;
+  approved: string;
+  rejected: string;
+  pending: string;
+  caption: string;
+}
+
+// Review page translations
+export interface ReviewTranslations {
+  title: string;
+  subtitle: string;
+  search: string;
+  searchPlaceholder: string;
+  filterCountry: string;
+  selectCountry: string;
+  allCountries: string;
+  sortBy: string;
+  newestFirst: string;
+  oldestFirst: string;
+  noResults: string;
+  tryAdjusting: string;
+  clearFilters: string;
+  cards: string;
+  table: string;
+}
