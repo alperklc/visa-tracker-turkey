@@ -67,6 +67,57 @@ const initialApplications: VisaApplication[] = [
       status: "Rejected"
     },
     createdAt: new Date(2023, 2, 15)
+  },
+  {
+    id: "5",
+    country: "Germany",
+    city: "Ankara",
+    durationOfVisit: "90 days",
+    purposeOfVisit: "Tourism",
+    applicationSubmitDate: new Date(2023, 6, 10),
+    idataReplyDate: new Date(2023, 6, 15),
+    appointmentDate: new Date(2023, 7, 5),
+    passportReturnDate: new Date(2023, 7, 30),
+    result: {
+      status: "Approved",
+      validity: "90 days",
+      entryType: "Single"
+    },
+    createdAt: new Date(2023, 6, 10)
+  },
+  {
+    id: "6",
+    country: "Italy",
+    city: "Istanbul",
+    durationOfVisit: "60 days",
+    purposeOfVisit: "Business",
+    applicationSubmitDate: new Date(2023, 7, 20),
+    idataReplyDate: new Date(2023, 7, 25),
+    appointmentDate: new Date(2023, 8, 15),
+    passportReturnDate: new Date(2023, 8, 30),
+    result: {
+      status: "Approved",
+      validity: "60 days",
+      entryType: "Multiple"
+    },
+    createdAt: new Date(2023, 7, 20)
+  },
+  {
+    id: "7",
+    country: "Germany",
+    city: "Izmir",
+    durationOfVisit: "180 days",
+    purposeOfVisit: "Education",
+    applicationSubmitDate: new Date(2023, 8, 5),
+    idataReplyDate: new Date(2023, 8, 12),
+    appointmentDate: new Date(2023, 9, 3),
+    passportReturnDate: new Date(2023, 9, 25),
+    result: {
+      status: "Approved",
+      validity: "180 days",
+      entryType: "Multiple"
+    },
+    createdAt: new Date(2023, 8, 5)
   }
 ];
 
@@ -76,7 +127,12 @@ export const useApplications = () => {
     totalApplications: 0,
     byCountry: { Germany: 0, Italy: 0 },
     averageProcessingDays: 0,
-    approvalRate: 0
+    approvalRate: 0,
+    citiesProcessingTime: [],
+    trendsLastThreeMonths: [],
+    totalAnnualApplications: 85000, // Estimated number of applications per year
+    totalAnnualCost: 25500000, // Estimated total cost in euros (85000 * 300€ average cost)
+    worstCities: []
   });
   const [loading, setLoading] = useState(true);
 
@@ -105,6 +161,20 @@ export const useApplications = () => {
     let completedApplications = 0;
     let approvedApplications = 0;
 
+    // Calculate processing time by city
+    const cityProcessing: Record<string, {total: number, count: number}> = {};
+    
+    // Calculate monthly trends (last 3 months)
+    const monthlyData: Record<string, {total: number, count: number}> = {};
+    const now = new Date();
+    
+    // Get data for the last 3 months
+    for (let i = 0; i < 3; i++) {
+      const month = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const monthStr = month.toLocaleString('default', { month: 'short', year: '2-digit' });
+      monthlyData[monthStr] = { total: 0, count: 0 };
+    }
+
     apps.forEach(app => {
       // Count by country
       countryCount[app.country]++;
@@ -122,8 +192,41 @@ export const useApplications = () => {
         if (app.result && app.result.status === "Approved") {
           approvedApplications++;
         }
+        
+        // Add to city processing stats
+        if (!cityProcessing[app.city]) {
+          cityProcessing[app.city] = { total: 0, count: 0 };
+        }
+        cityProcessing[app.city].total += processingTime;
+        cityProcessing[app.city].count += 1;
+        
+        // Add to monthly trends if within last 3 months
+        const appMonth = app.passportReturnDate.toLocaleString('default', { month: 'short', year: '2-digit' });
+        if (monthlyData[appMonth]) {
+          monthlyData[appMonth].total += processingTime;
+          monthlyData[appMonth].count += 1;
+        }
       }
     });
+    
+    // Calculate average processing time by city
+    const citiesProcessingTime = Object.entries(cityProcessing).map(([city, data]) => ({
+      city,
+      days: Math.round(data.total / data.count)
+    }));
+    
+    // Get worst cities (longest average processing times)
+    const worstCities = [...citiesProcessingTime]
+      .sort((a, b) => b.days - a.days)
+      .slice(0, 5);
+    
+    // Calculate trends for last 3 months
+    const trendsLastThreeMonths = Object.entries(monthlyData)
+      .map(([month, data]) => ({
+        month,
+        averageDays: data.count > 0 ? Math.round(data.total / data.count) : 0
+      }))
+      .reverse();
 
     setStats({
       totalApplications: apps.length,
@@ -133,7 +236,12 @@ export const useApplications = () => {
         : 0,
       approvalRate: completedApplications > 0 
         ? Math.round((approvedApplications / completedApplications) * 100) 
-        : 0
+        : 0,
+      citiesProcessingTime,
+      trendsLastThreeMonths,
+      totalAnnualApplications: 85000, // Estimated
+      totalAnnualCost: 25500000, // Estimated (85000 * 300€)
+      worstCities
     });
   };
 

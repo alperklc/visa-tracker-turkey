@@ -7,9 +7,11 @@ import ApplicationCard from '@/components/ApplicationCard';
 import { useApplications } from '@/hooks/useApplications';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const Index: React.FC = () => {
   const { applications, loading } = useApplications();
+  const { t } = useLanguage();
   
   // Display only the most recent 4 applications
   const recentApplications = [...applications]
@@ -21,16 +23,16 @@ const Index: React.FC = () => {
       <Hero />
       
       <section className="container py-16 animate-fade-in">
-        <h2 className="text-3xl font-bold mb-8 text-center">Visa Application Dashboard</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">{t('dashboard.title')}</h2>
         <Dashboard />
       </section>
       
       <section className="container py-16 animate-fade-in">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Recent Applications</h2>
+          <h2 className="text-3xl font-bold">{t('recentApplications.title')}</h2>
           <Link to="/submit">
             <Button variant="outline">
-              Submit Your Experience
+              {t('recentApplications.submit')}
             </Button>
           </Link>
         </div>
@@ -53,12 +55,12 @@ const Index: React.FC = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold mb-2">No applications yet</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('recentApplications.noApplications')}</h3>
             <p className="text-muted-foreground mb-6">
-              Be the first to share your visa application experience
+              {t('recentApplications.beFirst')}
             </p>
             <Link to="/submit">
-              <Button>Submit Application</Button>
+              <Button>{t('recentApplications.submitApplication')}</Button>
             </Link>
           </div>
         )}

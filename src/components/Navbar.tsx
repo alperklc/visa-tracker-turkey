@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,9 +25,9 @@ const Navbar: React.FC = () => {
   }, [scrolled]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Submit Application', path: '/submit' },
-    { name: 'Review Entries', path: '/review' }
+    { name: t('home'), path: '/' },
+    { name: t('submitApplication'), path: '/submit' },
+    { name: t('reviewEntries'), path: '/review' }
   ];
 
   return (
@@ -38,9 +41,9 @@ const Navbar: React.FC = () => {
       <div className="container py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-semibold text-xl tracking-tight">Visa Tracker</span>
+            <span className="font-semibold text-xl tracking-tight">{t('appName').split(' ')[0]}</span>
             <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-medium">
-              Turkey
+              {t('appName').split(' ')[1]}
             </span>
           </Link>
 
@@ -64,13 +67,14 @@ const Navbar: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             <Link to="/submit">
               <Button 
                 variant="default" 
                 size="sm"
                 className="shadow-sm hover:shadow transition-all"
               >
-                Submit Application
+                {t('submitApplication')}
               </Button>
             </Link>
           </div>

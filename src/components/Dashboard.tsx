@@ -17,6 +17,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useApplications } from '@/hooks/useApplications';
 import { ApplicationStats, VisaApplication, Country } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/LanguageContext';
+import ProcessingTrends from './ProcessingTrends';
+import FinancialImpact from './FinancialImpact';
 
 interface DashboardProps {
   className?: string;
@@ -25,6 +28,7 @@ interface DashboardProps {
 const Dashboard: React.FC<DashboardProps> = ({ className }) => {
   const { applications, stats, loading } = useApplications();
   const [selectedCountry, setSelectedCountry] = useState<Country | 'All'>('All');
+  const { t } = useLanguage();
 
   if (loading) {
     return (
@@ -61,15 +65,15 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
   // Prepare data for the pie chart
   const resultData = [
     {
-      name: 'Approved',
+      name: t('dashboard.approved'),
       value: filteredApplications.filter(app => app.result?.status === 'Approved').length
     },
     {
-      name: 'Rejected',
+      name: t('dashboard.rejected'),
       value: filteredApplications.filter(app => app.result?.status === 'Rejected').length
     },
     {
-      name: 'Pending',
+      name: t('dashboard.pending'),
       value: filteredApplications.filter(app => !app.result || app.result.status === 'Pending').length
     }
   ];
@@ -91,35 +95,57 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
       <div className="mb-8">
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid grid-cols-3 w-[400px] mx-auto mb-8">
-            <TabsTrigger value="all" onClick={() => setSelectedCountry('All')}>All Countries</TabsTrigger>
-            <TabsTrigger value="germany" onClick={() => setSelectedCountry('Germany')}>Germany</TabsTrigger>
-            <TabsTrigger value="italy" onClick={() => setSelectedCountry('Italy')}>Italy</TabsTrigger>
+            <TabsTrigger value="all" onClick={() => setSelectedCountry('All')}>
+              {t('dashboard.allCountries')}
+            </TabsTrigger>
+            <TabsTrigger value="germany" onClick={() => setSelectedCountry('Germany')}>
+              Germany
+            </TabsTrigger>
+            <TabsTrigger value="italy" onClick={() => setSelectedCountry('Italy')}>
+              Italy
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="all" className="animate-slide-up">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <StatsCard 
-                title="Total Applications" 
+                title={t('dashboard.totalApplications')} 
                 value={stats.totalApplications.toString()} 
-                description="Total number of visa applications submitted" 
+                description={t('dashboard.description')} 
               />
               <StatsCard 
-                title="Avg. Processing Time" 
-                value={`${stats.averageProcessingDays} days`} 
-                description="Average time from submission to result" 
+                title={t('dashboard.avgProcessingTime')} 
+                value={`${stats.averageProcessingDays} ${t('dashboard.days')}`} 
+                description={t('dashboard.description')} 
               />
               <StatsCard 
-                title="Approval Rate" 
+                title={t('dashboard.approvalRate')} 
                 value={`${stats.approvalRate}%`} 
-                description="Percentage of approved applications" 
+                description={t('dashboard.description')} 
               />
               <StatsCard 
-                title="Latest Application" 
+                title={t('dashboard.latestApplication')} 
                 value={formatDate(applications.length > 0 
                   ? applications.sort((a, b) => 
                       b.createdAt.getTime() - a.createdAt.getTime())[0].createdAt 
                   : null)} 
-                description="Most recent application submitted" 
+                description={t('dashboard.description')} 
+              />
+            </div>
+            
+            {/* Financial Impact Section - Show at the top */}
+            <div className="mb-8">
+              <FinancialImpact 
+                totalAnnualApplications={stats.totalAnnualApplications}
+                totalAnnualCost={stats.totalAnnualCost}
+              />
+            </div>
+            
+            {/* Processing Trends Section - Show under financial impact */}
+            <div className="mb-8">
+              <ProcessingTrends 
+                trendsData={stats.trendsLastThreeMonths}
+                worstCities={stats.worstCities}
               />
             </div>
           </TabsContent>
@@ -137,9 +163,9 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         <Card className="overflow-hidden">
           <CardHeader className="pb-2">
-            <CardTitle>Processing Time</CardTitle>
+            <CardTitle>{t('dashboard.processingTime')}</CardTitle>
             <CardDescription>
-              Days from application submission to passport return
+              {t('dashboard.processingTimeDesc')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -151,7 +177,7 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
                 >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="city" />
-                  <YAxis label={{ value: 'Days', angle: -90, position: 'insideLeft' }} />
+                  <YAxis label={{ value: t('dashboard.days'), angle: -90, position: 'insideLeft' }} />
                   <Tooltip />
                   <Bar dataKey="days" fill="#4f46e5" radius={[4, 4, 0, 0]} />
                 </BarChart>
@@ -162,9 +188,9 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
 
         <Card className="overflow-hidden">
           <CardHeader className="pb-2">
-            <CardTitle>Application Results</CardTitle>
+            <CardTitle>{t('dashboard.applicationResults')}</CardTitle>
             <CardDescription>
-              Distribution of visa application outcomes
+              {t('dashboard.applicationResultsDesc')}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center">

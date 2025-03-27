@@ -1,5 +1,6 @@
 
 export type Country = "Germany" | "Italy";
+export type Language = "tr" | "en" | "de";
 
 export type VisaApplication = {
   id: string;
@@ -26,4 +27,10 @@ export type ApplicationStats = {
   byCountry: Record<Country, number>;
   averageProcessingDays: number;
   approvalRate: number;
+  // New stats
+  citiesProcessingTime: Array<{city: string, days: number}>;
+  trendsLastThreeMonths: Array<{month: string, averageDays: number}>;
+  totalAnnualApplications: number;
+  totalAnnualCost: number; // in Euros
+  worstCities: Array<{city: string, days: number}>;
 };
