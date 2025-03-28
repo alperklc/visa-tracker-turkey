@@ -1,4 +1,3 @@
-
 export enum CountryCode {
   DE = "DE", // Germany
   IT = "IT", // Italy
@@ -148,6 +147,7 @@ export interface ReviewTranslations {
   filterCountry: string;
   selectCountry: string;
   allCountries: string;
+  allPurposes: string;
   sortBy: string;
   newestFirst: string;
   oldestFirst: string;
@@ -156,4 +156,20 @@ export interface ReviewTranslations {
   clearFilters: string;
   cards: string;
   table: string;
+}
+
+export interface PaginationTranslations {
+  rowsPerPage: string;
+  showing: string;
+  of: string;
+}
+
+export interface PurposeTranslations {
+  tourism: string;
+  business: string;
+  family: string;
+  study: string;
+  work: string;
+  medical: string;
+  other: string;
 }
