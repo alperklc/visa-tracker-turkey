@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useApplications } from '@/hooks/useApplications';
@@ -76,10 +77,10 @@ const Dashboard: React.FC<DashboardProps> = ({ className }) => {
             <TabsTrigger value="all" onClick={() => setSelectedCountry('All')}>
               {t('dashboard.allCountries')}
             </TabsTrigger>
-            <TabsTrigger value="germany" onClick={() => setSelectedCountry('Germany')}>
+            <TabsTrigger value="germany" onClick={() => setSelectedCountry(Country.Germany)}>
               Germany
             </TabsTrigger>
-            <TabsTrigger value="italy" onClick={() => setSelectedCountry('Italy')}>
+            <TabsTrigger value="italy" onClick={() => setSelectedCountry(Country.Italy)}>
               Italy
             </TabsTrigger>
           </TabsList>
