@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Language } from './types';
 
@@ -143,21 +142,21 @@ const translations: Record<Language, Record<string, string>> = {
     "form.countryDescription": "Vize başvurusu yaptığınız ülke",
     "form.city": "Şehir",
     "form.selectCity": "Şehir seçin",
-    "form.cityDescription": "Başvuru yaptığınız VFS veya konsolosluk lokasyonu",
-    "form.duration": "Ziyaret Süresi",
-    "form.durationPlaceholder": "örn. 90 gün, 6 ay",
-    "form.durationDescription": "Vize için talep ettiğiniz gün veya ay sayısı",
+    "form.cityDescription": "Başvuru yaptığınız konsolosluğun / büyükelçiliğin lokasyonu",
+    "form.duration": "Ziyaret Süresi (gün)",
+    "form.durationPlaceholder": "örn. 12 gün",
+    "form.durationDescription": "Vize için talep ettiğiniz gün sayısı",
     "form.purpose": "Ziyaret Amacı",
     "form.selectPurpose": "Ziyaret amacı seçin",
     "form.purposeDescription": "Vize başvurusunun ana amacı",
     "form.submitDate": "Başvuru Tarihi",
     "form.pickDate": "Tarih seçin",
-    "form.submitDateDescription": "Tüm belgeleri ve başvuruyu teslim ettiğiniz tarih",
+    "form.submitDateDescription": "Başvurduğunuz tarih. Randevu tarihi değil.",
     "form.replyReceived": "Yanıt Alındı",
     "form.replyDateDescription": "Başvurunuzun ilk değerlendirilmesinden sonraki yanıt tarihi (varsa)",
     "form.appointmentDate": "Randevu Tarihi",
     "form.appointmentDateDescription": "Parmak izi ve belge kontrolü için randevu tarihi",
-    "form.passportReturned": "Pasaportunuz iade edildi mi?",
+    "form.passportReturned": "Sonuç geldi mi?",
     "form.yes": "Evet",
     "form.no": "Hayır",
     "form.passportReturnedDescription": "Pasaportunuz size geri verildi mi?",
@@ -213,6 +212,43 @@ const translations: Record<Language, Record<string, string>> = {
     "discussions.subtitle": "Vize deneyimlerinizi ve sorularınızı diğer kullanıcılarla paylaşın",
     "discussions.comingSoon": "Tartışma forumu yakında eklenecek",
     "discussions.stayTuned": "Güncellemeler için takipte kalın!",
+    
+    // Actions
+    "actions.title": "Ne Yapabiliriz?",
+    "actions.subtitle": "Adil vize politikaları için toplu eylem önerileri",
+    "actions.disclaimer.title": "Önemli Not",
+    "actions.disclaimer.text": "Aşağıdaki öneriler barışçıl ve yasal değişim yollarıdır. Her zaman yerel yasalara uygun hareket ettiğinizden emin olun.",
+    
+    "actions.diaspora.title": "Türk Diasporası ile İletişim",
+    "actions.diaspora.description": "Yurtdışındaki Türk toplumlarının etkisinden yararlanın",
+    "actions.diaspora.point1": "Yerel temsilcileriyle iletişime geçmeleri için yurtdışında yaşayan Türk vatandaşlarıyla iletişime geçin",
+    "actions.diaspora.point2": "Türk toplumlarının bulunduğu ülkelerde barışçıl gösteriler düzenleyin",
+    "actions.diaspora.point3": "Diaspora örgütleri aracılığıyla imza kampanyaları başlatın",
+    
+    "actions.tourism.title": "Alternatif Turizm",
+    "actions.tourism.description": "Turizm ve iş için alternatif destinasyonları değerlendirin",
+    "actions.tourism.point1": "Vizesiz veya daha kolay vize süreçleri olan ülkeleri keşfedin",
+    "actions.tourism.point2": "Türk vatandaşlarına adil vize politikaları uygulayan ülkeleri destekleyin",
+    "actions.tourism.point3": "Alternatif destinasyonlardan olumlu deneyimleri paylaşın",
+    
+    "actions.awareness.title": "Farkındalık Yaratın",
+    "actions.awareness.description": "Bilgi ve deneyimleri paylaşın",
+    "actions.awareness.point1": "Vize ret hikayelerini sosyal medyada belgelendirin ve paylaşın",
+    "actions.awareness.point2": "Vize sorunlarını ele almaları için gazeteciler ve medya kuruluşlarıyla iletişime geçin",
+    "actions.awareness.point3": "Ailelere ve işletmelere etkisini vurgulayan içerikler oluşturun",
+    
+    "actions.legal.title": "Hukuki Savunuculuk",
+    "actions.legal.description": "Adil muamele için yasal girişimleri destekleyin",
+    "actions.legal.point1": "Ayrımcı vize uygulamalarına karşı çıkan organizasyonları destekleyin",
+    "actions.legal.point2": "Olası yasal işlemler için haksız muamele vakalarını belgeleyin",
+    "actions.legal.point3": "Yasal kanallar aracılığıyla karşılıklı vize politikalarını savunun",
+    
+    "actions.alternatives.title": "Alternatif Destinasyonlar",
+    "actions.alternatives.description": "Türk vatandaşları için daha uygun vize politikaları olan bu ülkeleri değerlendirin:",
+    
+    "actions.contact.title": "Katılın",
+    "actions.contact.description": "Bu girişime katkıda bulunmak ister misiniz? Fikir ve önerileriniz için bizimle iletişime geçin.",
+    "actions.contact.email": "Bize e-posta gönderin",
   },
   en: {
     // General
@@ -345,10 +381,10 @@ const translations: Record<Language, Record<string, string>> = {
     "form.countryDescription": "The country you applied for a visa to",
     "form.city": "City",
     "form.selectCity": "Select city",
-    "form.cityDescription": "The VFS or consulate location where you applied",
-    "form.duration": "Duration of Visit",
-    "form.durationPlaceholder": "e.g. 90 days, 6 months",
-    "form.durationDescription": "Number of days or months requested for the visa",
+    "form.cityDescription": "The location of the consulate or embassy where you applied",
+    "form.duration": "Duration of Visit (days)",
+    "form.durationPlaceholder": "e.g. 12 days",
+    "form.durationDescription": "Number of days requested for the visa",
     "form.purpose": "Purpose of Visit",
     "form.selectPurpose": "Select purpose",
     "form.purposeDescription": "The main reason for the visa application",
@@ -415,6 +451,43 @@ const translations: Record<Language, Record<string, string>> = {
     "discussions.subtitle": "Share your visa experiences and questions with other users",
     "discussions.comingSoon": "Discussion forum coming soon",
     "discussions.stayTuned": "Stay tuned for updates!",
+    
+    // Actions (English translations)
+    "actions.title": "What Can We Do?",
+    "actions.subtitle": "Collective actions to advocate for fair visa policies",
+    "actions.disclaimer.title": "Important Note",
+    "actions.disclaimer.text": "The suggestions below are meant to be peaceful and legal ways to advocate for change. Always ensure your actions comply with local laws.",
+    
+    "actions.diaspora.title": "Engage with Turkish Diaspora",
+    "actions.diaspora.description": "Leverage the influence of Turkish communities abroad",
+    "actions.diaspora.point1": "Contact Turkish citizens living abroad to raise awareness with their local representatives",
+    "actions.diaspora.point2": "Organize peaceful demonstrations in countries where Turkish communities are present",
+    "actions.diaspora.point3": "Create petitions through diaspora organizations",
+    
+    "actions.tourism.title": "Alternative Tourism",
+    "actions.tourism.description": "Consider alternative destinations for tourism and business",
+    "actions.tourism.point1": "Explore visa-free countries or those with easier visa processes",
+    "actions.tourism.point2": "Support countries that maintain fair visa policies for Turkish citizens",
+    "actions.tourism.point3": "Share positive experiences from alternative destinations",
+    
+    "actions.awareness.title": "Raise Awareness",
+    "actions.awareness.description": "Share information and experiences",
+    "actions.awareness.point1": "Document and share visa rejection stories on social media",
+    "actions.awareness.point2": "Contact journalists and media outlets to cover visa issues",
+    "actions.awareness.point3": "Create content highlighting the impact on families and businesses",
+    
+    "actions.legal.title": "Legal Advocacy",
+    "actions.legal.description": "Support legal initiatives for fair treatment",
+    "actions.legal.point1": "Support organizations challenging discriminatory visa practices",
+    "actions.legal.point2": "Document cases of unfair treatment for potential legal action",
+    "actions.legal.point3": "Advocate for reciprocal visa policies through legal channels",
+    
+    "actions.alternatives.title": "Alternative Destinations",
+    "actions.alternatives.description": "Consider these countries with more favorable visa policies for Turkish citizens:",
+    
+    "actions.contact.title": "Get Involved",
+    "actions.contact.description": "Want to contribute to this initiative? Contact us with your ideas and suggestions.",
+    "actions.contact.email": "Send us an email",
   },
   de: {
     // General
@@ -547,10 +620,10 @@ const translations: Record<Language, Record<string, string>> = {
     "form.countryDescription": "Das Land, für das Sie ein Visum beantragt haben",
     "form.city": "Stadt",
     "form.selectCity": "Stadt auswählen",
-    "form.cityDescription": "Der VFS- oder Konsulatsstandort, an dem Sie den Antrag gestellt haben",
-    "form.duration": "Besuchsdauer",
-    "form.durationPlaceholder": "z.B. 90 Tage, 6 Monate",
-    "form.durationDescription": "Anzahl der Tage oder Monate, die für das Visum beantragt wurden",
+    "form.cityDescription": "Der Konsulats-Botschaftsstandort, an dem Sie den Antrag gestellt haben",
+    "form.duration": "Besuchsdauer (Tage)",
+    "form.durationPlaceholder": "z.B. 12 Tage",
+    "form.durationDescription": "Anzahl der Tage die für das Visum beantragt wurden",
     "form.purpose": "Besuchszweck",
     "form.selectPurpose": "Zweck auswählen",
     "form.purposeDescription": "Der Hauptgrund für den Visumantrag",
@@ -617,7 +690,44 @@ const translations: Record<Language, Record<string, string>> = {
     "discussions.subtitle": "Teilen Sie Ihre Visumerfahrungen und Fragen mit anderen Benutzern",
     "discussions.comingSoon": "Diskussionsforum kommt bald",
     "discussions.stayTuned": "Bleiben Sie dran für Updates!",
-  }
+    
+    // Actions (German translations)
+    "actions.title": "Was können wir tun?",
+    "actions.subtitle": "Gemeinsame Aktionen für faire Visapolitik",
+    "actions.disclaimer.title": "Wichtige Notiz",
+    "actions.disclaimer.text": "Die Vorschläge unten sind gemeinnützige und rechtliche Wege, um für Veränderungen zu kämpfen. Stellen Sie sicher, dass Ihre Handlungen lokalen Gesetzen entsprechen.",
+    
+    "actions.diaspora.title": "Engage with Turkish Diaspora",
+    "actions.diaspora.description": "Leverage the influence of Turkish communities abroad",
+    "actions.diaspora.point1": "Contact Turkish citizens living abroad to raise awareness with their local representatives",
+    "actions.diaspora.point2": "Organize peaceful demonstrations in countries where Turkish communities are present",
+    "actions.diaspora.point3": "Create petitions through diaspora organizations",
+    
+    "actions.tourism.title": "Alternative Tourism",
+    "actions.tourism.description": "Consider alternative destinations for tourism and business",
+    "actions.tourism.point1": "Explore visa-free countries or those with easier visa processes",
+    "actions.tourism.point2": "Support countries that maintain fair visa policies for Turkish citizens",
+    "actions.tourism.point3": "Share positive experiences from alternative destinations",
+    
+    "actions.awareness.title": "Farkındalık Yaratın",
+    "actions.awareness.description": "Bilgi ve deneyimleri paylaşın",
+    "actions.awareness.point1": "Vize ret hikayelerini sosyal medyada belgelendirin ve paylaşın",
+    "actions.awareness.point2": "Vize sorunlarını ele almaları için gazeteciler ve medya kuruluşlarıyla iletişime geçin",
+    "actions.awareness.point3": "Ailelere ve işletmelere etkisini vurgulayan içerikler oluşturun",
+    
+    "actions.legal.title": "Hukuki Savunuculuk",
+    "actions.legal.description": "Adil muamele için yasal girişimleri destekleyin",
+    "actions.legal.point1": "Ayrımcı vize uygulamalarına karşı çıkan organizasyonları destekleyin",
+    "actions.legal.point2": "Olası yasal işlemler için haksız muamele vakalarını belgeleyin",
+    "actions.legal.point3": "Yasal kanallar aracılığıyla karşılıklı vize politikalarını savunun",
+    
+    "actions.alternatives.title": "Alternatif Destinasyonlar",
+    "actions.alternatives.description": "Türk vatandaşları için daha uygun vize politikaları olan bu ülkeleri değerlendirin:",
+    
+    "actions.contact.title": "Katılın",
+    "actions.contact.description": "Bu girişime katkıda bulunmak ister misiniz? Fikir ve önerileriniz için bizimle iletişime geçin.",
+    "actions.contact.email": "Bize e-posta gönderin",
+  },
 };
 
 export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {

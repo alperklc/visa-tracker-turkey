@@ -26,18 +26,15 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, applications }) =>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <StatsCard 
         title={t('dashboard.totalApplications')} 
-        value={stats.totalApplications.toString()} 
-        description={t('dashboard.description')} 
+        value={stats.totalApplications.toString()}
       />
       <StatsCard 
         title={t('dashboard.avgProcessingTime')} 
         value={`${stats.averageProcessingDays} ${t('dashboard.days')}`} 
-        description={t('dashboard.description')} 
       />
       <StatsCard 
         title={t('dashboard.approvalRate')} 
         value={`${stats.approvalRate}%`} 
-        description={t('dashboard.description')} 
       />
       <StatsCard 
         title={t('dashboard.latestApplication')} 
@@ -45,7 +42,6 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, applications }) =>
           ? applications.sort((a, b) => 
               b.createdAt.getTime() - a.createdAt.getTime())[0].createdAt 
           : null)} 
-        description={t('dashboard.description')} 
       />
     </div>
   );

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -28,7 +27,8 @@ const Navbar: React.FC = () => {
     { name: t('home'), path: '/' },
     { name: t('facts'), path: '/facts' },
     { name: t('discussions'), path: '/discussions' },
-    { name: t('seeAllData'), path: '/review' }
+    { name: t('seeAllData'), path: '/review' },
+    { name: t('actions.title'), path: '/what-can-we-do' },
   ];
 
   return (

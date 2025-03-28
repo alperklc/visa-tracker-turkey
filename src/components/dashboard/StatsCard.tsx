@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 interface StatsCardProps {
   title: string;
   value: string;
-  description: string;
+  description?: string;
 }
 
 const StatsCard: React.FC<StatsCardProps> = ({ title, value, description }) => {
@@ -16,7 +16,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, description }) => {
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground mt-1">{description}</p>
+        {description && <p className="text-xs text-muted-foreground mt-1">{description}</p>}
       </CardContent>
     </Card>
   );

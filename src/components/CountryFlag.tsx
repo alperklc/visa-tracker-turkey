@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Country, CountryCode } from '@/lib/types';
 
@@ -21,7 +20,7 @@ const CountryFlag: React.FC<CountryFlagProps> = ({
       case Country.Italy: return CountryCode.IT;
       case Country.France: return CountryCode.FR;
       case Country.Spain: return CountryCode.ES;
-      case Country.UnitedKingdom: return CountryCode.UK;
+      case Country.UnitedKingdom: return CountryCode.GB;
       case Country.Portugal: return CountryCode.PT;
       case Country.Greece: return CountryCode.GR;
       case Country.Austria: return CountryCode.AT;
@@ -43,6 +42,15 @@ const CountryFlag: React.FC<CountryFlagProps> = ({
       case Country.Canada: return CountryCode.CA;
       case Country.Australia: return CountryCode.AU;
       case Country.NewZealand: return CountryCode.NZ;
+      case Country.Estonia: return CountryCode.EE;
+      case Country.Latvia: return CountryCode.LV;
+      case Country.Lithuania: return CountryCode.LT;
+      case Country.Luxembourg: return CountryCode.LU;
+      case Country.Malta: return CountryCode.MT;
+      case Country.Slovakia: return CountryCode.SK;
+      case Country.Slovenia: return CountryCode.SI;
+      case Country.Iceland: return CountryCode.IS;
+      case Country.Liechtenstein: return CountryCode.LI;
       default: return CountryCode.DE;
     }
   };

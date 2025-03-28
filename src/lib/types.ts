@@ -4,6 +4,7 @@ export enum CountryCode {
   FR = "FR", // France
   ES = "ES", // Spain
   UK = "UK", // United Kingdom
+  GB = "GB", // Great Britain
   PT = "PT", // Portugal
   GR = "GR", // Greece
   AT = "AT", // Austria
@@ -25,6 +26,15 @@ export enum CountryCode {
   CA = "CA", // Canada
   AU = "AU", // Australia
   NZ = "NZ", // New Zealand
+  EE = "EE", // Estonia
+  LV = "LV", // Latvia
+  LT = "LT", // Lithuania
+  LU = "LU", // Luxembourg
+  MT = "MT", // Malta
+  SK = "SK", // Slovakia
+  SI = "SI", // Slovenia
+  IS = "IS", // Iceland
+  LI = "LI", // Liechtenstein
 }
 
 export enum Country {
@@ -54,14 +64,25 @@ export enum Country {
   Canada = "Canada",
   Australia = "Australia",
   NewZealand = "New Zealand",
+  Estonia = "Estonia",
+  Latvia = "Latvia",
+  Lithuania = "Lithuania",
+  Luxembourg = "Luxembourg",
+  Malta = "Malta",
+  Slovakia = "Slovakia",
+  Slovenia = "Slovenia",
+  Iceland = "Iceland",
+  Liechtenstein = "Liechtenstein",
 }
 
 export enum PurposeOfVisit {
   Tourism = "Tourism",
   Business = "Business",
-  Family = "Family",
+  FamilyReunification = "Family Reunification",
+  Visit = "Visit",
   Study = "Study",
   Work = "Work",
+  Transit = "Transit",
   Medical = "Medical",
   Other = "Other"
 }
@@ -167,7 +188,9 @@ export interface PaginationTranslations {
 export interface PurposeTranslations {
   tourism: string;
   business: string;
-  family: string;
+  familyReunification: string;
+  visit: string;
+  transit: string;
   study: string;
   work: string;
   medical: string;

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -101,6 +100,11 @@ const ApplicationForm: React.FC = () => {
 
   const watchPassportReturned = form.watch('passportReturned');
   const watchResultStatus = form.watch('resultStatus');
+  const watchPurposeOfVisit = form.watch('purposeOfVisit');
+  const isLongTermPurpose = [PurposeOfVisit.FamilyReunification, PurposeOfVisit.Study, PurposeOfVisit.Work].includes(watchPurposeOfVisit);
+  const watchAppointmentDate = form.watch('appointmentDate');
+  const isAppointmentGiven = watchAppointmentDate !== null;
+  const isAppointmentPast = isAppointmentGiven && watchAppointmentDate < new Date();
   
   useEffect(() => {
     if (watchPassportReturned === 'yes') {
@@ -234,23 +238,6 @@ const ApplicationForm: React.FC = () => {
 
             <FormField
               control={form.control}
-              name="durationOfVisit"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('form.duration')}</FormLabel>
-                  <FormControl>
-                    <Input placeholder={t('form.durationPlaceholder')} {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    {t('form.durationDescription')}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="purposeOfVisit"
               render={({ field }) => (
                 <FormItem>
@@ -277,6 +264,31 @@ const ApplicationForm: React.FC = () => {
                 </FormItem>
               )}
             />
+
+            {!isLongTermPurpose && (
+              <FormField
+                control={form.control}
+                name="durationOfVisit"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('form.duration')}</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type="number" 
+                        min="1" 
+                        placeholder={t('form.durationPlaceholder')} 
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      {t('form.durationDescription')}
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -326,50 +338,6 @@ const ApplicationForm: React.FC = () => {
 
             <FormField
               control={form.control}
-              name="idataReplyDate"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel>{t('form.replyReceived')}</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>{t('form.pickDate')}</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value || undefined}
-                        onSelect={field.onChange}
-                        disabled={(date) => date > new Date()}
-                        initialFocus
-                        className={cn("p-3 pointer-events-auto")}
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormDescription>
-                    {t('form.replyDateDescription')}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="appointmentDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
@@ -398,7 +366,6 @@ const ApplicationForm: React.FC = () => {
                         mode="single"
                         selected={field.value || undefined}
                         onSelect={field.onChange}
-                        disabled={(date) => date > new Date()}
                         initialFocus
                         className={cn("p-3 pointer-events-auto")}
                       />
@@ -413,43 +380,45 @@ const ApplicationForm: React.FC = () => {
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="passportReturned"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>{t('form.passportReturned')}</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        {t('form.yes')}
-                      </FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        {t('form.no')}
-                      </FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormDescription>
-                  {t('form.passportReturnedDescription')}
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {isAppointmentGiven && isAppointmentPast && (
+            <FormField
+              control={form.control}
+              name="passportReturned"
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <FormLabel>{t('form.passportReturned')}</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col space-y-1"
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="yes" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          {t('form.yes')}
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="no" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          {t('form.no')}
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormDescription>
+                    {t('form.passportReturnedDescription')}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
 
           {showResultFields && (
             <>

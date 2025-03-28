@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import { useApplications } from '@/hooks/useApplications';
 import { Card } from '@/components/ui/card';
-import ApplicationTable from '@/components/ApplicationTable';
 import StatsOverview from '@/components/dashboard/StatsOverview';
 import ProcessingTrends from '@/components/ProcessingTrends';
 import FinancialImpact from '@/components/FinancialImpact';
+import LiteApplicationTable from '@/components/LiteApplicationTable';
 
 const Index: React.FC = () => {
   const { applications, stats, loading } = useApplications();
@@ -68,7 +68,7 @@ const Index: React.FC = () => {
           </div>
         ) : recentApplications.length > 0 ? (
           <Card className="overflow-hidden">
-            <ApplicationTable applications={recentApplications} />
+            <LiteApplicationTable applications={recentApplications} />
           </Card>
         ) : (
           <div className="text-center py-12">
