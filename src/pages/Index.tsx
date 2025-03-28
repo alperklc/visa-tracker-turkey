@@ -1,23 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import Dashboard from '@/components/Dashboard';
-import ApplicationCard from '@/components/ApplicationCard';
-import { useApplications } from '@/hooks/useApplications';
+import ApplicationTable from '@/components/ApplicationTable';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useApplications } from '@/hooks/useApplications';
+import { Card } from '@/components/ui/card';
 
 const Index: React.FC = () => {
   const { applications, loading } = useApplications();
   const { t } = useLanguage();
   
-  // Display only the most recent 4 applications
-  const recentApplications = [...applications]
-    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-    .slice(0, 4);
-
   return (
     <Layout>
       <Hero />
@@ -38,21 +34,14 @@ const Index: React.FC = () => {
         </div>
         
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-64 animate-pulse bg-muted rounded-lg"></div>
-            ))}
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-muted rounded-md w-full"></div>
+            <div className="h-64 bg-muted rounded-md w-full"></div>
           </div>
-        ) : recentApplications.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {recentApplications.map((application) => (
-              <ApplicationCard 
-                key={application.id} 
-                application={application} 
-                className="animate-slide-up"
-              />
-            ))}
-          </div>
+        ) : applications.length > 0 ? (
+          <Card className="overflow-hidden">
+            <ApplicationTable />
+          </Card>
         ) : (
           <div className="text-center py-12">
             <h3 className="text-xl font-semibold mb-2">{t('recentApplications.noApplications')}</h3>
