@@ -1,34 +1,29 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LanguageProvider } from "./lib/LanguageContext";
-import Index from "./pages/Index";
-import SubmitApplication from "./pages/SubmitApplication";
-import ReviewEntries from "./pages/ReviewEntries";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Index from './pages/Index';
+import ReviewEntries from './pages/ReviewEntries';
+import SubmitApplication from './pages/SubmitApplication';
+import NotFound from './pages/NotFound';
+import { LanguageProvider } from './lib/LanguageContext';
+import { Toaster } from './components/ui/sonner';
+import Discussions from './pages/Discussions';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <LanguageProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/submit" element={<SubmitApplication />} />
-            <Route path="/review" element={<ReviewEntries />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </LanguageProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <LanguageProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/review" element={<ReviewEntries />} />
+          <Route path="/submit" element={<SubmitApplication />} />
+          <Route path="/discussions" element={<Discussions />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+      <Toaster />
+    </LanguageProvider>
+  );
+}
 
 export default App;

@@ -31,22 +31,29 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { 
+  Country, 
+  ApplicationCenterCity, 
+  PurposeOfVisit, 
+  VisaResultStatus, 
+  EntryType 
+} from '@/lib/types';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const formSchema = z.object({
-  country: z.enum(['Germany', 'Italy'], {
+  country: z.nativeEnum(Country, {
     required_error: 'Please select a country.',
   }),
-  city: z.string().min(2, {
-    message: 'City must be at least 2 characters.',
+  city: z.nativeEnum(ApplicationCenterCity, {
+    required_error: 'Please select a city.',
   }),
   durationOfVisit: z.string().min(1, {
     message: 'Please enter the duration of your visit.',
   }),
-  purposeOfVisit: z.string().min(2, {
-    message: 'Please enter the purpose of your visit.',
+  purposeOfVisit: z.nativeEnum(PurposeOfVisit, {
+    required_error: 'Please select the purpose of your visit.',
   }),
   applicationSubmitDate: z.date({
     required_error: 'Please select the application submission date.',
@@ -54,9 +61,9 @@ const formSchema = z.object({
   idataReplyDate: z.date().nullable().optional(),
   appointmentDate: z.date().nullable().optional(),
   passportReturnDate: z.date().nullable().optional(),
-  resultStatus: z.enum(['Approved', 'Rejected', 'Pending']).nullable().optional(),
+  resultStatus: z.nativeEnum(VisaResultStatus).nullable().optional(),
   validity: z.string().nullable().optional(),
-  entryType: z.enum(['Single', 'Multiple']).nullable().optional(),
+  entryType: z.nativeEnum(EntryType).nullable().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -65,19 +72,20 @@ const ApplicationForm: React.FC = () => {
   const { addApplication } = useApplications();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t } = useLanguage();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       country: undefined,
-      city: '',
+      city: undefined,
       durationOfVisit: '',
-      purposeOfVisit: '',
+      purposeOfVisit: undefined,
       applicationSubmitDate: undefined,
       idataReplyDate: null,
       appointmentDate: null,
       passportReturnDate: null,
-      resultStatus: 'Pending',
+      resultStatus: VisaResultStatus.Pending,
       validity: null,
       entryType: null,
     },
@@ -108,15 +116,15 @@ const ApplicationForm: React.FC = () => {
         result,
       });
 
-      toast.success('Application submitted successfully', {
-        description: 'Thank you for sharing your visa experience.'
+      toast.success(t('form.successMessage'), {
+        description: t('form.successDescription')
       });
 
       // Redirect to home page after submission
       navigate('/');
     } catch (error) {
       console.error('Error submitting application:', error);
-      toast.error('Failed to submit application');
+      toast.error(t('form.errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
@@ -127,9 +135,9 @@ const ApplicationForm: React.FC = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 animate-fade-in">
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Visa Application Details</h2>
+            <h2 className="text-xl font-semibold">{t('form.detailsTitle')}</h2>
             <p className="text-sm text-muted-foreground">
-              Please provide details about your visa application process
+              {t('form.detailsDescription')}
             </p>
           </div>
 
@@ -139,23 +147,24 @@ const ApplicationForm: React.FC = () => {
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Country</FormLabel>
+                  <FormLabel>{t('form.country')}</FormLabel>
                   <Select 
                     onValueChange={field.onChange} 
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a country" />
+                        <SelectValue placeholder={t('form.selectCountry')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Germany">Germany</SelectItem>
-                      <SelectItem value="Italy">Italy</SelectItem>
+                      {Object.values(Country).map((country) => (
+                        <SelectItem key={country} value={country}>{country}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    Country you applied for a visa to
+                    {t('form.countryDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -167,12 +176,24 @@ const ApplicationForm: React.FC = () => {
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>City of Embassy/Consulate</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Istanbul" {...field} />
-                  </FormControl>
+                  <FormLabel>{t('form.city')}</FormLabel>
+                  <Select 
+                    onValueChange={field.onChange} 
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder={t('form.selectCity')} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(ApplicationCenterCity).map((city) => (
+                        <SelectItem key={city} value={city}>{city}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormDescription>
-                    Location of the embassy or consulate
+                    {t('form.cityDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -184,12 +205,12 @@ const ApplicationForm: React.FC = () => {
               name="durationOfVisit"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Duration of Visit</FormLabel>
+                  <FormLabel>{t('form.duration')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g. 90 days" {...field} />
+                    <Input placeholder={t('form.durationPlaceholder')} {...field} />
                   </FormControl>
                   <FormDescription>
-                    How long you plan to stay
+                    {t('form.durationDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -201,12 +222,24 @@ const ApplicationForm: React.FC = () => {
               name="purposeOfVisit"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Purpose of Visit</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Tourism, Business" {...field} />
-                  </FormControl>
+                  <FormLabel>{t('form.purpose')}</FormLabel>
+                  <Select 
+                    onValueChange={field.onChange} 
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder={t('form.selectPurpose')} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(PurposeOfVisit).map((purpose) => (
+                        <SelectItem key={purpose} value={purpose}>{purpose}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormDescription>
-                    Your reason for visiting
+                    {t('form.purposeDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -220,7 +253,7 @@ const ApplicationForm: React.FC = () => {
               name="applicationSubmitDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Application Submit Date</FormLabel>
+                  <FormLabel>{t('form.submitDate')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -234,7 +267,7 @@ const ApplicationForm: React.FC = () => {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>{t('form.pickDate')}</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -252,7 +285,7 @@ const ApplicationForm: React.FC = () => {
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
-                    Date you submitted your application
+                    {t('form.submitDateDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -264,7 +297,7 @@ const ApplicationForm: React.FC = () => {
               name="idataReplyDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>iData Reply Date</FormLabel>
+                  <FormLabel>{t('form.replyDate')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -278,7 +311,7 @@ const ApplicationForm: React.FC = () => {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>{t('form.pickDate')}</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -296,7 +329,7 @@ const ApplicationForm: React.FC = () => {
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
-                    Date iData replied to your application
+                    {t('form.replyDateDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -308,7 +341,7 @@ const ApplicationForm: React.FC = () => {
               name="appointmentDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Appointment Date</FormLabel>
+                  <FormLabel>{t('form.appointmentDate')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -322,7 +355,7 @@ const ApplicationForm: React.FC = () => {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>{t('form.pickDate')}</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -340,7 +373,7 @@ const ApplicationForm: React.FC = () => {
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
-                    Date of your visa appointment
+                    {t('form.appointmentDateDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -352,7 +385,7 @@ const ApplicationForm: React.FC = () => {
               name="passportReturnDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Passport Return Date</FormLabel>
+                  <FormLabel>{t('form.returnDate')}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -366,7 +399,7 @@ const ApplicationForm: React.FC = () => {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>{t('form.pickDate')}</span>
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -384,7 +417,7 @@ const ApplicationForm: React.FC = () => {
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
-                    Date they returned your passport
+                    {t('form.returnDateDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -393,7 +426,7 @@ const ApplicationForm: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Visa Result</h2>
+            <h2 className="text-xl font-semibold">{t('form.resultTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -402,43 +435,43 @@ const ApplicationForm: React.FC = () => {
               name="resultStatus"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Result Status</FormLabel>
+                  <FormLabel>{t('form.resultStatus')}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value || undefined}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select result status" />
+                        <SelectValue placeholder={t('form.selectResult')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Approved">Approved</SelectItem>
-                      <SelectItem value="Rejected">Rejected</SelectItem>
-                      <SelectItem value="Pending">Pending</SelectItem>
+                      {Object.values(VisaResultStatus).map(status => (
+                        <SelectItem key={status} value={status}>{t(`table.${status.toLowerCase()}`)}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    The result of your visa application
+                    {t('form.resultStatusDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {watchResultStatus === 'Approved' && (
+            {watchResultStatus === VisaResultStatus.Approved && (
               <>
                 <FormField
                   control={form.control}
                   name="validity"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Validity Period</FormLabel>
+                      <FormLabel>{t('form.validity')}</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g. 90 days, 1 year" {...field} value={field.value || ''} />
+                        <Input placeholder={t('form.validityPlaceholder')} {...field} value={field.value || ''} />
                       </FormControl>
                       <FormDescription>
-                        How long the visa is valid for
+                        {t('form.validityDescription')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -450,23 +483,24 @@ const ApplicationForm: React.FC = () => {
                   name="entryType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Entry Type</FormLabel>
+                      <FormLabel>{t('form.entryType')}</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value || undefined}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select entry type" />
+                            <SelectValue placeholder={t('form.selectEntryType')} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Single">Single Entry</SelectItem>
-                          <SelectItem value="Multiple">Multiple Entry</SelectItem>
+                          {Object.values(EntryType).map(type => (
+                            <SelectItem key={type} value={type}>{t(`form.${type.toLowerCase()}Entry`)}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormDescription>
-                        Type of entry allowed
+                        {t('form.entryTypeDescription')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -477,7 +511,7 @@ const ApplicationForm: React.FC = () => {
           </div>
 
           <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit Application'}
+            {isSubmitting ? t('form.submitting') : t('form.submit')}
           </Button>
         </form>
       </Form>

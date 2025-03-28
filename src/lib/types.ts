@@ -1,13 +1,52 @@
 
-export type Country = "Germany" | "Italy";
+export enum CountryCode {
+  DE = "DE", // Germany
+  IT = "IT", // Italy
+}
+
+export enum Country {
+  Germany = "Germany",
+  Italy = "Italy",
+}
+
+export enum PurposeOfVisit {
+  Tourism = "Tourism",
+  Business = "Business",
+  Family = "Family",
+  Study = "Study",
+  Work = "Work",
+  Medical = "Medical",
+  Other = "Other"
+}
+
+export enum ApplicationCenterCity {
+  Istanbul = "Istanbul",
+  Ankara = "Ankara",
+  Izmir = "Izmir",
+  Antalya = "Antalya",
+  Bodrum = "Bodrum",
+  Gaziantep = "Gaziantep",
+}
+
+export enum VisaResultStatus {
+  Approved = "Approved",
+  Rejected = "Rejected",
+  Pending = "Pending"
+}
+
+export enum EntryType {
+  Single = "Single",
+  Multiple = "Multiple"
+}
+
 export type Language = "tr" | "en" | "de";
 
 export type VisaApplication = {
   id: string;
   country: Country;
-  city: string;
+  city: ApplicationCenterCity;
   durationOfVisit: string; // In days or months
-  purposeOfVisit: string;
+  purposeOfVisit: PurposeOfVisit;
   applicationSubmitDate: Date;
   idataReplyDate: Date | null;
   appointmentDate: Date | null;
@@ -17,9 +56,9 @@ export type VisaApplication = {
 };
 
 export type VisaResult = {
-  status: "Approved" | "Rejected" | "Pending";
+  status: VisaResultStatus;
   validity?: string; // e.g. "90 days", "6 months"
-  entryType?: "Single" | "Multiple";
+  entryType?: EntryType;
 };
 
 export type ApplicationStats = {

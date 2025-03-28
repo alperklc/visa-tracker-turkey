@@ -1,8 +1,11 @@
 
-import { ApplicationStats, Country, VisaApplication } from "@/lib/types";
+import { ApplicationStats, Country, VisaApplication, VisaResultStatus } from "@/lib/types";
 
 export const calculateStats = (apps: VisaApplication[]): ApplicationStats => {
-  const countryCount: Record<Country, number> = { Germany: 0, Italy: 0 };
+  const countryCount: Record<Country, number> = { 
+    [Country.Germany]: 0, 
+    [Country.Italy]: 0 
+  };
   let totalProcessingDays = 0;
   let completedApplications = 0;
   let approvedApplications = 0;
@@ -35,7 +38,7 @@ export const calculateStats = (apps: VisaApplication[]): ApplicationStats => {
       completedApplications++;
 
       // Count approved applications
-      if (app.result && app.result.status === "Approved") {
+      if (app.result && app.result.status === VisaResultStatus.Approved) {
         approvedApplications++;
       }
       

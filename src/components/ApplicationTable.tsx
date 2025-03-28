@@ -2,17 +2,22 @@
 import React from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Flag } from 'lucide-react';
-import { VisaApplication } from '@/lib/types';
+import { VisaApplication, Country, CountryCode } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
-import { useApplications } from '@/hooks/useApplications';
 
-export const ApplicationTable = () => {
-  const { applications, loading } = useApplications();
+interface ApplicationTableProps {
+  applications?: VisaApplication[];
+}
+
+export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications }) => {
   const { t } = useLanguage();
+  const { applications: allApplications } = useApplications();
+  
+  // Use provided applications or all applications if not provided
+  const displayApplications = applications || allApplications;
 
   // Sort applications by submission date (newest first)
-  const sortedApplications = [...applications].sort((a, b) => 
+  const sortedApplications = [...displayApplications].sort((a, b) => 
     b.applicationSubmitDate.getTime() - a.applicationSubmitDate.getTime()
   );
 
@@ -35,9 +40,9 @@ export const ApplicationTable = () => {
     return date.toLocaleDateString();
   };
 
-  const getCountryFlag = (country: string) => {
-    if (country === "Germany") return "🇩🇪";
-    if (country === "Italy") return "🇮🇹";
+  const getCountryFlag = (country: Country) => {
+    if (country === Country.Germany) return "🇩🇪";
+    if (country === Country.Italy) return "🇮🇹";
     return "";
   };
   
@@ -53,11 +58,8 @@ export const ApplicationTable = () => {
     }
   };
 
-  if (loading) {
-    return <div className="animate-pulse space-y-4">
-      <div className="h-8 bg-muted rounded-md w-full"></div>
-      <div className="h-64 bg-muted rounded-md w-full"></div>
-    </div>;
+  if (sortedApplications.length === 0) {
+    return <div className="p-4 text-center text-muted-foreground">{t('recentApplications.noApplications')}</div>;
   }
 
   return (
@@ -106,5 +108,8 @@ export const ApplicationTable = () => {
     </div>
   );
 };
+
+// Add missing import
+import { useApplications } from '@/hooks/useApplications';
 
 export default ApplicationTable;
