@@ -6,17 +6,7 @@ import { calculateStats } from "@/utils/applicationStats";
 
 export const useApplications = () => {
   const [applications, setApplications] = useState<VisaApplication[]>([]);
-  const [stats, setStats] = useState({
-    totalApplications: 0,
-    byCountry: { Germany: 0, Italy: 0 },
-    averageProcessingDays: 0,
-    approvalRate: 0,
-    citiesProcessingTime: [],
-    trendsLastThreeMonths: [],
-    totalAnnualApplications: 85000,
-    totalAnnualCost: 25500000,
-    worstCities: []
-  });
+  const [stats, setStats] = useState(calculateStats([]));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
