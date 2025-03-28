@@ -26,6 +26,7 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: t('home'), path: '/' },
+    { name: t('facts'), path: '/facts' },
     { name: t('discussions'), path: '/discussions' },
     { name: t('seeAllData'), path: '/review' }
   ];

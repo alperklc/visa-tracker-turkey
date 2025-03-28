@@ -2,8 +2,10 @@
 import React from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { VisaApplication, Country, CountryCode } from '@/lib/types';
+import { VisaApplication, Country } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useApplications } from '@/hooks/useApplications';
+import CountryFlag from './CountryFlag';
 
 interface ApplicationTableProps {
   applications?: VisaApplication[];
@@ -38,12 +40,6 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
   const formatDate = (date: Date | null) => {
     if (!date) return t('table.pending');
     return date.toLocaleDateString();
-  };
-
-  const getCountryFlag = (country: Country) => {
-    if (country === Country.Germany) return "🇩🇪";
-    if (country === Country.Italy) return "🇮🇹";
-    return "";
   };
   
   const getResultBadge = (app: VisaApplication) => {
@@ -85,7 +81,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
               <TableRow key={app.id} className={getRowColorClass(processingDays)}>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg">{getCountryFlag(app.country)}</span>
+                    <CountryFlag country={app.country} size={20} />
                     {app.country}
                   </div>
                 </TableCell>
@@ -108,8 +104,5 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     </div>
   );
 };
-
-// Add missing import
-import { useApplications } from '@/hooks/useApplications';
 
 export default ApplicationTable;

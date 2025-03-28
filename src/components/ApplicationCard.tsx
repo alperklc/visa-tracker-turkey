@@ -4,6 +4,7 @@ import { VisaApplication } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import CountryFlag from './CountryFlag';
 
 interface ApplicationCardProps {
   application: VisaApplication;
@@ -51,7 +52,10 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application, classNam
           <div className="text-xs text-muted-foreground mb-1">
             Application for
           </div>
-          <h3 className="font-semibold text-lg">{application.country}</h3>
+          <h3 className="font-semibold text-lg flex items-center gap-2">
+            <CountryFlag country={application.country} size={20} />
+            {application.country}
+          </h3>
           <div className="text-sm text-muted-foreground">{application.city}</div>
         </div>
         <Badge 
