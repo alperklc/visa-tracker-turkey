@@ -2,11 +2,59 @@
 export enum CountryCode {
   DE = "DE", // Germany
   IT = "IT", // Italy
+  FR = "FR", // France
+  ES = "ES", // Spain
+  UK = "UK", // United Kingdom
+  PT = "PT", // Portugal
+  GR = "GR", // Greece
+  AT = "AT", // Austria
+  CH = "CH", // Switzerland
+  NL = "NL", // Netherlands
+  BE = "BE", // Belgium
+  SE = "SE", // Sweden
+  DK = "DK", // Denmark
+  FI = "FI", // Finland
+  NO = "NO", // Norway
+  IE = "IE", // Ireland
+  PL = "PL", // Poland
+  CZ = "CZ", // Czech Republic
+  HU = "HU", // Hungary
+  HR = "HR", // Croatia
+  BG = "BG", // Bulgaria
+  RO = "RO", // Romania
+  US = "US", // United States
+  CA = "CA", // Canada
+  AU = "AU", // Australia
+  NZ = "NZ", // New Zealand
 }
 
 export enum Country {
   Germany = "Germany",
   Italy = "Italy",
+  France = "France",
+  Spain = "Spain",
+  UnitedKingdom = "United Kingdom",
+  Portugal = "Portugal",
+  Greece = "Greece",
+  Austria = "Austria",
+  Switzerland = "Switzerland",
+  Netherlands = "Netherlands",
+  Belgium = "Belgium",
+  Sweden = "Sweden",
+  Denmark = "Denmark",
+  Finland = "Finland",
+  Norway = "Norway",
+  Ireland = "Ireland",
+  Poland = "Poland",
+  CzechRepublic = "Czech Republic",
+  Hungary = "Hungary",
+  Croatia = "Croatia",
+  Bulgaria = "Bulgaria",
+  Romania = "Romania",
+  UnitedStates = "United States",
+  Canada = "Canada",
+  Australia = "Australia",
+  NewZealand = "New Zealand",
 }
 
 export enum PurposeOfVisit {

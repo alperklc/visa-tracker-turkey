@@ -2,10 +2,15 @@
 import { ApplicationStats, Country, VisaApplication, VisaResultStatus } from "@/lib/types";
 
 export const calculateStats = (apps: VisaApplication[]): ApplicationStats => {
-  const countryCount: Record<Country, number> = { 
-    [Country.Germany]: 0, 
-    [Country.Italy]: 0 
-  };
+  // Initialize country count with all countries
+  const countryCount: Record<Country, number> = Object.values(Country).reduce(
+    (acc, country) => {
+      acc[country] = 0;
+      return acc;
+    },
+    {} as Record<Country, number>
+  );
+  
   let totalProcessingDays = 0;
   let completedApplications = 0;
   let approvedApplications = 0;
@@ -26,7 +31,9 @@ export const calculateStats = (apps: VisaApplication[]): ApplicationStats => {
 
   apps.forEach(app => {
     // Count by country
-    countryCount[app.country]++;
+    if (countryCount[app.country] !== undefined) {
+      countryCount[app.country]++;
+    }
 
     // Calculate processing time for completed applications
     if (app.passportReturnDate && app.applicationSubmitDate) {
