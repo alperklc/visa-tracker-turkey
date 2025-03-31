@@ -1,163 +1,121 @@
 
 import React from 'react';
-import { useLanguage } from '@/lib/LanguageContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { AlertTriangle, Users, Megaphone, Scale, Plane, Globe, Mail } from 'lucide-react';
 import Layout from '@/components/Layout';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/LanguageContext';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import StatsGridCard from '@/components/dashboard/StatsGridCard';
+import { ArrowRight, BookOpen, ClipboardList, FileText, Globe, MessageSquare, PenSquare } from 'lucide-react';
 
-const WhatCanWeDo = () => {
+const WhatCanWeDo: React.FC = () => {
   const { t } = useLanguage();
-
-  const actionCards = [
+  
+  const actionLinks = [
     {
-      icon: <Users className="w-6 h-6 text-primary" />,
-      title: t('actions.diaspora.title'),
-      description: t('actions.diaspora.description'),
-      points: [
-        t('actions.diaspora.point1'),
-        t('actions.diaspora.point2'),
-        t('actions.diaspora.point3'),
-      ]
+      title: t('actions.submitApplication'),
+      description: t('actions.submitApplicationDescription'),
+      icon: <PenSquare className="h-6 w-6" />,
+      link: '/submit',
+      iconClassName: 'bg-blue-100 text-blue-700',
+      stat: '5 min'
     },
     {
-      icon: <Plane className="w-6 h-6 text-primary" />,
-      title: t('actions.tourism.title'),
-      description: t('actions.tourism.description'),
-      points: [
-        t('actions.tourism.point1'),
-        t('actions.tourism.point2'),
-        t('actions.tourism.point3'),
-      ]
+      title: t('actions.viewApplications'),
+      description: t('actions.viewApplicationsDescription'),
+      icon: <ClipboardList className="h-6 w-6" />,
+      link: '/review',
+      iconClassName: 'bg-green-100 text-green-700',
+      stat: '100+'
     },
     {
-      icon: <Megaphone className="w-6 h-6 text-primary" />,
-      title: t('actions.awareness.title'),
-      description: t('actions.awareness.description'),
-      points: [
-        t('actions.awareness.point1'),
-        t('actions.awareness.point2'),
-        t('actions.awareness.point3'),
-      ]
+      title: t('actions.joinDiscussion'),
+      description: t('actions.joinDiscussionDescription'),
+      icon: <MessageSquare className="h-6 w-6" />,
+      link: '/discussions',
+      iconClassName: 'bg-purple-100 text-purple-700',
+      stat: '24/7'
     },
     {
-      icon: <Scale className="w-6 h-6 text-primary" />,
-      title: t('actions.legal.title'),
-      description: t('actions.legal.description'),
-      points: [
-        t('actions.legal.point1'),
-        t('actions.legal.point2'),
-        t('actions.legal.point3'),
-      ]
+      title: t('actions.learnFacts'),
+      description: t('actions.learnFactsDescription'),
+      icon: <BookOpen className="h-6 w-6" />,
+      link: '/facts',
+      iconClassName: 'bg-amber-100 text-amber-700',
+      stat: '10+'
+    },
+    {
+      title: t('actions.followNews'),
+      description: t('actions.followNewsDescription'),
+      icon: <Globe className="h-6 w-6" />,
+      link: '/news',
+      iconClassName: 'bg-red-100 text-red-700',
+      stat: 'Daily'
+    },
+    {
+      title: t('actions.readGuides'),
+      description: t('actions.readGuidesDescription'),
+      icon: <FileText className="h-6 w-6" />,
+      link: '/guides',
+      iconClassName: 'bg-teal-100 text-teal-700',
+      stat: '15+'
     }
   ];
 
   return (
-    <Layout>
-      <div className="container py-12 animate-fade-in">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-4">{t('actions.title')}</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t('actions.subtitle')}
+    <Layout className="py-12">
+      <div className="container max-w-5xl">
+        <div className="text-center mb-8 animate-slide-down">
+          <h1 className="text-3xl font-bold mb-4">{t('whatCanWeDo.title')}</h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+            {t('whatCanWeDo.subtitle')}
           </p>
         </div>
         
-        <Tabs defaultValue="actions" className="space-y-8">
-          <TabsList className="flex justify-center mb-8">
-            <TabsTrigger value="actions">{t('actions.mainActions')}</TabsTrigger>
-            <TabsTrigger value="alternatives">{t('actions.alternatives.title')}</TabsTrigger>
-            <TabsTrigger value="contact">{t('actions.contact.title')}</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="actions" className="space-y-8">
-            <section className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="font-medium text-yellow-800">{t('actions.disclaimer.title')}</h3>
-                <p className="text-yellow-700 text-sm">{t('actions.disclaimer.text')}</p>
-              </div>
-            </section>
-
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {actionCards.map((card, index) => (
-                <StatsGridCard
-                  key={index}
-                  title={card.title}
-                  stat=""
-                  icon={card.icon}
-                  description={card.description}
-                  iconClassName="p-2 bg-primary/10 rounded-full"
-                  className="h-full"
-                >
-                  <CardContent className="pt-4">
-                    <ul className="space-y-2">
-                      {card.points.map((point, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-primary font-bold">•</span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </StatsGridCard>
-              ))}
-            </section>
-          </TabsContent>
-          
-          <TabsContent value="alternatives" className="space-y-6">
-            <Card className="overflow-hidden hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-full">
-                    <Globe className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle>{t('actions.alternatives.title')}</CardTitle>
-                </div>
-                <CardDescription>{t('actions.alternatives.description')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {[
-                    'Thailand', 'Malaysia', 'Singapore',
-                    'South Korea', 'Japan', 'UAE',
-                    'Mexico', 'Georgia', 'Serbia'
-                  ].map((country) => (
-                    <div key={country} className="flex items-center gap-2 p-3 bg-accent/50 rounded-lg transition-all hover:bg-accent/80 hover:translate-y-[-2px] hover:shadow-sm">
-                      <Plane className="w-4 h-4 text-primary" />
-                      <span>{country}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="contact" className="space-y-6">
-            <Card className="overflow-hidden hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-full">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle>{t('actions.contact.title')}</CardTitle>
-                </div>
-                <CardDescription>{t('actions.contact.description')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col md:flex-row gap-4">
-                  <a 
-                    href="mailto:feedback@example.com" 
-                    className="inline-flex items-center gap-2 text-primary hover:underline bg-primary/5 p-3 rounded-lg transition-colors hover:bg-primary/10"
-                  >
-                    <Mail className="w-4 h-4" />
-                    {t('actions.contact.email')}
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {actionLinks.map((action, index) => (
+            <StatsGridCard
+              key={index}
+              title={action.title}
+              stat={action.stat}
+              icon={action.icon}
+              description={action.description}
+              iconClassName={action.iconClassName}
+              className="animate-fade-in h-full"
+            />
+          ))}
+        </div>
+        
+        <Card className="mb-8 animate-fade-in">
+          <CardHeader>
+            <CardTitle className="text-xl">{t('whatCanWeDo.communityTitle')}</CardTitle>
+            <CardDescription>{t('whatCanWeDo.communityDescription')}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">{t('whatCanWeDo.communityContent1')}</p>
+            <p>{t('whatCanWeDo.communityContent2')}</p>
+          </CardContent>
+          <CardFooter>
+            <Link to="/discussions" className="w-full">
+              <Button variant="outline" className="w-full group">
+                <span>{t('whatCanWeDo.joinCommunity')}</span>
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </CardFooter>
+        </Card>
+        
+        <div className="text-center animate-fade-in">
+          <h2 className="text-2xl font-bold mb-4">{t('whatCanWeDo.readyTitle')}</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+            {t('whatCanWeDo.readyDescription')}
+          </p>
+          <Link to="/submit">
+            <Button size="lg" className="px-8">
+              {t('whatCanWeDo.getStarted')}
+            </Button>
+          </Link>
+        </div>
       </div>
     </Layout>
   );
