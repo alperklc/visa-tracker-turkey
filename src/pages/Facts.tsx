@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -158,6 +157,21 @@ const Facts: React.FC = () => {
                             <span>🇷🇺</span> {t('facts.russia')}
                           </div>
                         </TableHead>
+                        <TableHead>
+                          <div className="flex items-center gap-2">
+                            <span>🇬🇪</span> {t('facts.georgia')}
+                          </div>
+                        </TableHead>
+                        <TableHead>
+                          <div className="flex items-center gap-2">
+                            <span>🇧🇦</span> {t('facts.bosnia')}
+                          </div>
+                        </TableHead>
+                        <TableHead>
+                          <div className="flex items-center gap-2">
+                            <span>🇿🇦</span> {t('facts.southAfrica')}
+                          </div>
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -166,15 +180,24 @@ const Facts: React.FC = () => {
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-green-50">{t('facts.notRequired')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
+                        <TableCell className="bg-green-50">{t('facts.notRequired')}</TableCell>
+                        <TableCell className="bg-green-50">{t('facts.notRequired')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.schengenFee')}</TableCell>
                         <TableCell>€90</TableCell>
                         <TableCell>€0</TableCell>
                         <TableCell>€90</TableCell>
+                        <TableCell>€0</TableCell>
+                        <TableCell>€0</TableCell>
+                        <TableCell>€80</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.ukVisa')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
@@ -184,12 +207,36 @@ const Facts: React.FC = () => {
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
+                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.visaFreeCountries')}</TableCell>
                         <TableCell>110+</TableCell>
                         <TableCell>130+</TableCell>
                         <TableCell>80+</TableCell>
+                        <TableCell>115+</TableCell>
+                        <TableCell>120+</TableCell>
+                        <TableCell>100+</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">{t('facts.gdpPerCapita')}</TableCell>
+                        <TableCell>$9,600</TableCell>
+                        <TableCell>$3,800</TableCell>
+                        <TableCell>$12,200</TableCell>
+                        <TableCell>$5,700</TableCell>
+                        <TableCell>$7,100</TableCell>
+                        <TableCell>$6,900</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">{t('facts.population')}</TableCell>
+                        <TableCell>85M</TableCell>
+                        <TableCell>28M</TableCell>
+                        <TableCell>144M</TableCell>
+                        <TableCell>3.7M</TableCell>
+                        <TableCell>3.2M</TableCell>
+                        <TableCell>60M</TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -215,6 +262,21 @@ const Facts: React.FC = () => {
                 <div className="p-4 bg-red-50 rounded-lg">
                   <p className="font-semibold mb-2">{t('facts.turkeyFact')}</p>
                   <p>{t('facts.turkeyFactDesc')}</p>
+                </div>
+                
+                <div className="p-4 bg-green-50 rounded-lg">
+                  <p className="font-semibold mb-2">{t('facts.georgiaFact')}</p>
+                  <p>{t('facts.georgiaFactDesc')}</p>
+                </div>
+                
+                <div className="p-4 bg-purple-50 rounded-lg">
+                  <p className="font-semibold mb-2">{t('facts.bosniaFact')}</p>
+                  <p>{t('facts.bosniaFactDesc')}</p>
+                </div>
+                
+                <div className="p-4 bg-orange-50 rounded-lg">
+                  <p className="font-semibold mb-2">{t('facts.southAfricaFact')}</p>
+                  <p>{t('facts.southAfricaFactDesc')}</p>
                 </div>
               </CardContent>
             </Card>
