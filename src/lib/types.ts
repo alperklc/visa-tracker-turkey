@@ -35,6 +35,12 @@ export enum CountryCode {
   SI = "SI", // Slovenia
   IS = "IS", // Iceland
   LI = "LI", // Liechtenstein
+  AR = "AR", // Argentina
+  GE = "GE", // Georgia
+  BA = "BA", // Bosnia
+  ZA = "ZA", // South Africa
+  VE = "VE", // Venezuela
+  RU = "RU", // Russia
 }
 
 export enum Country {
@@ -73,6 +79,12 @@ export enum Country {
   Slovenia = "Slovenia",
   Iceland = "Iceland",
   Liechtenstein = "Liechtenstein",
+  Argentina = "Argentina",
+  Georgia = "Georgia",
+  Bosnia = "Bosnia and Herzegovina",
+  SouthAfrica = "South Africa",
+  Venezuela = "Venezuela",
+  Russia = "Russia",
 }
 
 export enum PurposeOfVisit {
@@ -134,7 +146,6 @@ export type ApplicationStats = {
   byCountry: Record<Country, number>;
   averageProcessingDays: number;
   approvalRate: number;
-  // New stats
   citiesProcessingTime: Array<{city: string, days: number}>;
   trendsLastThreeMonths: Array<{month: string, averageDays: number}>;
   totalAnnualApplications: number;
@@ -142,7 +153,19 @@ export type ApplicationStats = {
   worstCities: Array<{city: string, days: number}>;
 };
 
-// Table translations
+export type CountryStats = {
+  country: Country;
+  democracyIndex: number;
+  refugeeCount: number;
+  gdpPerCapita: number;
+  population: string;
+  visaFreeCountries: number;
+  needsSchengenVisa: boolean;
+  schengenFee?: string;
+  needsUKVisa: boolean;
+  needsUSVisa: boolean;
+};
+
 export interface TableTranslations {
   country: string;
   city: string;
@@ -159,7 +182,6 @@ export interface TableTranslations {
   caption: string;
 }
 
-// Review page translations
 export interface ReviewTranslations {
   title: string;
   subtitle: string;
