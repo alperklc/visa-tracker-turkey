@@ -255,7 +255,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
                   <SelectItem key={country} value={country}>
                     <div className="flex items-center gap-2">
                       <CountryFlag country={country} size={16} />
-                      {country}
+                      {t(`countries.${country.replace(/\s+/g, '').toLowerCase()}`)}
                     </div>
                   </SelectItem>
                 ))}
@@ -321,7 +321,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <CountryFlag country={app.country} size={20} />
-                    {app.country}
+                    {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
                   </div>
                 </TableCell>
                 <TableCell>{app.city}</TableCell>

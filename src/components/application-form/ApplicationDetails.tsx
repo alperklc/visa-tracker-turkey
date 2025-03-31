@@ -18,9 +18,9 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Country, ApplicationCenterCity, PurposeOfVisit } from '@/lib/types';
-import { useLanguage } from '@/lib/LanguageContext';
-import CountryFlag from '@/components/CountryFlag';
 import { FormValues, cityToCountriesMap } from './schema';
+import { useLanguage } from '@/lib/LanguageContext';
+import CountryFlag from '../CountryFlag';
 
 interface ApplicationDetailsProps {
   form: UseFormReturn<FormValues>;
@@ -28,57 +28,44 @@ interface ApplicationDetailsProps {
 
 const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
   const { t } = useLanguage();
-  const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
-
-  const watchCity = form.watch('city');
-  const watchPurposeOfVisit = form.watch('purposeOfVisit');
-  const isLongTermPurpose = [PurposeOfVisit.FamilyReunification, PurposeOfVisit.Study, PurposeOfVisit.Work].includes(watchPurposeOfVisit);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [availableCities, setAvailableCities] = useState<ApplicationCenterCity[]>([]);
   
-  // Update available countries when city changes
+  // Watch for country changes
+  const watchCountry = form.watch('country');
+  
+  // Generate the reverse mapping: country to available cities
+  const countryToCitiesMap = React.useMemo(() => {
+    const mapping: Record<Country, ApplicationCenterCity[]> = {} as Record<Country, ApplicationCenterCity[]>;
+    
+    Object.entries(cityToCountriesMap).forEach(([city, countries]) => {
+      countries.forEach(country => {
+        if (!mapping[country]) {
+          mapping[country] = [];
+        }
+        mapping[country].push(city as ApplicationCenterCity);
+      });
+    });
+    
+    return mapping;
+  }, []);
+  
+  // Update available cities when country changes
   useEffect(() => {
-    if (watchCity) {
-      const countries = cityToCountriesMap[watchCity] || [];
-      setAvailableCountries(countries);
+    if (watchCountry) {
+      setSelectedCountry(watchCountry);
+      setAvailableCities(countryToCitiesMap[watchCountry] || []);
       
-      // Reset country selection if current selection is not available in the new city
-      const currentCountry = form.getValues('country');
-      if (currentCountry && !countries.includes(currentCountry)) {
-        form.setValue('country', undefined);
+      // If the currently selected city is not available for this country, reset it
+      const currentCity = form.getValues('city');
+      if (currentCity && !countryToCitiesMap[watchCountry]?.includes(currentCity)) {
+        form.setValue('city', undefined);
       }
     }
-  }, [watchCity, form]);
+  }, [watchCountry, countryToCitiesMap, form]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <FormField
-        control={form.control}
-        name="city"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('form.city')}</FormLabel>
-            <Select 
-              onValueChange={field.onChange} 
-              defaultValue={field.value}
-            >
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder={t('form.selectCity')} />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {Object.values(ApplicationCenterCity).map((city) => (
-                  <SelectItem key={city} value={city}>{city}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormDescription>
-              {t('form.cityDescription')}
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
+    <div className="space-y-4">
       <FormField
         control={form.control}
         name="country"
@@ -86,21 +73,20 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
           <FormItem>
             <FormLabel>{t('form.country')}</FormLabel>
             <Select 
-              onValueChange={field.onChange} 
-              defaultValue={field.value}
-              disabled={!watchCity}
+              onValueChange={(value: Country) => field.onChange(value)}
+              value={field.value}
             >
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue placeholder={watchCity ? t('form.selectCountry') : t('form.selectCityFirst')} />
+                  <SelectValue placeholder={t('form.selectCountry')} />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {availableCountries.map((country) => (
+                {Object.values(Country).map((country) => (
                   <SelectItem key={country} value={country}>
                     <div className="flex items-center gap-2">
                       <CountryFlag country={country} size={16} />
-                      {country}
+                      {t(`countries.${country.replace(/\s+/g, '').toLowerCase()}`)}
                     </div>
                   </SelectItem>
                 ))}
@@ -116,13 +102,65 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
 
       <FormField
         control={form.control}
+        name="city"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t('form.city')}</FormLabel>
+            <Select 
+              onValueChange={(value: ApplicationCenterCity) => field.onChange(value)}
+              value={field.value}
+              disabled={!selectedCountry}
+            >
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder={t('form.selectCity')} />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {Object.values(ApplicationCenterCity)
+                  .filter(city => !selectedCountry || availableCities.includes(city))
+                  .map((city) => (
+                    <SelectItem key={city} value={city}>
+                      {city}
+                    </SelectItem>
+                  ))
+                }
+              </SelectContent>
+            </Select>
+            <FormDescription>
+              {t('form.cityDescription')}
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name="durationOfVisit"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t('form.duration')}</FormLabel>
+            <FormControl>
+              <Input placeholder={t('form.durationPlaceholder')} {...field} />
+            </FormControl>
+            <FormDescription>
+              {t('form.durationDescription')}
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
         name="purposeOfVisit"
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t('form.purpose')}</FormLabel>
             <Select 
-              onValueChange={field.onChange} 
-              defaultValue={field.value}
+              onValueChange={(value: PurposeOfVisit) => field.onChange(value)}
+              value={field.value}
             >
               <FormControl>
                 <SelectTrigger>
@@ -131,7 +169,9 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
               </FormControl>
               <SelectContent>
                 {Object.values(PurposeOfVisit).map((purpose) => (
-                  <SelectItem key={purpose} value={purpose}>{purpose}</SelectItem>
+                  <SelectItem key={purpose} value={purpose}>
+                    {t(`purpose.${purpose.toLowerCase()}`)}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -142,30 +182,6 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
           </FormItem>
         )}
       />
-
-      {!isLongTermPurpose && (
-        <FormField
-          control={form.control}
-          name="durationOfVisit"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('form.duration')}</FormLabel>
-              <FormControl>
-                <Input 
-                  type="number" 
-                  min="1" 
-                  placeholder={t('form.durationPlaceholder')} 
-                  {...field} 
-                />
-              </FormControl>
-              <FormDescription>
-                {t('form.durationDescription')}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      )}
     </div>
   );
 };

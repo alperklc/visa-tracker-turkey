@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -7,20 +8,11 @@ import CountryFlag from './CountryFlag';
 
 interface LiteApplicationTableProps {
   applications: VisaApplication[];
-  className?: string;
 }
 
-export const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ 
-  applications,
-  className 
-}) => {
+const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ applications }) => {
   const { t } = useLanguage();
-
-  const formatDate = (date: Date | null) => {
-    if (!date) return t('table.pending');
-    return date.toLocaleDateString();
-  };
-
+  
   const getProcessingDays = (app: VisaApplication) => {
     if (!app.passportReturnDate) {
       const today = new Date();
@@ -29,6 +21,11 @@ export const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({
     return Math.floor((app.passportReturnDate.getTime() - app.applicationSubmitDate.getTime()) / (1000 * 60 * 60 * 24));
   };
 
+  const formatDate = (date: Date | null) => {
+    if (!date) return t('table.pending');
+    return date.toLocaleDateString();
+  };
+  
   const getResultBadge = (app: VisaApplication) => {
     if (!app.result) return <Badge variant="outline">{t('table.pending')}</Badge>;
     
@@ -42,7 +39,7 @@ export const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({
   };
 
   return (
-    <div className={className}>
+    <div className="overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -55,12 +52,12 @@ export const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {applications.slice(0, 5).map((app) => (
+          {applications.map((app) => (
             <TableRow key={app.id}>
               <TableCell>
                 <div className="flex items-center gap-2">
                   <CountryFlag country={app.country} size={20} />
-                  {app.country}
+                  {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
                 </div>
               </TableCell>
               <TableCell>{app.city}</TableCell>
@@ -80,4 +77,4 @@ export const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({
   );
 };
 
-export default LiteApplicationTable; 
+export default LiteApplicationTable;

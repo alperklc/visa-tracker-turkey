@@ -62,7 +62,7 @@ const Facts: React.FC = () => {
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <CountryFlag country={item.country} size={20} />
-                            {item.country}
+                            {t(`countries.${item.country.replace(/\s+/g, '').toLowerCase()}`)}
                           </div>
                         </TableCell>
                         <TableCell>
@@ -99,7 +99,7 @@ const Facts: React.FC = () => {
                       ].map((country) => (
                         <div key={country} className="flex items-center gap-2">
                           <CountryFlag country={country} size={18} />
-                          <span className="text-sm">{country}</span>
+                          <span className="text-sm">{t(`countries.${country.replace(/\s+/g, '').toLowerCase()}`)}</span>
                         </div>
                       ))}
                     </div>
@@ -166,12 +166,7 @@ const Facts: React.FC = () => {
                         </TableHead>
                         <TableHead>
                           <div className="flex items-center gap-2">
-                            <span>🇧🇦</span> {t('facts.bosnia')}
-                          </div>
-                        </TableHead>
-                        <TableHead>
-                          <div className="flex items-center gap-2">
-                            <span>🇿🇦</span> {t('facts.southAfrica')}
+                            <span>🇲🇾</span> {t('facts.malaysia')}
                           </div>
                         </TableHead>
                         <TableHead>
@@ -189,7 +184,6 @@ const Facts: React.FC = () => {
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-green-50">{t('facts.notRequired')}</TableCell>
                         <TableCell className="bg-green-50">{t('facts.notRequired')}</TableCell>
-                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-green-50">{t('facts.notRequired')}</TableCell>
                       </TableRow>
                       <TableRow>
@@ -199,12 +193,10 @@ const Facts: React.FC = () => {
                         <TableCell>€90</TableCell>
                         <TableCell>€0</TableCell>
                         <TableCell>€0</TableCell>
-                        <TableCell>€80</TableCell>
                         <TableCell>€0</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.ukVisa')}</TableCell>
-                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
@@ -220,7 +212,6 @@ const Facts: React.FC = () => {
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                         <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
-                        <TableCell className="bg-red-50">{t('facts.required')}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.visaFreeCountries')}</TableCell>
@@ -228,8 +219,7 @@ const Facts: React.FC = () => {
                         <TableCell>130+</TableCell>
                         <TableCell>80+</TableCell>
                         <TableCell>115+</TableCell>
-                        <TableCell>120+</TableCell>
-                        <TableCell>100+</TableCell>
+                        <TableCell>180+</TableCell>
                         <TableCell>170+</TableCell>
                       </TableRow>
                       <TableRow>
@@ -238,8 +228,7 @@ const Facts: React.FC = () => {
                         <TableCell>$3,800</TableCell>
                         <TableCell>$12,200</TableCell>
                         <TableCell>$5,700</TableCell>
-                        <TableCell>$7,100</TableCell>
-                        <TableCell>$6,900</TableCell>
+                        <TableCell>$11,400</TableCell>
                         <TableCell>$13,800</TableCell>
                       </TableRow>
                       <TableRow>
@@ -248,8 +237,7 @@ const Facts: React.FC = () => {
                         <TableCell>28M</TableCell>
                         <TableCell>144M</TableCell>
                         <TableCell>3.7M</TableCell>
-                        <TableCell>3.2M</TableCell>
-                        <TableCell>60M</TableCell>
+                        <TableCell>33M</TableCell>
                         <TableCell>45M</TableCell>
                       </TableRow>
                       <TableRow>
@@ -258,8 +246,7 @@ const Facts: React.FC = () => {
                         <TableCell className="bg-red-50">2.11</TableCell>
                         <TableCell className="bg-red-50">2.28</TableCell>
                         <TableCell className="bg-amber-50">5.86</TableCell>
-                        <TableCell className="bg-amber-50">5.04</TableCell>
-                        <TableCell className="bg-amber-50">7.05</TableCell>
+                        <TableCell className="bg-amber-50">6.5</TableCell>
                         <TableCell className="bg-green-50">7.52</TableCell>
                       </TableRow>
                       <TableRow>
@@ -268,8 +255,7 @@ const Facts: React.FC = () => {
                         <TableCell>7.1M</TableCell>
                         <TableCell>112,000</TableCell>
                         <TableCell>9,800</TableCell>
-                        <TableCell>17,200</TableCell>
-                        <TableCell>38,600</TableCell>
+                        <TableCell>178,000</TableCell>
                         <TableCell>5,800</TableCell>
                       </TableRow>
                     </TableBody>
@@ -304,13 +290,8 @@ const Facts: React.FC = () => {
                 </div>
                 
                 <div className="p-4 bg-purple-50 rounded-lg">
-                  <p className="font-semibold mb-2">{t('facts.bosniaFact')}</p>
-                  <p>{t('facts.bosniaFactDesc')}</p>
-                </div>
-                
-                <div className="p-4 bg-orange-50 rounded-lg">
-                  <p className="font-semibold mb-2">{t('facts.southAfricaFact')}</p>
-                  <p>{t('facts.southAfricaFactDesc')}</p>
+                  <p className="font-semibold mb-2">{t('facts.malaysiaFact')}</p>
+                  <p>{t('facts.malaysiaFactDesc')}</p>
                 </div>
                 
                 <div className="p-4 bg-yellow-50 rounded-lg">

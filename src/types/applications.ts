@@ -1,5 +1,6 @@
 
-import { Country, ApplicationCenterCity, PurposeOfVisit, VisaResultStatus, EntryType } from './enums';
+import { ApplicationCenterCity, PurposeOfVisit, VisaResultStatus, EntryType } from './enums';
+import { Country } from './countries';
 
 export type VisaApplication = {
   id: string;
