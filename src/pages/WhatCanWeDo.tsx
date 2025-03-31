@@ -5,13 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { AlertTriangle, Users, Megaphone, Scale, Plane, Globe, Mail } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import StatsGridCard from '@/components/dashboard/StatsGridCard';
 
 const WhatCanWeDo = () => {
   const { t } = useLanguage();
 
   const actionCards = [
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="w-6 h-6 text-primary" />,
       title: t('actions.diaspora.title'),
       description: t('actions.diaspora.description'),
       points: [
@@ -21,7 +22,7 @@ const WhatCanWeDo = () => {
       ]
     },
     {
-      icon: <Plane className="w-6 h-6" />,
+      icon: <Plane className="w-6 h-6 text-primary" />,
       title: t('actions.tourism.title'),
       description: t('actions.tourism.description'),
       points: [
@@ -31,7 +32,7 @@ const WhatCanWeDo = () => {
       ]
     },
     {
-      icon: <Megaphone className="w-6 h-6" />,
+      icon: <Megaphone className="w-6 h-6 text-primary" />,
       title: t('actions.awareness.title'),
       description: t('actions.awareness.description'),
       points: [
@@ -41,7 +42,7 @@ const WhatCanWeDo = () => {
       ]
     },
     {
-      icon: <Scale className="w-6 h-6" />,
+      icon: <Scale className="w-6 h-6 text-primary" />,
       title: t('actions.legal.title'),
       description: t('actions.legal.description'),
       points: [
@@ -80,15 +81,16 @@ const WhatCanWeDo = () => {
 
             <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {actionCards.map((card, index) => (
-                <Card key={index} className="overflow-hidden transition-all hover:shadow-md">
-                  <CardHeader>
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary/10 rounded-full">{card.icon}</div>
-                      <CardTitle>{card.title}</CardTitle>
-                    </div>
-                    <CardDescription>{card.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
+                <StatsGridCard
+                  key={index}
+                  title={card.title}
+                  stat=""
+                  icon={card.icon}
+                  description={card.description}
+                  iconClassName="p-2 bg-primary/10 rounded-full"
+                  className="h-full"
+                >
+                  <CardContent className="pt-4">
                     <ul className="space-y-2">
                       {card.points.map((point, idx) => (
                         <li key={idx} className="flex items-start gap-2">
@@ -98,54 +100,52 @@ const WhatCanWeDo = () => {
                       ))}
                     </ul>
                   </CardContent>
-                </Card>
+                </StatsGridCard>
               ))}
             </section>
           </TabsContent>
           
           <TabsContent value="alternatives" className="space-y-6">
-            <Card>
+            <Card className="overflow-hidden hover:shadow-md transition-shadow">
               <CardHeader>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-full">
-                    <Globe className="w-6 h-6" />
+                    <Globe className="w-6 h-6 text-primary" />
                   </div>
                   <CardTitle>{t('actions.alternatives.title')}</CardTitle>
                 </div>
+                <CardDescription>{t('actions.alternatives.description')}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <p>{t('actions.alternatives.description')}</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {[
-                      'Thailand', 'Malaysia', 'Singapore',
-                      'South Korea', 'Japan', 'UAE',
-                      'Mexico', 'Georgia', 'Serbia'
-                    ].map((country) => (
-                      <div key={country} className="flex items-center gap-2 p-3 bg-accent rounded-lg transition-all hover:bg-accent/70">
-                        <Plane className="w-4 h-4" />
-                        <span>{country}</span>
-                      </div>
-                    ))}
-                  </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {[
+                    'Thailand', 'Malaysia', 'Singapore',
+                    'South Korea', 'Japan', 'UAE',
+                    'Mexico', 'Georgia', 'Serbia'
+                  ].map((country) => (
+                    <div key={country} className="flex items-center gap-2 p-3 bg-accent/50 rounded-lg transition-all hover:bg-accent/80 hover:translate-y-[-2px] hover:shadow-sm">
+                      <Plane className="w-4 h-4 text-primary" />
+                      <span>{country}</span>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
           
           <TabsContent value="contact" className="space-y-6">
-            <Card>
+            <Card className="overflow-hidden hover:shadow-md transition-shadow">
               <CardHeader>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-full">
-                    <Mail className="w-6 h-6" />
+                    <Mail className="w-6 h-6 text-primary" />
                   </div>
                   <CardTitle>{t('actions.contact.title')}</CardTitle>
                 </div>
+                <CardDescription>{t('actions.contact.description')}</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>{t('actions.contact.description')}</p>
-                <div className="mt-4 flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                   <a 
                     href="mailto:feedback@example.com" 
                     className="inline-flex items-center gap-2 text-primary hover:underline bg-primary/5 p-3 rounded-lg transition-colors hover:bg-primary/10"

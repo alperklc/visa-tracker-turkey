@@ -41,6 +41,7 @@ export enum CountryCode {
   ZA = "ZA", // South Africa
   VE = "VE", // Venezuela
   RU = "RU", // Russia
+  MY = "MY", // Malaysia
 }
 
 export enum Country {
@@ -85,6 +86,7 @@ export enum Country {
   SouthAfrica = "South Africa",
   Venezuela = "Venezuela",
   Russia = "Russia",
+  Malaysia = "Malaysia",
 }
 
 export enum PurposeOfVisit {
@@ -139,6 +141,7 @@ export type VisaResult = {
   status: VisaResultStatus;
   validity?: string; // e.g. "90 days", "6 months"
   entryType?: EntryType;
+  rejectionReason?: string;
 };
 
 export type ApplicationStats = {

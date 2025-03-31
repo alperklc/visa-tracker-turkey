@@ -16,6 +16,10 @@ interface StatsGridCardProps {
     value: number;
     isPositive?: boolean;
   };
+  source?: {
+    name: string;
+    url: string;
+  };
 }
 
 const StatsGridCard: React.FC<StatsGridCardProps> = ({ 
@@ -28,10 +32,11 @@ const StatsGridCard: React.FC<StatsGridCardProps> = ({
   titleClassName = "",
   statClassName = "",
   descriptionClassName = "",
-  trend
+  trend,
+  source
 }) => {
   return (
-    <Card className={`overflow-hidden ${className}`}>
+    <Card className={`overflow-hidden hover:shadow-md transition-shadow ${className}`}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className={`text-sm font-medium text-muted-foreground ${titleClassName}`}>{title}</CardTitle>
@@ -48,6 +53,18 @@ const StatsGridCard: React.FC<StatsGridCardProps> = ({
           )}
         </div>
         {description && <p className={`text-xs text-muted-foreground mt-1 ${descriptionClassName}`}>{description}</p>}
+        {source && (
+          <div className="mt-3 text-[10px] text-muted-foreground">
+            <a 
+              href={source.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:underline flex items-center gap-1"
+            >
+              Source: {source.name}
+            </a>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
