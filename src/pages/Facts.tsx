@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -7,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import CountryFlag from '@/components/CountryFlag';
 import { Country } from '@/lib/types';
+import StatsGridCard from '@/components/dashboard/StatsGridCard';
 
 const Facts: React.FC = () => {
   const { t } = useLanguage();
@@ -120,9 +122,9 @@ const Facts: React.FC = () => {
                   
                   <div className="flex flex-wrap gap-2">
                     {["Albania", "Andorra", "Argentina", "Australia", "Bosnia and Herzegovina", "Brazil", "Brunei", "Canada", "Chile", "Colombia", "Costa Rica", "El Salvador", "Georgia", "Guatemala", "Honduras", "Hong Kong", "Israel", "Japan", "Malaysia", "Mexico", "Moldova", "Monaco", "Montenegro", "New Zealand", "Nicaragua", "North Macedonia", "Panama", "Paraguay", "Peru", "San Marino", "Serbia", "Singapore", "South Korea", "Taiwan", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Vatican City", "Venezuela"].map((country) => (
-                      <Badge key={country} variant="outline" className="bg-green-50">
+                      <div key={country} className="flex items-center gap-2 bg-green-50 rounded-lg px-2 py-1 text-sm border border-green-100">
                         {country}
-                      </Badge>
+                      </div>
                     ))}
                   </div>
                 </div>
