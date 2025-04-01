@@ -13,10 +13,10 @@ declare global {
 }
 
 const Discussions: React.FC = () => {
-  const { t, locale } = useLanguage();
+  const { t, language } = useLanguage();
   
   useEffect(() => {
-    // Setup Disqus with current page URL and locale
+    // Setup Disqus with current page URL and language
     const loadDisqus = () => {
       const disqusShortname = 'visa-tracker-turkey'; // Replace with your Disqus shortname
       
@@ -27,7 +27,7 @@ const Discussions: React.FC = () => {
           config: function() {
             this.page.identifier = window.location.pathname;
             this.page.url = window.location.href;
-            this.language = locale;
+            this.language = language;
           }
         });
       } else {
@@ -35,7 +35,7 @@ const Discussions: React.FC = () => {
         window.disqus_config = function() {
           this.page.identifier = window.location.pathname;
           this.page.url = window.location.href;
-          this.language = locale;
+          this.language = language;
         };
         
         // Load Disqus script
@@ -59,7 +59,7 @@ const Discussions: React.FC = () => {
         }
       }
     };
-  }, [locale]);
+  }, [language]);
   
   return (
     <Layout className="py-12">
