@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
-import { VisaApplication, Country } from "@/lib/types";
+import { VisaApplication } from "@/lib/types";
+import { Country } from "@/types/countries";
 import { initialApplications } from "@/data/mockApplications";
 import { calculateStats } from "@/utils/applicationStats";
 
