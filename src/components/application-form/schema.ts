@@ -4,16 +4,12 @@ import { Country, ApplicationCenterCity, PurposeOfVisit } from '@/lib/types';
 
 // Define the map of cities to countries
 export const cityToCountriesMap: Record<ApplicationCenterCity, Country[]> = {
-  [ApplicationCenterCity.Amsterdam]: [Country.Netherlands],
-  [ApplicationCenterCity.Ankara]: [Country.Turkey],
-  [ApplicationCenterCity.Berlin]: [Country.Germany],
-  [ApplicationCenterCity.Brussels]: [Country.Belgium],
   [ApplicationCenterCity.Istanbul]: [Country.Turkey],
-  [ApplicationCenterCity.London]: [Country.UnitedKingdom],
-  [ApplicationCenterCity.Madrid]: [Country.Spain],
-  [ApplicationCenterCity.Paris]: [Country.France],
-  [ApplicationCenterCity.Rome]: [Country.Italy],
-  [ApplicationCenterCity.Vienna]: [Country.Austria],
+  [ApplicationCenterCity.Ankara]: [Country.Turkey],
+  [ApplicationCenterCity.Izmir]: [Country.Turkey],
+  [ApplicationCenterCity.Antalya]: [Country.Turkey],
+  [ApplicationCenterCity.Bodrum]: [Country.Turkey],
+  [ApplicationCenterCity.Gaziantep]: [Country.Turkey],
 };
 
 // Form validation schema
