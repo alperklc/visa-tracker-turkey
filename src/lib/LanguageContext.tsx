@@ -34,7 +34,8 @@ export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ childr
       // Access the nested objects using the keys
       const obj = translations[language][objectKey as keyof typeof translations[typeof language]];
       if (typeof obj === 'object' && obj !== null) {
-        return (obj as Record<string, string>)[propKey] || key;
+        // Use type assertion to access the property safely
+        return (obj as any)[propKey] || key;
       }
       return key;
     }
