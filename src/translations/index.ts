@@ -4,7 +4,7 @@ import { en } from './en';
 import { de } from './de';
 import { Language } from '@/lib/types';
 
-// Define a common type for all translation objects
+// Use the same type as defined in the translation files
 type TranslationType = typeof en;
 
 // Export all translations
