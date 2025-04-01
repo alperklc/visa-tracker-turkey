@@ -100,6 +100,7 @@ export interface CountryTranslations {
   moldova: string;
   northmacedonia: string;
   turkey: string;
+  southkorea: string;
 }
 
 export interface FormTranslations {

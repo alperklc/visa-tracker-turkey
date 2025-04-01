@@ -168,7 +168,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
               <SelectContent>
                 {Object.values(PurposeOfVisit).map((purpose) => (
                   <SelectItem key={purpose} value={purpose}>
-                    {t(`purpose.${purpose.toLowerCase()}`)}
+                    {t(`purposes.${purpose.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>

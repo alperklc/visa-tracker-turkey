@@ -9,7 +9,6 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Dictionary for translations
 const translations: Record<Language, Record<string, string>> = {
   tr: {
     // General
@@ -352,6 +351,16 @@ const translations: Record<Language, Record<string, string>> = {
     "cookies.acceptSelected": "Seçilenleri Kabul Et",
     "cookies.acceptAll": "Tümünü Kabul Et",
     "cookies.close": "Kapat",
+    
+    // Form
+    "form.appointmentDateQuestion": "Randevu tarihi başvuru tarihi ile aynı mı?",
+    "form.back": "Geri",
+    "form.next": "İleri",
+    "form.sameAsSubmitDate": "Evet, aynı tarih",
+    "form.differentDate": "Hayır, farklı tarih",
+    "form.validityDescription": "Vizenin geçerli olduğu süre",
+    "form.rejectionReason": "Ret Nedeni",
+    "discussion.community": "Topluluk Tartışmaları",
   },
   en: {
     // General
@@ -694,6 +703,16 @@ const translations: Record<Language, Record<string, string>> = {
     "cookies.acceptSelected": "Accept Selected",
     "cookies.acceptAll": "Accept All",
     "cookies.close": "Close",
+    
+    // Form
+    "form.appointmentDateQuestion": "Is the appointment date the same as the submission date?",
+    "form.back": "Back",
+    "form.next": "Next",
+    "form.sameAsSubmitDate": "Yes, same date",
+    "form.differentDate": "No, different date",
+    "form.validityDescription": "Duration of the visa validity",
+    "form.rejectionReason": "Rejection Reason",
+    "discussion.community": "Community Discussions",
   },
   de: {
     // General
@@ -1036,6 +1055,16 @@ const translations: Record<Language, Record<string, string>> = {
     "cookies.acceptSelected": "Ausgewählte akzeptieren",
     "cookies.acceptAll": "Alle akzeptieren",
     "cookies.close": "Schließen",
+    
+    // Form
+    "form.appointmentDateQuestion": "Ist das Termindatum das gleiche wie das Einreichungsdatum?",
+    "form.back": "Zurück",
+    "form.next": "Weiter",
+    "form.sameAsSubmitDate": "Ja, gleiches Datum",
+    "form.differentDate": "Nein, anderes Datum",
+    "form.validityDescription": "Dauer der Visumgültigkeit",
+    "form.rejectionReason": "Ablehnungsgrund",
+    "discussion.community": "Community-Diskussionen",
   },
 };
 
