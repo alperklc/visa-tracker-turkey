@@ -1,4 +1,3 @@
-
 export enum CountryCode {
   DE = "DE", // Germany
   IT = "IT", // Italy
@@ -43,6 +42,7 @@ export enum CountryCode {
   VE = "VE", // Venezuela
   RU = "RU", // Russia
   MY = "MY", // Malaysia
+  TR = "TR", // Turkey
 }
 
 export enum Country {
@@ -88,6 +88,7 @@ export enum Country {
   Venezuela = "Venezuela",
   Russia = "Russia",
   Malaysia = "Malaysia",
+  Turkey = "Turkey",
 }
 
 // Country statistics type
