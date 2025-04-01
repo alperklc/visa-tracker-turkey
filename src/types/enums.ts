@@ -18,6 +18,13 @@ export enum ApplicationCenterCity {
   Antalya = "Antalya",
   Bodrum = "Bodrum",
   Gaziantep = "Gaziantep",
+  Moscow = "Moscow",
+  SaintPetersburg = "Saint Petersburg",
+  Caracas = "Caracas",
+  Tbilisi = "Tbilisi",
+  Batumi = "Batumi",
+  Skopje = "Skopje",
+  Chisinau = "Chisinau"
 }
 
 export enum VisaResultStatus {

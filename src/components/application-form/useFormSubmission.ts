@@ -48,3 +48,5 @@ export const useFormSubmission = () => {
   
   return { submitForm, isSubmitting };
 };
+
+export default useFormSubmission;
