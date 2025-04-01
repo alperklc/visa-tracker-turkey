@@ -1,23 +1,62 @@
-
 import * as z from 'zod';
 import { Country } from '@/types/countries';
 import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
 
-// Define the map of cities to countries
+// Define the map of Turkish cities to countries they serve (consulates/embassies)
 export const cityToCountriesMap: Record<ApplicationCenterCity, Country[]> = {
-  [ApplicationCenterCity.Istanbul]: [Country.Turkey],
-  [ApplicationCenterCity.Ankara]: [Country.Turkey],
-  [ApplicationCenterCity.Izmir]: [Country.Turkey],
-  [ApplicationCenterCity.Antalya]: [Country.Turkey],
-  [ApplicationCenterCity.Bodrum]: [Country.Turkey],
-  [ApplicationCenterCity.Gaziantep]: [Country.Turkey],
-  [ApplicationCenterCity.Moscow]: [Country.Russia],
-  [ApplicationCenterCity.SaintPetersburg]: [Country.Russia],
-  [ApplicationCenterCity.Caracas]: [Country.Venezuela],
-  [ApplicationCenterCity.Tbilisi]: [Country.Georgia],
-  [ApplicationCenterCity.Batumi]: [Country.Georgia],
-  [ApplicationCenterCity.Skopje]: [Country.NorthMacedonia],
-  [ApplicationCenterCity.Chisinau]: [Country.Moldova],
+  [ApplicationCenterCity.Istanbul]: [
+    Country.Germany, 
+    Country.France, 
+    Country.Italy, 
+    Country.UnitedKingdom, 
+    Country.UnitedStates, 
+    Country.Greece, 
+    Country.Netherlands,
+    Country.Spain,
+    Country.Russia
+  ],
+  [ApplicationCenterCity.Ankara]: [
+    Country.Germany,
+    Country.UnitedStates,
+    Country.France,
+    Country.UnitedKingdom,
+    Country.Italy,
+    Country.Canada,
+    Country.Spain,
+    Country.Australia,
+    Country.Poland,
+    Country.Netherlands,
+    Country.Sweden,
+    Country.Switzerland
+  ],
+  [ApplicationCenterCity.Izmir]: [
+    Country.Germany,
+    Country.Greece,
+    Country.France,
+    Country.Italy,
+    Country.Netherlands
+  ],
+  [ApplicationCenterCity.Antalya]: [
+    Country.Germany,
+    Country.Russia,
+    Country.UnitedKingdom
+  ],
+  [ApplicationCenterCity.Bodrum]: [
+    Country.UnitedKingdom,
+    Country.Germany
+  ],
+  [ApplicationCenterCity.Gaziantep]: [
+    Country.UnitedStates,
+    Country.Germany,
+    Country.France
+  ],
+  [ApplicationCenterCity.Moscow]: [Country.Turkey],
+  [ApplicationCenterCity.SaintPetersburg]: [Country.Turkey],
+  [ApplicationCenterCity.Caracas]: [Country.Turkey],
+  [ApplicationCenterCity.Tbilisi]: [Country.Turkey],
+  [ApplicationCenterCity.Batumi]: [Country.Turkey],
+  [ApplicationCenterCity.Skopje]: [Country.Turkey],
+  [ApplicationCenterCity.Chisinau]: [Country.Turkey],
 };
 
 // Form validation schema
