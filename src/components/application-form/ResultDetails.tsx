@@ -23,7 +23,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from '@/lib/LanguageContext';
-import { VisaResultStatus, EntryType } from '@/lib/types';
+import { VisaResultStatus, EntryType } from '@/types/enums';
 import { FormValues } from './schema';
 
 interface ResultDetailsProps {

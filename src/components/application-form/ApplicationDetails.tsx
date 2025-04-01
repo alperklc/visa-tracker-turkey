@@ -17,7 +17,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Country, ApplicationCenterCity, PurposeOfVisit } from '@/lib/types';
+import { Country } from '@/types/countries';
+import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
 import { FormValues, cityToCountriesMap } from './schema';
 import { useLanguage } from '@/lib/LanguageContext';
 import CountryFlag from '../CountryFlag';

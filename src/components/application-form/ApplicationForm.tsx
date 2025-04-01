@@ -6,20 +6,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Form } from '@/components/ui/form';
-import { applicationSchema, type ApplicationFormType } from './schema';
+import { applicationSchema, type ApplicationForm } from './schema';
 import { ApplicationDetails, AppointmentDetails, ResultDetails, ApplicationCaptcha } from '.';
 import { useLanguage } from '@/lib/LanguageContext';
 import { toast } from 'sonner';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { useFormSubmission } from './useFormSubmission';
 
-const ApplicationForm = () => {
+const ApplicationFormComponent = () => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('details');
   const isMobile = useIsMobile();
   const { submitForm, isSubmitting } = useFormSubmission();
   
-  const form = useForm<ApplicationFormType>({
+  const form = useForm<ApplicationForm>({
     resolver: zodResolver(applicationSchema),
     defaultValues: {
       duration: 0,
@@ -29,7 +29,7 @@ const ApplicationForm = () => {
   });
   
   const validateAndGoToNextTab = (nextTab: string, currentTab: string) => {
-    let fieldsToValidate: (keyof ApplicationFormType)[] = [];
+    let fieldsToValidate: (keyof ApplicationForm)[] = [];
     
     if (currentTab === 'details') {
       fieldsToValidate = ['country', 'city', 'duration', 'purpose'];
@@ -50,7 +50,7 @@ const ApplicationForm = () => {
       });
   };
   
-  async function onSubmit(data: ApplicationFormType) {
+  async function onSubmit(data: ApplicationForm) {
     // Validate captcha first
     if (!data.captcha) {
       toast.error(t('form.captchaRequired'));
@@ -142,4 +142,4 @@ const ApplicationForm = () => {
   );
 };
 
-export default ApplicationForm;
+export default ApplicationFormComponent;

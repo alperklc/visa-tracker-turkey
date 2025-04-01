@@ -39,3 +39,48 @@ export enum EntryType {
 }
 
 export type Language = "tr" | "en" | "de";
+
+// Add CountryCode enum for the CountryFlag component
+export enum CountryCode {
+  DE = "DE",
+  IT = "IT",
+  FR = "FR",
+  ES = "ES",
+  GB = "GB",
+  PT = "PT",
+  GR = "GR",
+  AT = "AT",
+  CH = "CH",
+  NL = "NL",
+  BE = "BE",
+  SE = "SE",
+  DK = "DK",
+  FI = "FI",
+  NO = "NO",
+  IE = "IE",
+  PL = "PL",
+  CZ = "CZ",
+  HU = "HU",
+  HR = "HR",
+  BG = "BG",
+  RO = "RO",
+  US = "US",
+  CA = "CA",
+  AU = "AU",
+  NZ = "NZ",
+  EE = "EE",
+  LV = "LV",
+  LT = "LT",
+  LU = "LU",
+  MT = "MT",
+  SK = "SK",
+  SI = "SI",
+  IS = "IS",
+  LI = "LI",
+  TR = "TR",
+  RU = "RU",
+  VE = "VE",
+  GE = "GE",
+  MD = "MD",
+  MK = "MK"
+}

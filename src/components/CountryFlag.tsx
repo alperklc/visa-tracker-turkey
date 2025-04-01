@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Country, CountryCode } from '@/lib/types';
+import { Country, CountryCode } from '@/types/enums';
 
 interface CountryFlagProps {
   country: Country;
@@ -51,6 +52,12 @@ const CountryFlag: React.FC<CountryFlagProps> = ({
       case Country.Slovenia: return CountryCode.SI;
       case Country.Iceland: return CountryCode.IS;
       case Country.Liechtenstein: return CountryCode.LI;
+      case Country.Turkey: return CountryCode.TR;
+      case Country.Russia: return CountryCode.RU;
+      case Country.Venezuela: return CountryCode.VE;
+      case Country.Georgia: return CountryCode.GE;
+      case Country.Moldova: return CountryCode.MD;
+      case Country.NorthMacedonia: return CountryCode.MK;
       default: return CountryCode.DE;
     }
   };
@@ -68,7 +75,7 @@ const CountryFlag: React.FC<CountryFlagProps> = ({
 
 // Convert country code to flag emoji
 const getFlagEmoji = (countryCode: CountryCode): string => {
-  const codePoints = Array.from(countryCode)
+  const codePoints = Array.from(countryCode.toString())
     .map(char => 127397 + char.charCodeAt(0));
   return String.fromCodePoint(...codePoints);
 };

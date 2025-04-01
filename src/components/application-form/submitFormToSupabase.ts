@@ -1,29 +1,31 @@
 
 /**
- * This function would be deployed as a Supabase Edge Function
- * to handle form submissions and save them to a Supabase table.
+ * This is a reference implementation for a Supabase Edge Function
+ * that would be deployed to handle form submissions.
+ * 
+ * NOTE: This file is not meant to be imported directly in the frontend.
+ * It should be deployed as a Supabase Edge Function.
  */
 
-import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
+// Example implementation for reference - this isn't used directly
+export const handleFormSubmission = async (req: Request) => {
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  };
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
-
-serve(async (req) => {
   // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
   try {
-    // Create a Supabase client with the Deno runtime
-    const supabaseUrl = Deno.env.get('SUPABASE_URL') || '';
-    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+    // Example of environment variables in Supabase Edge Functions
+    // const supabaseUrl = Deno.env.get('SUPABASE_URL') || '';
+    // const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
     
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    // In a real edge function, you would create a Supabase client:
+    // const supabase = createClient(supabaseUrl, supabaseServiceKey);
     
     // Get the request body
     const body = await req.json();
@@ -37,38 +39,29 @@ serve(async (req) => {
     }
     
     // Insert the application data into the Supabase table
-    const { data, error } = await supabase
-      .from('visa_applications')
-      .insert([
-        {
-          country: body.country,
-          city: body.city,
-          duration: body.duration,
-          purpose: body.purpose,
-          submission_date: body.submissionDate,
-          appointment_date: body.sameAppointmentDate ? body.submissionDate : body.appointmentDate,
-          passport_returned: body.passportReturned,
-          return_date: body.returnDate,
-          result_status: body.resultStatus,
-          validity: body.validity,
-          entry_type: body.entryType,
-          rejection_reason: body.rejectionReason,
-          // Add any additional fields if needed
-        }
-      ])
-      .select();
-    
-    if (error) {
-      console.error('Error inserting data:', error);
-      return new Response(
-        JSON.stringify({ error: error.message }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    // const { data, error } = await supabase
+    //  .from('visa_applications')
+    //  .insert([
+    //    {
+    //      country: body.country,
+    //      city: body.city,
+    //      duration: body.duration,
+    //      purpose: body.purpose,
+    //      submission_date: body.submissionDate,
+    //      appointment_date: body.sameAppointmentDate ? body.submissionDate : body.appointmentDate,
+    //      passport_returned: body.passportReturned,
+    //      return_date: body.returnDate,
+    //      result_status: body.resultStatus,
+    //      validity: body.validity,
+    //      entry_type: body.entryType,
+    //      rejection_reason: body.rejectionReason,
+    //    }
+    //  ])
+    //  .select();
     
     // Return success response
     return new Response(
-      JSON.stringify({ success: true, data }),
+      JSON.stringify({ success: true, data: { id: 'mock-id' } }),
       { status: 201, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (err) {
@@ -78,4 +71,6 @@ serve(async (req) => {
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
-});
+};
+
+// This is just for reference, it should be deployed as a Supabase Edge Function

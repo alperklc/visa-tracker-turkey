@@ -1,6 +1,7 @@
 
 import * as z from 'zod';
-import { Country, ApplicationCenterCity, PurposeOfVisit } from '@/lib/types';
+import { Country } from '@/types/countries';
+import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
 
 // Define the map of cities to countries
 export const cityToCountriesMap: Record<ApplicationCenterCity, Country[]> = {

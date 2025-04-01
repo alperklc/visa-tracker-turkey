@@ -16,6 +16,23 @@ export const useFormSubmission = () => {
     setIsSubmitting(true);
     
     try {
+      // For development, we'll mock a successful submission
+      // In production, uncomment the fetch code below
+      
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Mock successful response
+      const result = { 
+        success: true, 
+        data: { 
+          id: Math.random().toString(36).substring(2, 15),
+          country: data.country,
+          city: data.city
+        } 
+      };
+      
+      /* In production, use this code instead:
       const response = await fetch(SUPABASE_FUNCTION_URL, {
         method: 'POST',
         headers: {
@@ -29,6 +46,7 @@ export const useFormSubmission = () => {
       if (!response.ok) {
         throw new Error(result.error || 'Failed to submit form');
       }
+      */
       
       toast.success(t('form.successMessage'), {
         description: t('form.successDescription'),
