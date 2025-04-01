@@ -34,7 +34,8 @@ const SchengenTab: React.FC = () => {
     Country.Hungary,
     Country.Iceland,
     Country.Liechtenstein,
-    Country.Switzerland
+    Country.Switzerland,
+    Country.Norway
   ];
   
   // Visa-free country names in all languages
