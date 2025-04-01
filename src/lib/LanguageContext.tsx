@@ -31,12 +31,17 @@ export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ childr
     // Handle typed nested objects like table, review, etc.
     if (nestedKeys.length > 1 && ['table', 'review', 'pagination', 'purposes', 'countries', 'form'].includes(nestedKeys[0])) {
       const [objectKey, propKey] = nestedKeys;
-      // Need to typecast here to access the nested objects with string keys
-      return translations[language][objectKey][propKey] || key;
+      // Access the nested objects using the keys
+      const obj = translations[language][objectKey as keyof typeof translations[typeof language]];
+      if (typeof obj === 'object' && obj !== null) {
+        return (obj as Record<string, string>)[propKey] || key;
+      }
+      return key;
     }
     
     // Handle regular string translations
-    return translations[language][key] || key;
+    const value = translations[language][key as keyof typeof translations[typeof language]];
+    return typeof value === 'string' ? value : key;
   };
 
   return (

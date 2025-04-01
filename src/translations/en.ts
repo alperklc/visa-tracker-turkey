@@ -1,7 +1,9 @@
+
 import { TableTranslations, ReviewTranslations, PaginationTranslations, PurposeTranslations, CountryTranslations, FormTranslations } from '@/types/interfaces';
 
+// Define a more specific type that accommodates both string values and specific object types
 type TranslationType = {
-  [key: string]: string;
+  [key: string]: string | Record<string, string>;
   table: TableTranslations;
   review: ReviewTranslations;
   pagination: PaginationTranslations;
