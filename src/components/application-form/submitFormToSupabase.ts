@@ -21,8 +21,9 @@ export const handleFormSubmission = async (req: Request) => {
 
   try {
     // Example of environment variables in Supabase Edge Functions
-    // const supabaseUrl = Deno.env.get('SUPABASE_URL') || '';
-    // const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+    // In a browser environment, we'd use a different approach for secrets
+    const supabaseUrl = process.env.SUPABASE_URL || '';
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
     
     // In a real edge function, you would create a Supabase client:
     // const supabase = createClient(supabaseUrl, supabaseServiceKey);
