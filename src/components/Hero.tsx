@@ -19,10 +19,6 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
     )}>
       <div className="container relative z-10 max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center">
-          <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-primary bg-primary/10 rounded-full">
-            {t('hero.badge')}
-          </div>
-          
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-balance">
             {t('hero.title')}
           </h1>

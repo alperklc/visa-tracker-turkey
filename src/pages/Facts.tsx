@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -38,45 +37,45 @@ const Facts: React.FC = () => {
                 <CardDescription>{t('facts.visaRequirementsDesc')}</CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableCaption>{t('facts.visaTableCaption')}</TableCaption>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>{t('facts.country')}</TableHead>
-                      <TableHead>{t('facts.requiresVisa')}</TableHead>
-                      <TableHead>{t('facts.processingTime')}</TableHead>
-                      <TableHead>{t('facts.notes')}</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {[
-                      { country: Country.Germany, requires: true, time: "15-30", notes: t('facts.schengenRules') },
-                      { country: Country.France, requires: true, time: "15-30", notes: t('facts.schengenRules') },
-                      { country: Country.Italy, requires: true, time: "15-30", notes: t('facts.schengenRules') },
-                      { country: Country.Spain, requires: true, time: "15-30", notes: t('facts.schengenRules') },
-                      { country: Country.UnitedKingdom, requires: true, time: "15-25", notes: t('facts.separateApplication') },
-                      { country: Country.UnitedStates, requires: true, time: "60-180", notes: t('facts.longProcessing') },
-                      { country: Country.Australia, requires: true, time: "20-40", notes: t('facts.electronicVisa') },
-                    ].map((item) => (
-                      <TableRow key={item.country}>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <CountryFlag country={item.country} size={20} />
-                            {t(`countries.${item.country.replace(/\s+/g, '').toLowerCase()}`)}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          {item.requires ? 
-                            <Badge variant="destructive">{t('facts.yes')}</Badge> : 
-                            <Badge variant="outline">{t('facts.no')}</Badge>
-                          }
-                        </TableCell>
-                        <TableCell>{item.time} {t('facts.days')}</TableCell>
-                        <TableCell>{item.notes}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                <div className="space-y-4">
+                  <div className="relative w-full">
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/3/35/Visa_requirements_for_Turkish_citizens.svg"
+                      alt="Visa requirements for Turkish citizens world map"
+                      className="w-full h-auto rounded-lg"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#002377]"></div>
+                      <span>{t('facts.turkeyRepublic')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#1191E5]"></div>
+                      <span>{t('facts.idCardTravel')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#22B14C]"></div>
+                      <span>{t('facts.noVisaRequired')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#B5E61D]"></div>
+                      <span>{t('facts.visaOnArrival')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#61C7A1]"></div>
+                      <span>{t('facts.eVisa')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#79D343]"></div>
+                      <span>{t('facts.visaAvailableBoth')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#C0C0C0]"></div>
+                      <span>{t('facts.visaRequired')}</span>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -166,12 +165,12 @@ const Facts: React.FC = () => {
                         </TableHead>
                         <TableHead>
                           <div className="flex items-center gap-2">
-                            <span>🇲🇾</span> {t('facts.malaysia')}
+                            <span>🇲🇰</span> {t('facts.northMacedonia')}
                           </div>
                         </TableHead>
                         <TableHead>
                           <div className="flex items-center gap-2">
-                            <span>🇦🇷</span> {t('facts.argentina')}
+                            <span>🇲🇩</span> {t('facts.moldova')}
                           </div>
                         </TableHead>
                       </TableRow>
@@ -219,8 +218,8 @@ const Facts: React.FC = () => {
                         <TableCell>130+</TableCell>
                         <TableCell>80+</TableCell>
                         <TableCell>115+</TableCell>
-                        <TableCell>180+</TableCell>
-                        <TableCell>170+</TableCell>
+                        <TableCell>125+</TableCell>
+                        <TableCell>120+</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.gdpPerCapita')}</TableCell>
@@ -228,8 +227,8 @@ const Facts: React.FC = () => {
                         <TableCell>$3,800</TableCell>
                         <TableCell>$12,200</TableCell>
                         <TableCell>$5,700</TableCell>
-                        <TableCell>$11,400</TableCell>
-                        <TableCell>$13,800</TableCell>
+                        <TableCell>$6,100</TableCell>
+                        <TableCell>$4,500</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">{t('facts.population')}</TableCell>
@@ -237,26 +236,8 @@ const Facts: React.FC = () => {
                         <TableCell>28M</TableCell>
                         <TableCell>144M</TableCell>
                         <TableCell>3.7M</TableCell>
-                        <TableCell>33M</TableCell>
-                        <TableCell>45M</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium">{t('facts.democracyIndex')}</TableCell>
-                        <TableCell className="bg-red-50">4.35</TableCell>
-                        <TableCell className="bg-red-50">2.11</TableCell>
-                        <TableCell className="bg-red-50">2.28</TableCell>
-                        <TableCell className="bg-amber-50">5.86</TableCell>
-                        <TableCell className="bg-amber-50">6.5</TableCell>
-                        <TableCell className="bg-green-50">7.52</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium">{t('facts.refugees')}</TableCell>
-                        <TableCell>32,400</TableCell>
-                        <TableCell>7.1M</TableCell>
-                        <TableCell>112,000</TableCell>
-                        <TableCell>9,800</TableCell>
-                        <TableCell>178,000</TableCell>
-                        <TableCell>5,800</TableCell>
+                        <TableCell>2.1M</TableCell>
+                        <TableCell>2.6M</TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
