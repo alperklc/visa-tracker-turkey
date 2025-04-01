@@ -10,11 +10,13 @@ import { applicationSchema, type ApplicationForm as ApplicationFormType } from '
 import { ApplicationDetails, AppointmentDetails, ResultDetails, ApplicationCaptcha } from '.';
 import { useLanguage } from '@/lib/LanguageContext';
 import { toast } from 'sonner';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const ApplicationForm = () => {
   const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState('details');
+  const isMobile = useIsMobile();
   
   const form = useForm<ApplicationFormType>({
     resolver: zodResolver(applicationSchema),
@@ -54,7 +56,7 @@ const ApplicationForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsList className={`${isMobile ? 'flex flex-col space-y-1 w-full h-auto' : 'grid grid-cols-3'} mb-6`}>
                 <TabsTrigger value="details">{t('form.detailsTitle')}</TabsTrigger>
                 <TabsTrigger value="appointment">{t('form.appointmentDate')}</TabsTrigger>
                 <TabsTrigger value="result">{t('form.resultTitle')}</TabsTrigger>
@@ -68,7 +70,7 @@ const ApplicationForm = () => {
                     type="button" 
                     onClick={() => setActiveTab('appointment')}
                   >
-                    {t('form.submit')}
+                    {t('form.next')}
                   </Button>
                 </div>
               </TabsContent>
@@ -82,13 +84,13 @@ const ApplicationForm = () => {
                     variant="outline" 
                     onClick={() => setActiveTab('details')}
                   >
-                    {t('form.detailsTitle')}
+                    {t('form.back')}
                   </Button>
                   <Button 
                     type="button" 
                     onClick={() => setActiveTab('result')}
                   >
-                    {t('form.submit')}
+                    {t('form.next')}
                   </Button>
                 </div>
               </TabsContent>
@@ -104,7 +106,7 @@ const ApplicationForm = () => {
                     variant="outline" 
                     onClick={() => setActiveTab('appointment')}
                   >
-                    {t('form.appointmentDate')}
+                    {t('form.back')}
                   </Button>
                   <Button 
                     type="submit" 

@@ -1,12 +1,65 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageSquare } from 'lucide-react';
 
+declare global {
+  interface Window {
+    DISQUS?: any;
+    disqus_config?: any;
+  }
+}
+
 const Discussions: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  
+  useEffect(() => {
+    // Setup Disqus with current page URL and locale
+    const loadDisqus = () => {
+      const disqusShortname = 'visa-tracker-turkey'; // Replace with your Disqus shortname
+      
+      if (window.DISQUS) {
+        // If Disqus exists, call reset
+        window.DISQUS.reset({
+          reload: true,
+          config: function() {
+            this.page.identifier = window.location.pathname;
+            this.page.url = window.location.href;
+            this.language = locale;
+          }
+        });
+      } else {
+        // First load
+        window.disqus_config = function() {
+          this.page.identifier = window.location.pathname;
+          this.page.url = window.location.href;
+          this.language = locale;
+        };
+        
+        // Load Disqus script
+        const script = document.createElement('script');
+        script.src = `https://${disqusShortname}.disqus.com/embed.js`;
+        script.setAttribute('data-timestamp', String(new Date().getTime()));
+        script.async = true;
+        
+        document.body.appendChild(script);
+      }
+    };
+    
+    loadDisqus();
+    
+    return () => {
+      // Clean up Disqus if needed
+      const disqusThread = document.getElementById('disqus_thread');
+      if (disqusThread) {
+        while (disqusThread.firstChild) {
+          disqusThread.removeChild(disqusThread.firstChild);
+        }
+      }
+    };
+  }, [locale]);
   
   return (
     <Layout className="py-12">
@@ -22,18 +75,14 @@ const Discussions: React.FC = () => {
           <CardHeader className="bg-primary/5">
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5" />
-              {t('discussions.comingSoon')}
+              {t('discussions.community')}
             </CardTitle>
             <CardDescription>
               {t('discussions.description')}
             </CardDescription>
           </CardHeader>
           <CardContent className="py-6">
-            <div className="text-center py-12">
-              <p className="text-muted-foreground mb-4">
-                {t('discussions.placeholder')}
-              </p>
-            </div>
+            <div id="disqus_thread"></div>
           </CardContent>
         </Card>
       </div>

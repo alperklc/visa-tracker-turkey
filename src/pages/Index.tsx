@@ -53,7 +53,7 @@ const Index: React.FC = () => {
       {/* 4. Last 10 entries in the table */}
       <section className="container py-8 animate-fade-in">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">{t('recentApplications.title')}</h2>
+          <h2 className="text-3xl font-bold">{t('recentApplications.community')}</h2>
           <Link to="/submit">
             <Button variant="outline">
               {t('recentApplications.submit')}

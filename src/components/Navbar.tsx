@@ -94,12 +94,12 @@ const Navbar: React.FC = () => {
               </Button>
             )}
             
-            {/* Submit Button (hidden on mobile when menu is closed) */}
-            <div className={`${isMobile && !isMenuOpen ? 'hidden' : 'block'} md:block`}>
+            {/* Submit Button (only shown on desktop) */}
+            <div className="hidden md:block">
               <Link to="/submit">
                 <Button 
                   variant="default" 
-                  size={isMobile ? "sm" : "sm"}
+                  size="sm"
                   className="shadow-sm hover:shadow transition-all"
                 >
                   {t('submitApplication')}
@@ -126,6 +126,16 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
+              
+              {/* Submit Application button in mobile menu */}
+              <Link to="/submit" className="mt-2">
+                <Button 
+                  variant="default"
+                  className="w-full shadow-sm hover:shadow transition-all"
+                >
+                  {t('submitApplication')}
+                </Button>
+              </Link>
             </nav>
           </div>
         )}

@@ -6,8 +6,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import StatsGridCard from '@/components/dashboard/StatsGridCard';
-import { ArrowRight, BookOpen, ClipboardList, FileText, Globe, Megaphone, MessageSquare, Plane, Scale, Users } from 'lucide-react';
-import { Description } from '@radix-ui/react-dialog';
+import { ArrowRight, Bookmark, BookOpen, ClipboardList, FileText, Globe, Megaphone, MessageSquare, Plane, Scale, Share, Share2, Users } from 'lucide-react';
 
 const WhatCanWeDo: React.FC = () => {
   const { t } = useLanguage();
@@ -63,6 +62,21 @@ const WhatCanWeDo: React.FC = () => {
     },
   ];
 
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: t('appName'),
+        text: t('actions.shareText'),
+        url: window.location.origin,
+      }).catch((error) => console.log('Error sharing', error));
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      navigator.clipboard.writeText(window.location.origin)
+        .then(() => alert(t('actions.copied')))
+        .catch((error) => console.log('Error copying', error));
+    }
+  };
+
   return (
     <Layout className="py-12">
       <div className="container max-w-5xl">
@@ -89,28 +103,51 @@ const WhatCanWeDo: React.FC = () => {
         
         <Card className="mb-8 animate-fade-in">
           <CardHeader>
-            <CardTitle className="text-xl">{t('actions.communityTitle')}</CardTitle>
-            <CardDescription>{t('actions.alternatives.title')}</CardDescription>
+            <CardTitle className="text-xl">{t('actions.shareTitle')}</CardTitle>
+            <CardDescription>{t('actions.shareDescription')}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="mb-4">{t('actions.communityContent1')}</p>
-            <p>{t('actions.alternatives.description')}</p>
-          </CardContent>
-          <CardFooter>
-            <Link to="/discussions" className="w-full">
-              <Button variant="outline" className="w-full group">
-                <span>{t('actions.joinCommunity')}</span>
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <div className="flex flex-wrap gap-3">
+              <Button onClick={handleShare} variant="outline" className="flex items-center gap-2">
+                <Share2 className="h-4 w-4" />
+                <span>{t('actions.shareButton')}</span>
               </Button>
-            </Link>
-          </CardFooter>
+              <Link to="/discussions">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <MessageSquare className="h-4 w-4" />
+                  <span>{t('actions.joinDiscussion')}</span>
+                </Button>
+              </Link>
+              <Button variant="outline" className="flex items-center gap-2" onClick={() => window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.origin), '_blank')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                </svg>
+                <span>Twitter</span>
+              </Button>
+              <Button variant="outline" className="flex items-center gap-2" onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.origin), '_blank')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+                <span>Facebook</span>
+              </Button>
+              <Button variant="outline" className="flex items-center gap-2" onClick={() => window.open('https://wa.me/?text=' + encodeURIComponent(t('actions.shareText') + ' ' + window.location.origin), '_blank')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>WhatsApp</span>
+              </Button>
+              <Button variant="outline" className="flex items-center gap-2" onClick={() => navigator.clipboard.writeText(window.location.origin).then(() => alert(t('actions.copied')))}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>{t('actions.copyLink')}</span>
+              </Button>
+            </div>
+          </CardContent>
         </Card>
         
         <div className="text-center animate-fade-in">
-          <h2 className="text-2xl font-bold mb-4">{t('actions.readyTitle')}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            {t('actions.readyDescription')}
-          </p>
           <Link to="/submit">
             <Button size="lg" className="px-8">
               {t('actions.getStarted')}

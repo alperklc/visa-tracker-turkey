@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { VisaApplication } from '@/lib/types';
 import { useLanguage } from '@/lib/LanguageContext';
 import CountryFlag from './CountryFlag';
+import { Card, CardContent } from './ui/card';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LiteApplicationTableProps {
   applications: VisaApplication[];
@@ -12,6 +14,7 @@ interface LiteApplicationTableProps {
 
 const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ applications }) => {
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
   
   const getProcessingDays = (app: VisaApplication) => {
     if (!app.passportReturnDate) {
@@ -38,6 +41,51 @@ const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ application
     }
   };
 
+  // Render as cards on mobile
+  if (isMobile) {
+    return (
+      <div className="space-y-4">
+        {applications.map((app) => (
+          <Card key={app.id} className="overflow-hidden">
+            <CardContent className="p-4">
+              <div className="grid gap-2">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <CountryFlag country={app.country} size={20} />
+                    <span className="font-medium">{t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}</span>
+                  </div>
+                  {getResultBadge(app)}
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <p className="text-muted-foreground">{t('table.city')}</p>
+                    <p>{app.city}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">{t('table.purpose')}</p>
+                    <p>{t(`purpose.${app.purposeOfVisit.toLowerCase()}`)}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">{t('table.submissionDate')}</p>
+                    <p>{formatDate(app.applicationSubmitDate)}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">{t('table.processingTime')}</p>
+                    <Badge variant="outline">
+                      {getProcessingDays(app)} {t('table.days')}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  }
+
+  // Render as table on desktop
   return (
     <div className="overflow-x-auto">
       <Table>
