@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -9,9 +8,11 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import CountryFlag from '@/components/CountryFlag';
 import { Country } from '@/lib/types';
 import StatsGridCard from '@/components/dashboard/StatsGridCard';
+import { useIsMobile } from '@/lib/hooks';
 
 const Facts: React.FC = () => {
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
   
   // Vize muafiyeti olan ülkelerin listesi ve ilgili dilbilgisi anahtarları
   const visaFreeCountries = [
@@ -382,6 +383,10 @@ const Facts: React.FC = () => {
                     <div className="flex gap-2">
                       <Badge variant="outline" className="bg-red-50">2022</Badge>
                       <span>{t('facts.fee2022')}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Badge variant="outline" className="bg-red-50">2024</Badge>
+                      <span>{t('facts.fee2024')}</span>
                     </div>
                   </div>
                 </div>

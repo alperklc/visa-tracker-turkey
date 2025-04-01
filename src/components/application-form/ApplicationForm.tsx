@@ -6,17 +6,18 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Form } from '@/components/ui/form';
-import { applicationSchema, type ApplicationForm as ApplicationFormType } from './schema';
+import { applicationSchema, type ApplicationFormType } from './schema';
 import { ApplicationDetails, AppointmentDetails, ResultDetails, ApplicationCaptcha } from '.';
 import { useLanguage } from '@/lib/LanguageContext';
 import { toast } from 'sonner';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useFormSubmission } from './useFormSubmission';
 
 const ApplicationForm = () => {
   const { t } = useLanguage();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState('details');
   const isMobile = useIsMobile();
+  const { submitForm, isSubmitting } = useFormSubmission();
   
   const form = useForm<ApplicationFormType>({
     resolver: zodResolver(applicationSchema),
@@ -24,29 +25,44 @@ const ApplicationForm = () => {
       duration: 0,
       passportReturned: false,
     },
+    mode: 'onChange',
   });
   
-  async function onSubmit(data: ApplicationFormType) {
-    setIsSubmitting(true);
+  const validateAndGoToNextTab = (nextTab: string, currentTab: string) => {
+    let fieldsToValidate: (keyof ApplicationFormType)[] = [];
     
-    // Simulate API call
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Form submitted:', data);
-      
-      // Show success toast
-      toast.success(t('form.successMessage'), {
-        description: t('form.successDescription'),
+    if (currentTab === 'details') {
+      fieldsToValidate = ['country', 'city', 'duration', 'purpose'];
+    } else if (currentTab === 'appointment') {
+      fieldsToValidate = ['submissionDate', 'sameAppointmentDate'];
+      if (!form.getValues('sameAppointmentDate')) {
+        fieldsToValidate.push('appointmentDate');
+      }
+    }
+    
+    form.trigger(fieldsToValidate as any)
+      .then(isValid => {
+        if (isValid) {
+          setActiveTab(nextTab);
+        } else {
+          toast.error(t('form.pleaseCompleteAllFields'));
+        }
       });
-      
+  };
+  
+  async function onSubmit(data: ApplicationFormType) {
+    // Validate captcha first
+    if (!data.captcha) {
+      toast.error(t('form.captchaRequired'));
+      return;
+    }
+    
+    const result = await submitForm(data);
+    
+    if (result.success) {
       // Reset form and go back to first tab
       form.reset();
       setActiveTab('details');
-    } catch (error) {
-      console.error('Submission error:', error);
-      toast.error(t('form.errorMessage'));
-    } finally {
-      setIsSubmitting(false);
     }
   }
   
@@ -68,7 +84,7 @@ const ApplicationForm = () => {
                 <div className="flex justify-end">
                   <Button 
                     type="button" 
-                    onClick={() => setActiveTab('appointment')}
+                    onClick={() => validateAndGoToNextTab('appointment', 'details')}
                   >
                     {t('form.next')}
                   </Button>
@@ -88,7 +104,7 @@ const ApplicationForm = () => {
                   </Button>
                   <Button 
                     type="button" 
-                    onClick={() => setActiveTab('result')}
+                    onClick={() => validateAndGoToNextTab('result', 'appointment')}
                   >
                     {t('form.next')}
                   </Button>
@@ -98,7 +114,9 @@ const ApplicationForm = () => {
               <TabsContent value="result" className="space-y-6">
                 <ResultDetails form={form} />
                 
-                <ApplicationCaptcha form={form} />
+                <div className="w-full overflow-hidden">
+                  <ApplicationCaptcha form={form} />
+                </div>
                 
                 <div className="flex justify-between">
                   <Button 

@@ -86,7 +86,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
                   <SelectItem key={country} value={country}>
                     <div className="flex items-center gap-2">
                       <CountryFlag country={country} size={16} />
-                      {t(`countries.${country.replace(/\s+/g, '').toLowerCase()}`)}
+                      {t(`countries.${country.toLowerCase().replace(/\s+/g, '')}`)}
                     </div>
                   </SelectItem>
                 ))}
@@ -109,7 +109,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
             <Select 
               onValueChange={(value: string) => field.onChange(value)}
               value={field.value}
-              disabled={!selectedCountry}
+              disabled={!selectedCountry || availableCities.length === 0}
             >
               <FormControl>
                 <SelectTrigger>
@@ -139,7 +139,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
           <FormItem>
             <FormLabel>{t('form.duration')}</FormLabel>
             <FormControl>
-              <Input placeholder={t('form.durationPlaceholder')} {...field} />
+              <Input type="number" min="1" max="365" placeholder={t('form.durationPlaceholder')} {...field} />
             </FormControl>
             <FormDescription>
               {t('form.durationDescription')}

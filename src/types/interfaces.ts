@@ -32,6 +32,8 @@ export interface ReviewTranslations {
   clearFilters: string;
   cards: string;
   table: string;
+  gdpPerCapita: string;
+  population: string;
 }
 
 export interface PaginationTranslations {
@@ -95,6 +97,9 @@ export interface CountryTranslations {
   venezuela: string;
   russia: string;
   malaysia: string;
+  moldova: string;
+  northmacedonia: string;
+  turkey: string;
 }
 
 export interface FormTranslations {
@@ -139,4 +144,7 @@ export interface FormTranslations {
   errorMessage: string;
   submitting: string;
   submit: string;
+  next: string;
+  back: string;
+  resultTitle: string;
 }
