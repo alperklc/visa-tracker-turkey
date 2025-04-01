@@ -34,7 +34,7 @@ const AppointmentDetails: React.FC<AppointmentDetailsProps> = ({ form }) => {
   // Disable dates before today or before submission date for appointment
   const getDisabledDates = (field: 'appointment') => {
     if (field === 'appointment') {
-      const submissionDate = form.getValues('applicationSubmitDate');
+      const submissionDate = form.getValues('submissionDate');
       if (!submissionDate) return (date: Date) => false;
       
       return (date: Date) => {
@@ -82,7 +82,7 @@ const AppointmentDetails: React.FC<AppointmentDetailsProps> = ({ form }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormField
           control={form.control}
-          name="applicationSubmitDate"
+          name="submissionDate"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>{t('form.submitDate')}</FormLabel>

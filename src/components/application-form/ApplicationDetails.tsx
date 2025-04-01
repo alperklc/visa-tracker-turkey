@@ -53,13 +53,13 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
   // Update available cities when country changes
   useEffect(() => {
     if (watchCountry) {
-      setSelectedCountry(watchCountry);
-      setAvailableCities(countryToCitiesMap[watchCountry] || []);
+      setSelectedCountry(watchCountry as Country);
+      setAvailableCities(countryToCitiesMap[watchCountry as Country] || []);
       
       // If the currently selected city is not available for this country, reset it
       const currentCity = form.getValues('city');
-      if (currentCity && !countryToCitiesMap[watchCountry]?.includes(currentCity)) {
-        form.setValue('city', undefined);
+      if (currentCity && !countryToCitiesMap[watchCountry as Country]?.includes(currentCity as ApplicationCenterCity)) {
+        form.setValue('city', undefined as any);
       }
     }
   }, [watchCountry, countryToCitiesMap, form]);
@@ -73,7 +73,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
           <FormItem>
             <FormLabel>{t('form.country')}</FormLabel>
             <Select 
-              onValueChange={(value: Country) => field.onChange(value)}
+              onValueChange={(value: string) => field.onChange(value)}
               value={field.value}
             >
               <FormControl>
@@ -107,7 +107,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
           <FormItem>
             <FormLabel>{t('form.city')}</FormLabel>
             <Select 
-              onValueChange={(value: ApplicationCenterCity) => field.onChange(value)}
+              onValueChange={(value: string) => field.onChange(value)}
               value={field.value}
               disabled={!selectedCountry}
             >
@@ -137,7 +137,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
 
       <FormField
         control={form.control}
-        name="durationOfVisit"
+        name="duration"
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t('form.duration')}</FormLabel>
@@ -154,12 +154,12 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
 
       <FormField
         control={form.control}
-        name="purposeOfVisit"
+        name="purpose"
         render={({ field }) => (
           <FormItem>
             <FormLabel>{t('form.purpose')}</FormLabel>
             <Select 
-              onValueChange={(value: PurposeOfVisit) => field.onChange(value)}
+              onValueChange={(value: string) => field.onChange(value)}
               value={field.value}
             >
               <FormControl>

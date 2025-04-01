@@ -1,5 +1,20 @@
 
 import * as z from 'zod';
+import { Country, ApplicationCenterCity, PurposeOfVisit } from '@/lib/types';
+
+// Define the map of cities to countries
+export const cityToCountriesMap: Record<ApplicationCenterCity, Country[]> = {
+  [ApplicationCenterCity.Amsterdam]: [Country.Netherlands],
+  [ApplicationCenterCity.Ankara]: [Country.Turkey],
+  [ApplicationCenterCity.Berlin]: [Country.Germany],
+  [ApplicationCenterCity.Brussels]: [Country.Belgium],
+  [ApplicationCenterCity.Istanbul]: [Country.Turkey],
+  [ApplicationCenterCity.London]: [Country.UnitedKingdom],
+  [ApplicationCenterCity.Madrid]: [Country.Spain],
+  [ApplicationCenterCity.Paris]: [Country.France],
+  [ApplicationCenterCity.Rome]: [Country.Italy],
+  [ApplicationCenterCity.Vienna]: [Country.Austria],
+};
 
 // Form validation schema
 export const applicationSchema = z.object({
@@ -24,6 +39,7 @@ export const applicationSchema = z.object({
     required_error: "Please select a submission date",
   }),
   appointmentDate: z.date().optional(),
+  sameAppointmentDate: z.boolean().default(true),
   
   // Result Details
   passportReturned: z.boolean().default(false),
@@ -39,4 +55,6 @@ export const applicationSchema = z.object({
   }),
 });
 
+// Export the form type
 export type ApplicationForm = z.infer<typeof applicationSchema>;
+export type FormValues = ApplicationForm; // Alias for compatibility
