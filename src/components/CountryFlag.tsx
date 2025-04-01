@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Country, CountryCode } from '@/types/enums';
+import { CountryCode } from '@/types/enums';
+import { Country } from '@/types/countries';
 
 interface CountryFlagProps {
   country: Country;
