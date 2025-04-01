@@ -117,14 +117,11 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {Object.values(ApplicationCenterCity)
-                  .filter(city => !selectedCountry || availableCities.includes(city))
-                  .map((city) => (
-                    <SelectItem key={city} value={city}>
-                      {city}
-                    </SelectItem>
-                  ))
-                }
+                {availableCities.map((city) => (
+                  <SelectItem key={city} value={city}>
+                    {city}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <FormDescription>
