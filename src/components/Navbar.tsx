@@ -1,13 +1,18 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
+import { Menu, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +28,11 @@ const Navbar: React.FC = () => {
     };
   }, [scrolled]);
 
+  // When route changes, close the mobile menu
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
     { name: t('home'), path: '/' },
     { name: t('facts'), path: '/facts' },
@@ -34,7 +44,7 @@ const Navbar: React.FC = () => {
   return (
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled 
+        scrolled || isMenuOpen
           ? 'bg-background/80 backdrop-blur-md border-b shadow-sm' 
           : 'bg-transparent'
       }`}
@@ -48,6 +58,7 @@ const Navbar: React.FC = () => {
             </span>
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -69,17 +80,55 @@ const Navbar: React.FC = () => {
 
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <Link to="/submit">
+            
+            {/* Mobile Hamburger Button */}
+            {isMobile && (
               <Button 
-                variant="default" 
-                size="sm"
-                className="shadow-sm hover:shadow transition-all"
+                variant="ghost" 
+                size="icon" 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                className="md:hidden"
               >
-                {t('submitApplication')}
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </Button>
-            </Link>
+            )}
+            
+            {/* Submit Button (hidden on mobile when menu is closed) */}
+            <div className={`${isMobile && !isMenuOpen ? 'hidden' : 'block'} md:block`}>
+              <Link to="/submit">
+                <Button 
+                  variant="default" 
+                  size={isMobile ? "sm" : "sm"}
+                  className="shadow-sm hover:shadow transition-all"
+                >
+                  {t('submitApplication')}
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
+        
+        {/* Mobile Navigation Menu */}
+        {isMobile && isMenuOpen && (
+          <div className="md:hidden mt-4 py-3 border-t animate-fade-in">
+            <nav className="flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-2 py-2 rounded-md ${
+                    location.pathname === link.path
+                      ? 'bg-primary/10 text-primary font-medium'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );

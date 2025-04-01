@@ -24,17 +24,17 @@ const LanguageSwitcher: React.FC = () => {
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setLanguage('tr')}>
           <span className={language === 'tr' ? 'font-bold' : ''}>
-            {t('language.turkish')}
+            Türkçe
           </span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage('en')}>
           <span className={language === 'en' ? 'font-bold' : ''}>
-            {t('language.english')}
+            English
           </span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage('de')}>
           <span className={language === 'de' ? 'font-bold' : ''}>
-            {t('language.german')}
+            Deutsch
           </span>
         </DropdownMenuItem>
       </DropdownMenuContent>

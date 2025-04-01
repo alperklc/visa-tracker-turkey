@@ -16,14 +16,16 @@ const FinancialImpact: React.FC<FinancialImpactProps> = ({
 }) => {
   const { t } = useLanguage();
   
-  // Real data for the impact
-  const visaFee = 80; // EUR for Schengen visa
-  const serviceFee = 30; // EUR average service fee
-  const additionalCosts = 150; // EUR for travel, insurance, etc.
+  // 2023 yılı verileri - Türk vatandaşlarının yıllık Schengen vize başvuruları
+  const realAnnualApplications = 891200; // 2023 yılı Schengen vize başvurusu
+  
+  // Vize masrafları
+  const visaFee = 90; // EUR - Schengen vize ücreti
+  const serviceFee = 35; // EUR - VFS, iDATA gibi aracı kurum ücreti
+  const additionalCosts = 195; // EUR - seyahat sigortası, banka masrafları, tercüme, seyahat vs.
   const totalPerApplication = visaFee + serviceFee + additionalCosts;
   
-  // More realistic annual visa application numbers
-  const realAnnualApplications = 275600; // Based on 2023 data
+  // Toplam maliyet hesabı
   const realAnnualCost = realAnnualApplications * totalPerApplication;
   
   return (
@@ -86,12 +88,12 @@ const FinancialImpact: React.FC<FinancialImpactProps> = ({
         
         <div className="text-[10px] text-muted-foreground mt-4">
           <a 
-            href="https://statistics.schengenvisainfo.com/schengen-visa-statistics-applications/"
+            href="https://www.schengenvisainfo.com/statistics/schengen-visa-statistics-by-third-country/"
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:underline"
           >
-            Source: Schengen Visa Statistics 2023
+            Kaynak: Schengen Visa Statistics 2023 - SchengenVisaInfo.com
           </a>
         </div>
       </CardContent>

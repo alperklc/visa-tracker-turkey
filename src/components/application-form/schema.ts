@@ -1,47 +1,42 @@
 
 import * as z from 'zod';
-import { 
-  Country, 
-  ApplicationCenterCity, 
-  PurposeOfVisit, 
-  VisaResultStatus, 
-  EntryType 
-} from '@/lib/types';
 
-export const formSchema = z.object({
-  city: z.nativeEnum(ApplicationCenterCity, {
-    required_error: 'Please select a city.',
+// Form validation schema
+export const applicationSchema = z.object({
+  // Application Details
+  country: z.string({
+    required_error: "Please select a country",
   }),
-  country: z.nativeEnum(Country, {
-    required_error: 'Please select a country.',
+  city: z.string({
+    required_error: "Please select a city",
   }),
-  durationOfVisit: z.string().min(1, {
-    message: 'Please enter the duration of your visit.',
+  duration: z.coerce.number().min(1, {
+    message: "Duration must be at least 1 day",
+  }).max(365, {
+    message: "Duration cannot exceed 365 days",
   }),
-  purposeOfVisit: z.nativeEnum(PurposeOfVisit, {
-    required_error: 'Please select the purpose of your visit.',
+  purpose: z.string({
+    required_error: "Please select a purpose",
   }),
-  applicationSubmitDate: z.date({
-    required_error: 'Please select the application submission date.',
+  
+  // Appointment Details
+  submissionDate: z.date({
+    required_error: "Please select a submission date",
   }),
-  sameAppointmentDate: z.boolean().default(false),
-  appointmentDate: z.date().nullable().optional(),
-  resultStatus: z.nativeEnum(VisaResultStatus, {
-    required_error: 'Please select the result status.',
+  appointmentDate: z.date().optional(),
+  
+  // Result Details
+  passportReturned: z.boolean().default(false),
+  returnDate: z.date().optional(),
+  resultStatus: z.string().optional(),
+  validity: z.string().optional(),
+  entryType: z.string().optional(),
+  rejectionReason: z.string().optional(),
+  
+  // Captcha
+  captcha: z.string().min(1, {
+    message: "Please complete the captcha verification"
   }),
-  validity: z.string().nullable().optional(),
-  entryType: z.nativeEnum(EntryType).nullable().optional(),
-  rejectionReason: z.string().nullable().optional(),
 });
 
-export type FormValues = z.infer<typeof formSchema>;
-
-// City to available countries mapping
-export const cityToCountriesMap: Record<ApplicationCenterCity, Country[]> = {
-  [ApplicationCenterCity.Istanbul]: Object.values(Country),
-  [ApplicationCenterCity.Ankara]: [Country.Germany, Country.France, Country.Italy, Country.Spain, Country.UnitedKingdom, Country.Netherlands, Country.Belgium],
-  [ApplicationCenterCity.Izmir]: [Country.Germany, Country.Italy, Country.Netherlands, Country.Greece],
-  [ApplicationCenterCity.Antalya]: [Country.Germany, Country.Russia, Country.Netherlands],
-  [ApplicationCenterCity.Bodrum]: [Country.UnitedKingdom, Country.Germany],
-  [ApplicationCenterCity.Gaziantep]: [Country.Germany, Country.France],
-};
+export type ApplicationForm = z.infer<typeof applicationSchema>;

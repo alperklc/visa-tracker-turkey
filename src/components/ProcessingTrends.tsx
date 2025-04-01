@@ -76,8 +76,8 @@ const ProcessingTrends: React.FC<ProcessingTrendsProps> = ({ trendsData, worstCi
                 tickFormatter={(value) => `${value}`}
               />
               <Tooltip 
-                formatter={(value) => [`${value} days`, 'Average']} 
-                labelFormatter={(label) => `Month: ${label}`}
+                formatter={(value) => [`${value} ${t('table.days')}`, '']} 
+                labelFormatter={(label) => `${label}`}
               />
               <Area
                 type="monotone"
@@ -105,7 +105,7 @@ const ProcessingTrends: React.FC<ProcessingTrendsProps> = ({ trendsData, worstCi
                     index === 0 ? 'text-red-500' : index === 1 ? 'text-orange-500' : 'text-yellow-500'
                   }`} />
                   <span className="font-medium">
-                    {city.city}/{city.country}
+                    {city.city}/{t(`countries.${city.country?.toLowerCase().replace(/\s+/g, '')}`)}
                   </span>
                 </div>
                 <Badge variant={index === 0 ? "destructive" : "outline"} className="ml-auto">
