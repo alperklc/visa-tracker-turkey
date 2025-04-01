@@ -1,14 +1,16 @@
-
 import { TableTranslations, ReviewTranslations, PaginationTranslations, PurposeTranslations, CountryTranslations, FormTranslations } from '@/types/interfaces';
 
-export const tr: Record<string, string> & {
+type TranslationType = {
+  [key: string]: string;
   table: TableTranslations;
   review: ReviewTranslations;
   pagination: PaginationTranslations;
   purposes: PurposeTranslations;
   countries: CountryTranslations;
   form: FormTranslations;
-} = {
+};
+
+export const tr: TranslationType = {
   // General
   "appName": "Vize İzleyici Türkiye",
   "home": "Ana Sayfa",
