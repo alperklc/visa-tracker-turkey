@@ -68,13 +68,13 @@ export const useApplicationsData = (initialFilter: Partial<ApplicationsFilter> =
         params.append('search', filter.search);
       }
 
-      const queryString = params.toString();
-      const { data: responseData, error } = await supabase.functions.invoke('get-applications', {
+      // The proper way to use URL parameters with supabase functions
+      const url = `get-applications?${params.toString()}`;
+      const { data: responseData, error } = await supabase.functions.invoke(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
-        queryParams: Object.fromEntries(params)
+        }
       });
 
       if (error) {
