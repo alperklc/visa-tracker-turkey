@@ -1,0 +1,37 @@
+
+name: Generate Application Stats
+
+on:
+  schedule:
+    # Run every 4 hours
+    - cron: '0 */4 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  generate-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Make script executable
+        run: chmod +x ./scripts/generate-stats.js
+        
+      - name: Generate stats file
+        run: ./scripts/generate-stats.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          PROJECT_ID: 'xptezpotlgvxkanvbctd'
+        
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add public/stats.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update stats file" && git push)

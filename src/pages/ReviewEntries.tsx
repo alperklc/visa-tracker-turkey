@@ -2,11 +2,9 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import ApplicationTable from '@/components/ApplicationTable';
-import { useApplications } from '@/hooks/useApplications';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const ReviewEntries: React.FC = () => {
-  const { applications, loading } = useApplications();
   const { t } = useLanguage();
   
   return (
@@ -19,13 +17,9 @@ const ReviewEntries: React.FC = () => {
           </p>
         </div>
         
-        {loading ? (
-          <div className="animate-pulse bg-muted rounded-lg h-96"></div>
-        ) : (
-          <div className="animate-fade-in">
-            <ApplicationTable />
-          </div>
-        )}
+        <div className="animate-fade-in">
+          <ApplicationTable />
+        </div>
       </div>
     </Layout>
   );

@@ -3,3 +3,9 @@ project_id = "xptezpotlgvxkanvbctd"
 
 [functions.submit-application]
 verify_jwt = false
+
+[functions.get-stats]
+verify_jwt = false
+
+[functions.get-applications]
+verify_jwt = false

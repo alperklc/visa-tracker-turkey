@@ -1,10 +1,9 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { VisaApplication, Country, PurposeOfVisit } from '@/lib/types';
+import { Country, PurposeOfVisit } from '@/types/enums';
 import { useLanguage } from '@/lib/LanguageContext';
-import { useApplications } from '@/hooks/useApplications';
 import CountryFlag from './CountryFlag';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -24,81 +23,21 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { ChevronDown, ChevronUp, Search } from 'lucide-react';
+import { ChevronDown, ChevronUp, RefreshCw, Search } from 'lucide-react';
+import { useApplicationsData, ApplicationsFilter } from '@/hooks/useApplicationsData';
 
-interface ApplicationTableProps {
-  applications?: VisaApplication[];
-}
-
-export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications }) => {
+const ApplicationTable: React.FC = () => {
   const { t } = useLanguage();
-  const { applications: allApplications } = useApplications();
+  const { 
+    applications, 
+    pagination, 
+    loading, 
+    filter, 
+    updateFilter, 
+    refresh 
+  } = useApplicationsData();
   
-  // Use provided applications or all applications if not provided
-  const displayApplications = applications || allApplications;
-  
-  // Pagination state
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  
-  // Filtering and sorting state
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCountry, setFilterCountry] = useState<Country | 'All'>('All');
-  const [filterPurpose, setFilterPurpose] = useState<PurposeOfVisit | 'All'>('All');
-  const [sortBy, setSortBy] = useState<'submissionDate' | 'processingTime'>('submissionDate');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
-
-  // Filter and sort applications
-  const filteredAndSortedApplications = React.useMemo(() => {
-    // First filter the applications
-    const filtered = displayApplications.filter(app => {
-      // Filter by country
-      if (filterCountry !== 'All' && app.country !== filterCountry) {
-        return false;
-      }
-      
-      // Filter by purpose
-      if (filterPurpose !== 'All' && app.purposeOfVisit !== filterPurpose) {
-        return false;
-      }
-      
-      // Filter by search term
-      if (searchTerm) {
-        const searchLower = searchTerm.toLowerCase();
-        return (
-          app.country.toLowerCase().includes(searchLower) ||
-          app.city.toLowerCase().includes(searchLower) ||
-          app.purposeOfVisit.toLowerCase().includes(searchLower)
-        );
-      }
-      
-      return true;
-    });
-    
-    // Then sort the filtered applications
-    return [...filtered].sort((a, b) => {
-      if (sortBy === 'submissionDate') {
-        const aTime = a.applicationSubmitDate.getTime();
-        const bTime = b.applicationSubmitDate.getTime();
-        return sortDirection === 'asc' ? aTime - bTime : bTime - aTime;
-      } else {
-        const aTime = getProcessingDays(a);
-        const bTime = getProcessingDays(b);
-        return sortDirection === 'asc' ? aTime - bTime : bTime - aTime;
-      }
-    });
-  }, [displayApplications, filterCountry, filterPurpose, searchTerm, sortBy, sortDirection]);
-
-  // Paginate the results
-  const paginatedApplications = React.useMemo(() => {
-    const startIndex = (currentPage - 1) * pageSize;
-    return filteredAndSortedApplications.slice(startIndex, startIndex + pageSize);
-  }, [filteredAndSortedApplications, currentPage, pageSize]);
-
-  // Calculate total pages
-  const totalPages = Math.ceil(filteredAndSortedApplications.length / pageSize);
-
-  const getProcessingDays = (app: VisaApplication) => {
+  const getProcessingDays = (app: any) => {
     if (!app.passportReturnDate) {
       const today = new Date();
       return Math.floor((today.getTime() - app.applicationSubmitDate.getTime()) / (1000 * 60 * 60 * 24));
@@ -106,7 +45,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     return Math.floor((app.passportReturnDate.getTime() - app.applicationSubmitDate.getTime()) / (1000 * 60 * 60 * 24));
   };
 
-  const getRowColorClass = (app: VisaApplication) => {
+  const getRowColorClass = (app: any) => {
     // First check if the application is completed and has a result
     if (app.result) {
       if (app.result.status === "Approved") return "bg-green-100"; // Light green for approved
@@ -126,7 +65,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     return date.toLocaleDateString();
   };
   
-  const getResultBadge = (app: VisaApplication) => {
+  const getResultBadge = (app: any) => {
     if (!app.result) return <Badge variant="outline">{t('table.pending')}</Badge>;
     
     if (app.result.status === "Approved") {
@@ -138,22 +77,35 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     }
   };
 
-  const toggleSort = (column: 'submissionDate' | 'processingTime') => {
-    if (sortBy === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+  const toggleSort = (column: string) => {
+    if (filter.sortBy === column) {
+      updateFilter({ sortOrder: filter.sortOrder === 'asc' ? 'desc' : 'asc' });
     } else {
-      setSortBy(column);
-      setSortDirection('desc');
+      updateFilter({ sortBy: column, sortOrder: 'desc' });
     }
   };
 
-  if (displayApplications.length === 0) {
-    return <div className="p-4 text-center text-muted-foreground">{t('recentApplications.noApplications')}</div>;
-  }
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateFilter({ search: e.target.value });
+  };
+
+  const handleCountryChange = (value: string) => {
+    updateFilter({ country: value === 'All' ? undefined : value });
+  };
+
+  const handlePurposeChange = (value: string) => {
+    updateFilter({ purpose: value === 'All' ? undefined : value });
+  };
+
+  const handlePageSizeChange = (value: string) => {
+    updateFilter({ pageSize: parseInt(value) });
+  };
 
   const renderPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 5;
+    const totalPages = pagination.totalPages;
+    const currentPage = pagination.page;
     
     // Calculate the range of pages to display
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
@@ -168,7 +120,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     if (startPage > 1) {
       pages.push(
         <PaginationItem key="1">
-          <PaginationLink isActive={currentPage === 1} onClick={() => setCurrentPage(1)}>
+          <PaginationLink isActive={currentPage === 1} onClick={() => updateFilter({ page: 1 })}>
             1
           </PaginationLink>
         </PaginationItem>
@@ -188,7 +140,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     for (let i = startPage; i <= endPage; i++) {
       pages.push(
         <PaginationItem key={i}>
-          <PaginationLink isActive={currentPage === i} onClick={() => setCurrentPage(i)}>
+          <PaginationLink isActive={currentPage === i} onClick={() => updateFilter({ page: i })}>
             {i}
           </PaginationLink>
         </PaginationItem>
@@ -210,7 +162,7 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
         <PaginationItem key={totalPages}>
           <PaginationLink
             isActive={currentPage === totalPages}
-            onClick={() => setCurrentPage(totalPages)}
+            onClick={() => updateFilter({ page: totalPages })}
           >
             {totalPages}
           </PaginationLink>
@@ -221,10 +173,30 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
     return pages;
   };
 
+  if (loading && applications.length === 0) {
+    return <div className="animate-pulse space-y-4">
+      <div className="h-8 bg-muted rounded-md w-full"></div>
+      <div className="h-64 bg-muted rounded-md w-full"></div>
+    </div>;
+  }
+
   return (
     <div className="space-y-4">
       {/* Filter and search controls */}
       <div className="bg-accent/50 rounded-lg p-4 space-y-4">
+        <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
+          <h2 className="text-xl font-bold">{t('review.applications')}</h2>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={refresh}
+            className="flex items-center gap-1"
+          >
+            <RefreshCw className="h-4 w-4" />
+            {t('common.refresh')}
+          </Button>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="text-sm font-medium mb-1 block">{t('review.search')}</label>
@@ -233,8 +205,8 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
               <Input
                 type="text"
                 placeholder={t('review.searchPlaceholder')}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                value={filter.search || ''}
+                onChange={handleSearchChange}
                 className="pl-8"
               />
             </div>
@@ -243,8 +215,8 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
           <div>
             <label className="text-sm font-medium mb-1 block">{t('review.filterCountry')}</label>
             <Select 
-              value={filterCountry} 
-              onValueChange={(value) => setFilterCountry(value as Country | 'All')}
+              value={filter.country || 'All'}
+              onValueChange={handleCountryChange}
             >
               <SelectTrigger>
                 <SelectValue placeholder={t('review.selectCountry')} />
@@ -266,8 +238,8 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
           <div>
             <label className="text-sm font-medium mb-1 block">{t('table.purpose')}</label>
             <Select 
-              value={filterPurpose} 
-              onValueChange={(value) => setFilterPurpose(value as PurposeOfVisit | 'All')}
+              value={filter.purpose || 'All'}
+              onValueChange={handlePurposeChange}
             >
               <SelectTrigger>
                 <SelectValue placeholder={t('table.purpose')} />
@@ -294,52 +266,57 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
               <TableHead>{t('table.country')}</TableHead>
               <TableHead>{t('table.city')}</TableHead>
               <TableHead>{t('table.purpose')}</TableHead>
-              <TableHead onClick={() => toggleSort('submissionDate')} className="cursor-pointer hover:bg-accent">
+              <TableHead onClick={() => toggleSort('submission_date')} className="cursor-pointer hover:bg-accent">
                 <div className="flex items-center gap-1">
                   {t('table.submissionDate')}
-                  {sortBy === 'submissionDate' && (
-                    sortDirection === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />
+                  {filter.sortBy === 'submission_date' && (
+                    filter.sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />
                   )}
                 </div>
               </TableHead>
               <TableHead>{t('table.appointmentDate')}</TableHead>
               <TableHead>{t('table.returnDate')}</TableHead>
-              <TableHead onClick={() => toggleSort('processingTime')} className="cursor-pointer hover:bg-accent">
+              <TableHead>
                 <div className="flex items-center gap-1">
                   {t('table.processingTime')}
-                  {sortBy === 'processingTime' && (
-                    sortDirection === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />
-                  )}
                 </div>
               </TableHead>
               <TableHead>{t('table.result')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedApplications.map((app) => (
-              <TableRow key={app.id} className={getRowColorClass(app)}>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <CountryFlag country={app.country} size={20} />
-                    {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
-                  </div>
+            {applications.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={8} className="text-center py-8">
+                  {t('review.noApplicationsFound')}
                 </TableCell>
-                <TableCell>{app.city}</TableCell>
-                <TableCell>{t(`purpose.${app.purposeOfVisit.toLowerCase()}`)}</TableCell>
-                <TableCell>{formatDate(app.applicationSubmitDate)}</TableCell>
-                <TableCell>{formatDate(app.appointmentDate)}</TableCell>
-                <TableCell>{formatDate(app.passportReturnDate)}</TableCell>
-                <TableCell>
-                  <Badge 
-                    variant={getProcessingDays(app) > 90 ? "destructive" : "outline"}
-                    className={getProcessingDays(app) < 30 ? "bg-green-500 text-white" : ""}
-                  >
-                    {getProcessingDays(app)} {t('table.days')}
-                  </Badge>
-                </TableCell>
-                <TableCell>{getResultBadge(app)}</TableCell>
               </TableRow>
-            ))}
+            ) : (
+              applications.map((app) => (
+                <TableRow key={app.id} className={getRowColorClass(app)}>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <CountryFlag country={app.country} size={20} />
+                      {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
+                    </div>
+                  </TableCell>
+                  <TableCell>{app.city}</TableCell>
+                  <TableCell>{t(`purpose.${app.purpose.toLowerCase()}`)}</TableCell>
+                  <TableCell>{formatDate(app.applicationSubmitDate)}</TableCell>
+                  <TableCell>{formatDate(app.appointmentDate)}</TableCell>
+                  <TableCell>{formatDate(app.passportReturnDate)}</TableCell>
+                  <TableCell>
+                    <Badge 
+                      variant={getProcessingDays(app) > 90 ? "destructive" : "outline"}
+                      className={getProcessingDays(app) < 30 ? "bg-green-500 text-white" : ""}
+                    >
+                      {getProcessingDays(app)} {t('table.days')}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{getResultBadge(app)}</TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </div>
@@ -351,14 +328,11 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
             {t('pagination.rowsPerPage')}:
           </span>
           <Select 
-            value={String(pageSize)} 
-            onValueChange={(value) => {
-              setPageSize(Number(value));
-              setCurrentPage(1); // Reset to first page when changing page size
-            }}
+            value={String(pagination.pageSize)} 
+            onValueChange={handlePageSizeChange}
           >
             <SelectTrigger className="w-16">
-              <SelectValue placeholder={pageSize} />
+              <SelectValue placeholder={pagination.pageSize} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="5">5</SelectItem>
@@ -373,9 +347,9 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious 
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                aria-disabled={currentPage === 1}
-                className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                onClick={() => updateFilter({ page: Math.max(1, pagination.page - 1) })}
+                aria-disabled={pagination.page === 1}
+                className={pagination.page === 1 ? "pointer-events-none opacity-50" : ""}
               />
             </PaginationItem>
             
@@ -383,17 +357,17 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({ applications
             
             <PaginationItem>
               <PaginationNext 
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                aria-disabled={currentPage === totalPages}
-                className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                onClick={() => updateFilter({ page: Math.min(pagination.totalPages, pagination.page + 1) })}
+                aria-disabled={pagination.page === pagination.totalPages}
+                className={pagination.page === pagination.totalPages ? "pointer-events-none opacity-50" : ""}
               />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
         
         <div className="text-sm text-muted-foreground">
-          {t('pagination.showing')} {(currentPage - 1) * pageSize + 1}-
-          {Math.min(currentPage * pageSize, filteredAndSortedApplications.length)} {t('pagination.of')} {filteredAndSortedApplications.length}
+          {t('pagination.showing')} {(pagination.page - 1) * pagination.pageSize + 1}-
+          {Math.min(pagination.page * pagination.pageSize, pagination.total)} {t('pagination.of')} {pagination.total}
         </div>
       </div>
     </div>
