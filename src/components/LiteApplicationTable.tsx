@@ -41,6 +41,12 @@ const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ application
     }
   };
 
+  // Safe country key conversion for translation
+  const getCountryKey = (countryName: string) => {
+    if (!countryName) return 'unknown';
+    return countryName.replace(/\s+/g, '').toLowerCase();
+  };
+
   // Render as cards on mobile
   if (isMobile) {
     return (
@@ -51,8 +57,10 @@ const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ application
               <div className="grid gap-2">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <CountryFlag country={app.country} size={20} />
-                    <span className="font-medium">{t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}</span>
+                    {app.country && <CountryFlag country={app.country} size={20} />}
+                    <span className="font-medium">
+                      {app.country ? t(`countries.${getCountryKey(app.country)}`) : t('general.unknown')}
+                    </span>
                   </div>
                   {getResultBadge(app)}
                 </div>
@@ -60,11 +68,11 @@ const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ application
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div>
                     <p className="text-muted-foreground">{t('table.city')}</p>
-                    <p>{app.city}</p>
+                    <p>{app.city || '-'}</p>
                   </div>
                   <div>
                     <p className="text-muted-foreground">{t('table.purpose')}</p>
-                    <p>{t(`purpose.${app.purposeOfVisit.toLowerCase()}`)}</p>
+                    <p>{app.purposeOfVisit ? t(`purpose.${app.purposeOfVisit.toLowerCase()}`) : '-'}</p>
                   </div>
                   <div>
                     <p className="text-muted-foreground">{t('table.submissionDate')}</p>
@@ -104,12 +112,12 @@ const LiteApplicationTable: React.FC<LiteApplicationTableProps> = ({ application
             <TableRow key={app.id}>
               <TableCell>
                 <div className="flex items-center gap-2">
-                  <CountryFlag country={app.country} size={20} />
-                  {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
+                  {app.country && <CountryFlag country={app.country} size={20} />}
+                  {app.country ? t(`countries.${getCountryKey(app.country)}`) : '-'}
                 </div>
               </TableCell>
-              <TableCell>{app.city}</TableCell>
-              <TableCell>{t(`purpose.${app.purposeOfVisit.toLowerCase()}`)}</TableCell>
+              <TableCell>{app.city || '-'}</TableCell>
+              <TableCell>{app.purposeOfVisit ? t(`purpose.${app.purposeOfVisit.toLowerCase()}`) : '-'}</TableCell>
               <TableCell>{formatDate(app.applicationSubmitDate)}</TableCell>
               <TableCell>
                 <Badge variant="outline">

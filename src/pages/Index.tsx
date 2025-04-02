@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
@@ -18,29 +17,29 @@ const Index: React.FC = () => {
   const { stats, loading } = useStaticStats();
   const { t } = useLanguage();
   
-  // Format applications from static file
+  // Format applications from static file with null checks
   const formatApplications = (apps: any[] = []) => {
     return apps.map(app => ({
-      id: app.id,
-      country: app.country,
-      city: app.city,
-      purposeOfVisit: app.purpose,
-      durationOfVisit: String(app.duration || '0'), // Add missing property
-      applicationSubmitDate: new Date(app.submission_date),
-      idataReplyDate: null, // Add missing property
+      id: app.id || `temp-${Math.random().toString(36).substring(2, 9)}`,
+      country: app.country || 'Unknown',
+      city: app.city || '',
+      purposeOfVisit: app.purpose || '',
+      durationOfVisit: String(app.duration || '0'),
+      applicationSubmitDate: app.submission_date ? new Date(app.submission_date) : new Date(),
+      idataReplyDate: null,
       appointmentDate: app.appointment_date ? new Date(app.appointment_date) : null,
       passportReturnDate: app.return_date ? new Date(app.return_date) : null,
       result: app.result_status ? {
         status: app.result_status,
-        validity: app.validity,
-        entryType: app.entry_type,
-        rejectionReason: app.rejection_reason
+        validity: app.validity || '',
+        entryType: app.entry_type || '',
+        rejectionReason: app.rejection_reason || ''
       } : null,
-      createdAt: new Date(app.created_at)
+      createdAt: app.created_at ? new Date(app.created_at) : new Date()
     }));
   };
   
-  // Format statistics for StatsOverview
+  // Format statistics for StatsOverview with safeguards
   const formatStats = () => {
     if (!stats) return {
       totalApplications: 0,
@@ -58,24 +57,24 @@ const Index: React.FC = () => {
     };
     
     return {
-      totalApplications: stats.totalApplications,
-      averageProcessingDays: stats.averageWaitingDays,
-      approvalRate: stats.approvalRate,
+      totalApplications: stats.totalApplications || 0,
+      averageProcessingDays: stats.averageWaitingDays || 0,
+      approvalRate: stats.approvalRate || 0,
       byCountry: Object.values(Country).reduce((acc, country) => {
         acc[country] = 0;
         return acc;
       }, {} as Record<Country, number>),
       trendsLastThreeMonths: [
-        { month: 'Current', averageDays: stats.averageWaitingDays }
+        { month: 'Current', averageDays: stats.averageWaitingDays || 0 }
       ],
-      totalAnnualApplications: 85000, // Estimated
-      totalAnnualCost: 25500000, // Estimated
+      totalAnnualApplications: 85000,
+      totalAnnualCost: 25500000,
       worstCities: [],
       citiesProcessingTime: []
     };
   };
   
-  const recentApplications = stats ? formatApplications(stats.latestApplications) : [];
+  const recentApplications = stats ? formatApplications(stats.latestApplications || []) : [];
   
   return (
     <Layout>
@@ -97,7 +96,7 @@ const Index: React.FC = () => {
         
         {stats && (
           <div className="text-center text-sm text-muted-foreground mt-2">
-            {t('dashboard.lastUpdated')}: {new Date(stats.lastUpdated).toLocaleString()}
+            {t('dashboard.lastUpdated')}: {new Date(stats.lastUpdated || Date.now()).toLocaleString()}
           </div>
         )}
       </section>

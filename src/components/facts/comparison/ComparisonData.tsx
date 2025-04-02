@@ -5,6 +5,7 @@ export const useComparisonData = () => {
   const { t } = useLanguage();
   
   // Countries comparison data
+  // Using lowercase keys for consistent lookup
   const countryComparisonData = [
     {
       country: "turkey",
