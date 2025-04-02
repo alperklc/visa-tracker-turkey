@@ -1,13 +1,13 @@
+
 export const facts = {
   title: "Facts About Schengen Visa Process",
   subtitle: "Learn about Schengen requirements and compare with other countries.",
   general: "General",
   schengen: "Schengen",
-  comparison: "Comparisons",
-  fees: "Fees",
   comparison: {
     aspect: "Aspect",
   },
+  fees: "Fees",
   
   // Add more fact translations
   visaRequirements: "Visa Requirements",
