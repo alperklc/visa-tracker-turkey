@@ -1,4 +1,3 @@
-
 export const facts = {
   title: "Facts About Schengen Visa Process",
   subtitle: "Learn about Schengen requirements and compare with other countries.",
@@ -6,6 +5,11 @@ export const facts = {
   schengen: "Schengen",
   comparison: {
     aspect: "Aspect",
+    diplomaticRelations: "Diplomatic Relations",
+    historicalContext: "Historical Context",
+    title: "Country Comparison",
+    paragraph1: "Below is a comparison of visa regimes and travel freedoms in the Schengen area for several countries.",
+    subtitle: "Political Differences"
   },
   fees: "Fees",
   
@@ -84,4 +88,5 @@ export const facts = {
   venezuela: "Venezuela",
   russia: "Russia",
   georgia: "Georgia",
+  facts: "Facts"
 };

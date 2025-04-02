@@ -161,17 +161,7 @@ export const de = {
     },
     fees: "Gebühren",
     
-    // More fact translations
-    visaRequirements: "Visumsanforderungen",
-    visaRequirementsDesc: "Visumsanforderungen weltweit für türkische Staatsbürger",
-    turkeyRepublic: "Republik Türkei",
-    idCardTravel: "Reisen mit Personalausweis möglich",
-    noVisaRequired: "Kein Visum erforderlich",
-    visaOnArrival: "Visum bei Ankunft",
-    eVisa: "E-Visum",
-    visaAvailableBoth: "Beide Visumsarten verfügbar",
-    visaRequired: "Visum erforderlich",
-    
+    // Add required properties for facts
     required: "Erforderlich",
     notRequired: "Nicht erforderlich",
     

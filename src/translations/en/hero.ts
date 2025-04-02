@@ -7,4 +7,17 @@ export const hero: HeroTranslations = {
   crowdsourced: "Crowdsourced Data",
   realExperiences: "Real Experiences",
   transparentProcess: "Transparent Process",
+  secondaryButton: "Add your application",
+  // Add the additional properties used in Turkish translations
+  visaData: "Visa Data",
+  visaDataSubtitle: "Real applications",
+  processingTime: "Processing Time",
+  processingTimeSubtitle: "Informative statistics",
+  communityDriven: "Community Driven",
+  communityDrivenSubtitle: "Share your experiences",
+  schengenVisa: "Schengen Visa",
+  schengenVisaDescription: "Free movement in 26 European countries",
+  nationalVisa: "National Visa",
+  nationalVisaDescription: "Long-term residence and work",
+  processingTitle: "Processing Times and Statistics"
 };

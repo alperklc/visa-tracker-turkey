@@ -8,11 +8,10 @@ import { Language } from '@/lib/types';
 export type TranslationType = typeof en;
 
 // Create a utility function to merge partial translations with the English defaults
-// This ensures full compatibility during migration while maintaining type safety
 function createFullTranslation<T extends Partial<TranslationType>>(partialTranslation: T): TranslationType {
   return {
     ...en, // Use English as fallback for missing translations
-    ...partialTranslation as any // Override with available translations and use type assertion
+    ...partialTranslation as any // Override with available translations
   };
 }
 
