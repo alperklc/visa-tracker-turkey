@@ -17,16 +17,19 @@ const FinancialImpact: React.FC<FinancialImpactProps> = ({
   const { t } = useLanguage();
   
   // 2023 yılı verileri - Türk vatandaşlarının yıllık Schengen vize başvuruları
-  const realAnnualApplications = 891200; // 2023 yılı Schengen vize başvurusu
+  const realAnnualApplications = 1054000; // 2023 yılı Schengen vize başvurusu (kaynak: karar.com)
   
   // Vize masrafları
-  const visaFee = 90; // EUR - Schengen vize ücreti
+  const visaFee = 80; // EUR - Schengen vize ücreti
   const serviceFee = 35; // EUR - VFS, iDATA gibi aracı kurum ücreti
-  const additionalCosts = 195; // EUR - seyahat sigortası, banka masrafları, tercüme, seyahat vs.
+  const additionalCosts = 185; // EUR - seyahat sigortası, banka masrafları, tercüme, seyahat vs.
   const totalPerApplication = visaFee + serviceFee + additionalCosts;
   
-  // Toplam maliyet hesabı
-  const realAnnualCost = realAnnualApplications * totalPerApplication;
+  // Toplam maliyet hesabı - 5 yıllık toplam maliyet
+  const fiveYearCost = 5114000000; // EUR - 10 yılda 5.114 milyar Euro (kaynak: karar.com)
+  
+  // Son yılın maliyeti (ortalamanın biraz üzerinde alındı)
+  const realAnnualCost = 619000000; // EUR - 2023 yılında 619 milyon Euro (kaynak: patronlardunyasi.com)
   
   return (
     <Card className="h-full hover:shadow-md transition-shadow">
@@ -88,12 +91,12 @@ const FinancialImpact: React.FC<FinancialImpactProps> = ({
         
         <div className="text-[10px] text-muted-foreground mt-4">
           <a 
-            href="https://www.schengenvisainfo.com/statistics/schengen-visa-statistics-by-third-country/"
+            href="https://www.karar.com/guncel-haberler/turkiye-schengene-10-yilda-5114-milyon-euro-odedi-ret-orani-rekor-1864240"
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:underline"
           >
-            Kaynak: Schengen Visa Statistics 2023 - SchengenVisaInfo.com
+            Kaynak: Karar.com - Türkiye Schengen'e 10 yılda 5.114 milyon euro ödedi
           </a>
         </div>
       </CardContent>
