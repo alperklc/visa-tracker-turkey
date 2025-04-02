@@ -2,7 +2,8 @@
 import React from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Country, PurposeOfVisit } from '@/types/enums';
+import { PurposeOfVisit } from '@/types/enums';
+import { Country } from '@/types/countries';
 import { useLanguage } from '@/lib/LanguageContext';
 import CountryFlag from './CountryFlag';
 import { Input } from "@/components/ui/input";
@@ -224,10 +225,10 @@ const ApplicationTable: React.FC = () => {
               <SelectContent>
                 <SelectItem value="All">{t('review.allCountries')}</SelectItem>
                 {Object.values(Country).map((country) => (
-                  <SelectItem key={country} value={country}>
+                  <SelectItem key={country as string} value={country as string}>
                     <div className="flex items-center gap-2">
-                      <CountryFlag country={country} size={16} />
-                      {t(`countries.${country.replace(/\s+/g, '').toLowerCase()}`)}
+                      <CountryFlag country={country as Country} size={16} />
+                      {t(`countries.${(country as string).replace(/\s+/g, '').toLowerCase()}`)}
                     </div>
                   </SelectItem>
                 ))}

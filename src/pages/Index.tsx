@@ -11,6 +11,7 @@ import ProcessingTrends from '@/components/ProcessingTrends';
 import FinancialImpact from '@/components/FinancialImpact';
 import LiteApplicationTable from '@/components/LiteApplicationTable';
 import { useStaticStats } from '@/hooks/useStaticStats';
+import { Country } from '@/types/countries';
 
 const Index: React.FC = () => {
   const { stats, loading } = useStaticStats();
@@ -23,7 +24,9 @@ const Index: React.FC = () => {
       country: app.country,
       city: app.city,
       purposeOfVisit: app.purpose,
+      durationOfVisit: String(app.duration || '0'), // Add missing property
       applicationSubmitDate: new Date(app.submission_date),
+      idataReplyDate: null, // Add missing property
       appointmentDate: app.appointment_date ? new Date(app.appointment_date) : null,
       passportReturnDate: app.return_date ? new Date(app.return_date) : null,
       result: app.result_status ? {
@@ -42,6 +45,10 @@ const Index: React.FC = () => {
       totalApplications: 0,
       averageProcessingDays: 0,
       approvalRate: 0,
+      byCountry: Object.values(Country).reduce((acc, country) => {
+        acc[country] = 0;
+        return acc;
+      }, {} as Record<Country, number>),
       trendsLastThreeMonths: [],
       totalAnnualApplications: 85000,
       totalAnnualCost: 25500000,
@@ -53,6 +60,10 @@ const Index: React.FC = () => {
       totalApplications: stats.totalApplications,
       averageProcessingDays: stats.averageWaitingDays,
       approvalRate: stats.approvalRate,
+      byCountry: Object.values(Country).reduce((acc, country) => {
+        acc[country] = 0;
+        return acc;
+      }, {} as Record<Country, number>),
       trendsLastThreeMonths: [
         { month: 'Current', averageDays: stats.averageWaitingDays }
       ],
