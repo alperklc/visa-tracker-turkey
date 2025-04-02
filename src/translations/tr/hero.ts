@@ -2,9 +2,19 @@
 import { HeroTranslations } from '@/types/interfaces';
 
 export const hero: HeroTranslations = {
-  title: "Vize Başvuru Deneyimlerini Birlikte Takip Ediyoruz",
-  subtitle: "Bu platform, Türk vatandaşlarının yaşadığı vize başvuru sürecini ve zaman çizelgelerini belgeler. Toplu deneyimlerimizi paylaşarak, sürece şeffaflık getirmeyi ve adil muameleyi savunmayı umuyoruz.",
-  crowdsourced: "Toplu Veriler",
-  realExperiences: "Gerçek Deneyimler",
-  transparentProcess: "Şeffaf Süreç"
+  title: "Türkiye ve diğer ülkelerin vize uygulamaları",
+  subtitle: "Vize başvuru deneyimlerini paylaşın ve başkalarının deneyimlerinden öğrenin.",
+  buttonText: "Başvurularına Göz At",
+  secondaryButton: "Kendi başvurunu ekle",
+  visaData: "Vize verisi",
+  visaDataSubtitle: "Gerçek başvurular",
+  processingTime: "İşlem süresi",
+  processingTimeSubtitle: "Bilgilendirici istatistikler",
+  communityDriven: "Topluluk odaklı",
+  communityDrivenSubtitle: "Deneyimlerinizi paylaşın",
+  schengenVisa: "Schengen vizesi",
+  schengenVisaDescription: "Avrupa'da 26 ülkeye serbest dolaşım",
+  nationalVisa: "Ulusal vize",
+  nationalVisaDescription: "Uzun süreli ikamet ve çalışma",
+  processingTitle: "İşlem süreleri ve istatistikler"
 };
