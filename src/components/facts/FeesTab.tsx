@@ -98,7 +98,7 @@ const FeesTab: React.FC = () => {
               </div>
               <div className="flex gap-2">
                 <Badge variant="outline" className="bg-red-50">2024</Badge>
-                <span>{t('facts.fee2024')}</span>
+                <span>2024: Standard visa fee increased to 90€</span>
               </div>
             </div>
           </div>

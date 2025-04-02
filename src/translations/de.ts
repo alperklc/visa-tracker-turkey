@@ -231,7 +231,11 @@ export const de: TranslationType = {
   "actions.contact.description": "Möchten Sie zu dieser Initiative beitragen? Kontaktieren Sie uns mit Ihren Ideen und Vorschlägen.",
   "actions.contact.email": "Senden Sie uns eine E-Mail",
   
+  // Discussion translations
   "discussion.community": "Community-Diskussionen",
+  "discussion.title": "Community-Diskussionen",
+  "discussion.subtitle": "Teilen Sie Ihre Visum-Erfahrungen und Fragen mit anderen Mitgliedern",
+  "discussion.description": "Diese Plattform bietet einen Raum, um Ihre Erfahrungen mit dem Visumprozess zu teilen und Fragen zu stellen.",
   
   // Table translations
   table: {
@@ -269,7 +273,13 @@ export const de: TranslationType = {
     cards: "Karten",
     table: "Tabelle",
     gdpPerCapita: "BIP pro Kopf",
-    population: "Bevölkerung"
+    population: "Bevölkerung",
+    seeall: "Alle anzeigen",
+    noApplicationsFound: "Keine Anträge gefunden",
+    applications: "Anträge",
+    common: {
+      refresh: "Aktualisieren"
+    }
   },
   
   // Pagination translations
@@ -392,6 +402,10 @@ export const de: TranslationType = {
     validityDaysDescription: "Der Zeitraum, für den das Visum gültig ist",
     validityDaysPlaceholder: "z.B. 90 Tage, 1 Jahr",
     captchaTitle: "Roboter-Check",
-    captchaDescription: "Bitte bestätigen Sie, dass Sie kein Roboter sind"
+    captchaDescription: "Bitte bestätigen Sie, dass Sie kein Roboter sind",
+    pleaseCompleteAllFields: "Bitte füllen Sie alle erforderlichen Felder aus",
+    captchaRequired: "Bitte bestätigen Sie, dass Sie kein Roboter sind",
+    singleEntry: "Einmalige Einreise",
+    multipleEntry: "Mehrfache Einreise"
   }
 };

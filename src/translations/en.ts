@@ -228,6 +228,9 @@ export const en: TranslationType = {
   "actions.contact.email": "Send us an email",
   
   "discussion.community": "Community Discussions",
+  "discussion.title": "Community Discussions",
+  "discussion.subtitle": "Share your visa experiences and questions with other members",
+  "discussion.description": "This platform provides a space to share your experiences with the visa process and ask questions.",
   
   // Table translations
   table: {
@@ -394,6 +397,10 @@ export const en: TranslationType = {
     validityDaysDescription: "The period for which the visa is valid",
     validityDaysPlaceholder: "e.g. 90 days, 1 year",
     captchaTitle: "Robot Check",
-    captchaDescription: "Please verify that you are not a robot"
+    captchaDescription: "Please verify that you are not a robot",
+    pleaseCompleteAllFields: "Please complete all required fields",
+    captchaRequired: "Please verify that you are not a robot",
+    singleEntry: "Single Entry",
+    multipleEntry: "Multiple Entry"
   }
 };

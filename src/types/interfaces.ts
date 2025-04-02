@@ -34,10 +34,10 @@ export interface ReviewTranslations {
   table: string;
   gdpPerCapita: string;
   population: string;
-  seeall?: string;
-  noApplicationsFound?: string;
-  applications?: string;
-  common?: {
+  seeall: string;
+  noApplicationsFound: string;
+  applications: string;
+  common: {
     refresh: string;
   };
 }
@@ -154,9 +154,13 @@ export interface FormTranslations {
   next: string;
   back: string;
   resultTitle: string;
-  resultStatusDescription?: string;
-  validityDaysDescription?: string;
-  validityDaysPlaceholder?: string;
-  captchaTitle?: string;
-  captchaDescription?: string;
+  resultStatusDescription: string;
+  validityDaysDescription: string;
+  validityDaysPlaceholder: string;
+  captchaTitle: string;
+  captchaDescription: string;
+  pleaseCompleteAllFields?: string;
+  captchaRequired?: string;
+  singleEntry?: string;
+  multipleEntry?: string;
 }

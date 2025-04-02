@@ -118,9 +118,12 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {Object.values(EntryType).map(type => (
-                      <SelectItem key={type} value={type}>{t(`form.${type.toLowerCase()}Entry`)}</SelectItem>
-                    ))}
+                    <SelectItem key={EntryType.Single} value={EntryType.Single}>
+                      {t('form.singleEntry')}
+                    </SelectItem>
+                    <SelectItem key={EntryType.Multiple} value={EntryType.Multiple}>
+                      {t('form.multipleEntry')}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormDescription>

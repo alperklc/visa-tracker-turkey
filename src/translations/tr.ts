@@ -227,7 +227,18 @@ export const tr: TranslationType = {
   "actions.contact.description": "Bu girişime katkıda bulunmak ister misiniz? Fikir ve önerileriniz için bizimle iletişime geçin.",
   "actions.contact.email": "Bize e-posta gönderin",
   
+  // Discussion translations
   "discussion.community": "Topluluk Tartışmaları",
+  "discussion.title": "Topluluk Tartışmaları",
+  "discussion.subtitle": "Vize deneyimlerinizi ve sorularınızı diğer üyelerle paylaşın",
+  "discussion.description": "Bu platform, vize sürecindeki deneyimlerinizi paylaşmanız ve sorularınızı sormanız için bir alan sağlar.",
+  
+  // Actions translations
+  "actions.shareTitle": "Deneyiminizi Paylaşın",
+  "actions.shareDescription": "Bu sayfayı sosyal medyada veya arkadaşlarınızla paylaşarak daha fazla kişiye ulaşın",
+  "actions.shareButton": "Paylaş",
+  "actions.copyLink": "Bağlantıyı Kopyala",
+  "actions.joinDiscussion": "Tartışmalara Katılın",
   
   // Table translations
   table: {
@@ -265,7 +276,13 @@ export const tr: TranslationType = {
     cards: "Kartlar",
     table: "Tablo",
     gdpPerCapita: "Kişi Başı GSYH",
-    population: "Nüfus"
+    population: "Nüfus",
+    seeall: "Tümünü Gör",
+    noApplicationsFound: "Başvuru bulunamadı",
+    applications: "Başvurular",
+    common: {
+      refresh: "Yenile"
+    }
   },
   
   // Pagination translations
@@ -388,6 +405,10 @@ export const tr: TranslationType = {
     validityDaysDescription: "Vizenin geçerli olduğu süre",
     validityDaysPlaceholder: "örn. 90 gün, 1 yıl",
     captchaTitle: "Robot Kontrolü",
-    captchaDescription: "Lütfen robot olmadığınızı doğrulayın"
+    captchaDescription: "Lütfen robot olmadığınızı doğrulayın",
+    pleaseCompleteAllFields: "Lütfen tüm gerekli alanları doldurun",
+    captchaRequired: "Lütfen robotum olmadığını doğrulayın",
+    singleEntry: "Tek giriş",
+    multipleEntry: "Çoklu giriş"
   }
 };
