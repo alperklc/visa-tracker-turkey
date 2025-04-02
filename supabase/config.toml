@@ -1,1 +1,5 @@
+
 project_id = "xptezpotlgvxkanvbctd"
+
+[functions.submit-application]
+verify_jwt = false
