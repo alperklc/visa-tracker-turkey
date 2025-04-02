@@ -1,0 +1,10 @@
+
+import { HeroTranslations } from '@/types/interfaces';
+
+export const hero: HeroTranslations = {
+  title: "Tracking Visa Application Experiences Together",
+  subtitle: "This platform documents the visa application process and timelines experienced by Turkish citizens. By sharing our collective experiences, we hope to bring transparency to the process and advocate for fair treatment.",
+  crowdsourced: "Crowdsourced Data",
+  realExperiences: "Real Experiences",
+  transparentProcess: "Transparent Process",
+};

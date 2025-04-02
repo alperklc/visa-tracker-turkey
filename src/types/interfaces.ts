@@ -164,3 +164,140 @@ export interface FormTranslations {
   singleEntry?: string;
   multipleEntry?: string;
 }
+
+export interface GeneralTranslations {
+  appName: string;
+  home: string;
+  submitApplication: string;
+  reviewEntries: string;
+  discussions: string;
+  seeAllData: string;
+  madeWith: string;
+}
+
+export interface HeroTranslations {
+  title: string;
+  subtitle: string;
+  crowdsourced: string;
+  realExperiences: string;
+  transparentProcess: string;
+}
+
+export interface DashboardTranslations {
+  title: string;
+  allCountries: string;
+  totalApplications: string;
+  avgProcessingTime: string;
+  approvalRate: string;
+  latestApplication: string;
+  lastupdated: string;
+  processingTime: string;
+  processingTimeDesc: string;
+  applicationResults: string;
+  applicationResultsDesc: string;
+  days: string;
+  approved: string;
+  rejected: string;
+  pending: string;
+  worstCities: string;
+}
+
+export interface FooterTranslations {
+  rights: string;
+  privacy: string;
+  terms: string;
+  contact: string;
+}
+
+export interface LanguageTranslations {
+  language: string;
+  turkish: string;
+  english: string;
+  german: string;
+}
+
+export interface CookieTranslations {
+  title: string;
+  description: string;
+  accept: string;
+  decline: string;
+  preferences: string;
+  privacy: string;
+  necessary: string;
+  analytics: string;
+  marketing: string;
+  acceptSelected: string;
+  acceptAll: string;
+  close: string;
+}
+
+export interface ActionsTranslations {
+  title: string;
+  subtitle: string;
+  disclaimer: {
+    title: string;
+    text: string;
+  };
+  diaspora: {
+    title: string;
+    description: string;
+    point1: string;
+    point2: string;
+    point3: string;
+  };
+  tourism: {
+    title: string;
+    description: string;
+    point1: string;
+    point2: string;
+    point3: string;
+  };
+  awareness: {
+    title: string;
+    description: string;
+    point1: string;
+    point2: string;
+    point3: string;
+  };
+  legal: {
+    title: string;
+    description: string;
+    point1: string;
+    point2: string;
+    point3: string;
+  };
+  alternatives: {
+    title: string;
+    description: string;
+  };
+  contact: {
+    title: string;
+    description: string;
+    email: string;
+  };
+  shareTitle: string;
+  shareDescription: string;
+  shareButton: string;
+  copyLink: string;
+  joinDiscussion: string;
+}
+
+export interface DiscussionTranslations {
+  community: string;
+  title: string;
+  subtitle: string;
+  description: string;
+}
+
+export interface FactsTranslations {
+  facts: string;
+  title: string;
+  subtitle: string;
+  general: string;
+  schengen: string;
+  comparison: string;
+  fees: string;
+  // Add more facts translations as needed
+}
+
+// Add other interface categories as needed

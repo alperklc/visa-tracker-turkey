@@ -28,21 +28,45 @@ export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ childr
   const t = (key: string): string => {
     const nestedKeys = key.split('.');
     
-    // Handle typed nested objects like table, review, etc.
-    if (nestedKeys.length > 1 && ['table', 'review', 'pagination', 'purposes', 'countries', 'form'].includes(nestedKeys[0])) {
-      const [objectKey, propKey] = nestedKeys;
-      // Access the nested objects using the keys
-      const obj = translations[language][objectKey as keyof typeof translations[typeof language]];
-      if (typeof obj === 'object' && obj !== null) {
-        // Use type assertion to access the property safely
-        return (obj as any)[propKey] || key;
+    // Handle different translation categories
+    try {
+      // If this is a nested path with multiple segments
+      if (nestedKeys.length > 1) {
+        const [category, ...restKeys] = nestedKeys;
+        const restKey = restKeys.join('.');
+        
+        // Get the category object
+        const categoryObj = translations[language][category as keyof typeof translations[typeof language]];
+        
+        // Handle nested objects for specific categories
+        if (typeof categoryObj === 'object' && categoryObj !== null) {
+          // Navigate through nested properties if needed
+          let value: any = categoryObj;
+          
+          for (const k of restKeys) {
+            if (value && typeof value === 'object' && k in value) {
+              value = value[k];
+            } else {
+              return key; // Key not found
+            }
+          }
+          
+          if (typeof value === 'string') {
+            return value;
+          }
+        }
+      } else {
+        // Direct access for top-level keys
+        const value = translations[language][key as keyof typeof translations[typeof language]];
+        if (typeof value === 'string') {
+          return value;
+        }
       }
-      return key;
+    } catch (error) {
+      console.error(`Translation error for key: ${key}`, error);
     }
     
-    // Handle regular string translations
-    const value = translations[language][key as keyof typeof translations[typeof language]];
-    return typeof value === 'string' ? value : key;
+    return key; // Return the key itself if no translation found
   };
 
   return (
