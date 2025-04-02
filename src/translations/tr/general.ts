@@ -1,7 +1,7 @@
 
 import { GeneralTranslations } from '@/types/interfaces';
 
-export const general = {
+export const general: GeneralTranslations = {
   appName: "Vize Takibi",
   tagline: "Vize süreçlerini topluluk desteğiyle izle",
   welcome: "Visa Tracking'e Hoş Geldiniz",
@@ -41,4 +41,9 @@ export const general = {
   viewAll: "Tümünü Gör",
   seeMore: "Daha Fazla Gör",
   showLess: "Daha Az Göster",
+  submitApplication: "Vize Başvurusu Ekle",
+  reviewEntries: "Başvuruları İncele",
+  discussions: "Tartışmalar",
+  seeAllData: "Tüm Verileri Gör",
+  madeWith: "Sevgiyle yapıldı"
 };
