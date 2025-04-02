@@ -107,7 +107,7 @@ const SchengenTab: React.FC = () => {
             <p className="mb-4">{t('facts.schengenVisaFreeDesc')}</p>
             
             <div className="flex flex-wrap gap-2">
-              {getVisaFreeCountries().map((country, index) => (
+              {getVisaFreeCountries().map((country) => (
                 <div key={country} className="flex items-center gap-2 bg-green-50 rounded-lg px-2 py-1 text-sm border border-green-100">
                   {country}
                 </div>
