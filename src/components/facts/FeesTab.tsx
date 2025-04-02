@@ -27,8 +27,11 @@ const FeesTab: React.FC = () => {
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <div className="font-medium">{t('facts.schengen')}</div>
-                  <div className="text-sm text-muted-foreground">{t('facts.allSchengenCountries')}</div>
+                  <div className="flex items-center gap-2">
+                    <span>🇪🇺</span>
+                    <div className="font-medium">{t('facts.schengen')}</div>
+                    <div className="text-sm text-muted-foreground">{t('facts.allSchengenCountries')}</div>
+                  </div>
                 </TableCell>
                 <TableCell>€90</TableCell>
                 <TableCell>{t('facts.standardFee')}</TableCell>

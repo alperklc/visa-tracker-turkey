@@ -1,4 +1,3 @@
-
 import { TableTranslations, ReviewTranslations, PaginationTranslations, PurposeTranslations, CountryTranslations, FormTranslations } from '@/types/interfaces';
 
 // Define a type that allows both string values and specific interfaces
@@ -36,6 +35,7 @@ export const de: TranslationType = {
   "dashboard.avgProcessingTime": "Durchschn. Bearbeitungszeit",
   "dashboard.approvalRate": "Genehmigungsrate",
   "dashboard.latestApplication": "Neuester Antrag",
+  "dashboard.lastupdated": "Zuletzt aktualisiert",
   "dashboard.processingTime": "Bearbeitungszeit",
   "dashboard.processingTimeDesc": "Tage von der Antragseinreichung bis zur Passrückgabe",
   "dashboard.applicationResults": "Antragsergebnisse",
@@ -65,6 +65,7 @@ export const de: TranslationType = {
   // Recent Applications
   "recentApplications.title": "Neueste Anträge",
   "recentApplications.submit": "Teilen Sie Ihre Erfahrung",
+  "recentApplications.community": "Community-Anträge",
   "recentApplications.noApplications": "Noch keine Anträge",
   "recentApplications.beFirst": "Seien Sie der Erste, der seine Visumantrags-Erfahrung teilt",
   "recentApplications.submitApplication": "Antrag einreichen",
@@ -192,8 +193,12 @@ export const de: TranslationType = {
   // Actions
   "actions.title": "Was können wir tun?",
   "actions.subtitle": "Gemeinsame Aktionen für faire Visapolitik",
-  "actions.disclaimer.title": "Wichtige Notiz",
-  "actions.disclaimer.text": "Die Vorschläge unten sind gemeinnützige und rechtliche Wege, um für Veränderungen zu kämpfen. Stellen Sie sicher, dass Ihre Handlungen lokalen Gesetzen entsprechen.",
+  "actions.shareTitle": "Teilen Sie Ihre Erfahrung",
+  "actions.shareDescription": "Teilen Sie diese Seite in sozialen Medien oder mit Freunden, um mehr Menschen zu erreichen",
+  "actions.shareButton": "Teilen",
+  "actions.copyLink": "Link kopieren",
+  "actions.joinDiscussion": "An Diskussionen teilnehmen",
+  "actions.getStarted": "Loslegen",
   
   "actions.diaspora.title": "Mit der türkischen Diaspora zusammenarbeiten",
   "actions.diaspora.description": "Nutzen Sie den Einfluss türkischer Gemeinschaften im Ausland",
@@ -382,6 +387,11 @@ export const de: TranslationType = {
     submit: "Einreichen",
     next: "Weiter",
     back: "Zurück",
-    resultTitle: "Ergebnisinformationen"
+    resultTitle: "Ergebnisinformationen",
+    resultStatusDescription: "Das Ergebnis Ihres Visumantrags",
+    validityDaysDescription: "Der Zeitraum, für den das Visum gültig ist",
+    validityDaysPlaceholder: "z.B. 90 Tage, 1 Jahr",
+    captchaTitle: "Roboter-Check",
+    captchaDescription: "Bitte bestätigen Sie, dass Sie kein Roboter sind"
   }
 };

@@ -120,9 +120,10 @@ const WhatCanWeDo: React.FC = () => {
               </Link>
               <Button variant="outline" className="flex items-center gap-2" onClick={() => window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.origin), '_blank')}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                  <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                  <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
                 </svg>
-                <span>Twitter</span>
+                <span>X</span>
               </Button>
               <Button variant="outline" className="flex items-center gap-2" onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.origin), '_blank')}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
@@ -147,13 +148,7 @@ const WhatCanWeDo: React.FC = () => {
           </CardContent>
         </Card>
         
-        <div className="text-center animate-fade-in">
-          <Link to="/submit">
-            <Button size="lg" className="px-8">
-              {t('actions.getStarted')}
-            </Button>
-          </Link>
-        </div>
+        {/* Get Started button removed as requested */}
       </div>
     </Layout>
   );

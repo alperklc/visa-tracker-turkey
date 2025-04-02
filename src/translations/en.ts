@@ -1,4 +1,3 @@
-
 import { TableTranslations, ReviewTranslations, PaginationTranslations, PurposeTranslations, CountryTranslations, FormTranslations } from '@/types/interfaces';
 
 // Define a type that allows both string values and specific interfaces
@@ -36,6 +35,7 @@ export const en: TranslationType = {
   "dashboard.avgProcessingTime": "Avg. Processing Time",
   "dashboard.approvalRate": "Approval Rate",
   "dashboard.latestApplication": "Latest Application",
+  "dashboard.lastupdated": "Last updated",
   "dashboard.processingTime": "Processing Time",
   "dashboard.processingTimeDesc": "Days from application submission to passport return",
   "dashboard.applicationResults": "Application Results",
@@ -65,6 +65,7 @@ export const en: TranslationType = {
   // Recent Applications
   "recentApplications.title": "Recent Applications",
   "recentApplications.submit": "Submit Your Experience",
+  "recentApplications.community": "Community Applications",
   "recentApplications.noApplications": "No applications yet",
   "recentApplications.beFirst": "Be the first to share your visa application experience",
   "recentApplications.submitApplication": "Submit Application",
@@ -264,7 +265,13 @@ export const en: TranslationType = {
     cards: "Cards",
     table: "Table",
     gdpPerCapita: "GDP Per Capita",
-    population: "Population"
+    population: "Population",
+    seeall: "See All",
+    noApplicationsFound: "No applications found",
+    applications: "Applications",
+    common: {
+      refresh: "Refresh"
+    }
   },
   
   // Pagination translations
@@ -382,6 +389,11 @@ export const en: TranslationType = {
     submit: "Submit",
     next: "Next",
     back: "Back",
-    resultTitle: "Result Information"
+    resultTitle: "Result Information",
+    resultStatusDescription: "The result of your visa application",
+    validityDaysDescription: "The period for which the visa is valid",
+    validityDaysPlaceholder: "e.g. 90 days, 1 year",
+    captchaTitle: "Robot Check",
+    captchaDescription: "Please verify that you are not a robot"
   }
 };

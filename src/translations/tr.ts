@@ -1,4 +1,3 @@
-
 import { TableTranslations, ReviewTranslations, PaginationTranslations, PurposeTranslations, CountryTranslations, FormTranslations } from '@/types/interfaces';
 
 // Define a type that allows both string values and specific interfaces
@@ -36,6 +35,7 @@ export const tr: TranslationType = {
   "dashboard.avgProcessingTime": "Ort. İşlem Süresi",
   "dashboard.approvalRate": "Onay Oranı",
   "dashboard.latestApplication": "Son Başvuru",
+  "dashboard.lastupdated": "Son güncelleme",
   "dashboard.processingTime": "İşlem Süresi",
   "dashboard.processingTimeDesc": "Başvuru gönderiminden pasaport iadesi gününe kadar geçen gün",
   "dashboard.applicationResults": "Başvuru Sonuçları",
@@ -65,6 +65,7 @@ export const tr: TranslationType = {
   // Recent Applications
   "recentApplications.title": "Son Başvurular",
   "recentApplications.submit": "Deneyiminizi Paylaşın",
+  "recentApplications.community": "Topluluk Başvuruları",
   "recentApplications.noApplications": "Henüz başvuru yok",
   "recentApplications.beFirst": "Vize başvuru deneyiminizi paylaşan ilk kişi olun",
   "recentApplications.submitApplication": "Başvuru Gönder",
@@ -382,6 +383,11 @@ export const tr: TranslationType = {
     submit: "Gönder",
     next: "İleri",
     back: "Geri",
-    resultTitle: "Sonuç Bilgileri"
+    resultTitle: "Sonuç Bilgileri",
+    resultStatusDescription: "Vize başvurunuzun sonucu",
+    validityDaysDescription: "Vizenin geçerli olduğu süre",
+    validityDaysPlaceholder: "örn. 90 gün, 1 yıl",
+    captchaTitle: "Robot Kontrolü",
+    captchaDescription: "Lütfen robot olmadığınızı doğrulayın"
   }
 };
