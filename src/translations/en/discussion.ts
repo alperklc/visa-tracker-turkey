@@ -1,5 +1,4 @@
-
-import { DiscussionTranslations } from '@/types/interfaces';
+import { DiscussionTranslations } from '@/types/interfaces/discussion';
 
 export const discussion: DiscussionTranslations = {
   community: "Community Discussions",

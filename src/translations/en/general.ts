@@ -1,5 +1,4 @@
-
-import { GeneralTranslations } from '@/types/interfaces';
+import { GeneralTranslations } from '@/types/interfaces/general';
 
 export const general: GeneralTranslations = {
   appName: "Visa Tracker Turkey",

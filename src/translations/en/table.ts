@@ -1,5 +1,4 @@
-
-import { TableTranslations } from '@/types/interfaces';
+import { TableTranslations } from '@/types/interfaces/table';
 
 export const table: TableTranslations = {
   country: "Country",

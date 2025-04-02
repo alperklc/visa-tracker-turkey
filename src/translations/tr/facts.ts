@@ -1,5 +1,4 @@
-
-import { FactsTranslations } from '@/types/interfaces';
+import { FactsTranslations } from '@/types/interfaces/facts';
 
 export const facts: FactsTranslations = {
   title: "Vize Gerçekleri",

@@ -1,5 +1,4 @@
-
-import { PurposeTranslations } from '@/types/interfaces';
+import { PurposeTranslations } from '@/types/interfaces/purpose';
 
 export const purposes: PurposeTranslations = {
   tourism: "Tourism",

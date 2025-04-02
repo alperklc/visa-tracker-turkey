@@ -1,5 +1,4 @@
-
-import { FooterTranslations } from '@/types/interfaces';
+import { FooterTranslations } from '@/types/interfaces/footer';
 
 export const footer: FooterTranslations = {
   rights: "All rights reserved.",

@@ -1,0 +1,47 @@
+
+export interface GeneralTranslations {
+  appName: string;
+  tagline?: string;
+  welcome?: string;
+  loading: string;
+  error: string;
+  retry: string;
+  cancel: string;
+  save: string;
+  edit: string;
+  delete: string;
+  confirm: string;
+  search: string;
+  filter: string;
+  sortBy: string;
+  ascending: string;
+  descending: string;
+  noResults: string;
+  backToHome: string;
+  menu: string;
+  home: string;
+  about: string;
+  services: string;
+  products: string;
+  blog: string;
+  contactUs: string;
+  faq: string;
+  login: string;
+  register: string;
+  logout: string;
+  profile: string;
+  settings: string;
+  notifications: string;
+  darkMode: string;
+  lightMode: string;
+  moreInfo: string;
+  readMore: string;
+  viewAll: string;
+  seeMore: string;
+  showLess: string;
+  submitApplication: string;
+  reviewEntries: string;
+  discussions: string;
+  seeAllData: string;
+  madeWith: string;
+}

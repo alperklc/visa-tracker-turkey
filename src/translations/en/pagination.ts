@@ -1,5 +1,4 @@
-
-import { PaginationTranslations } from '@/types/interfaces';
+import { PaginationTranslations } from '@/types/interfaces/pagination';
 
 export const pagination: PaginationTranslations = {
   rowsPerPage: "Rows per page",

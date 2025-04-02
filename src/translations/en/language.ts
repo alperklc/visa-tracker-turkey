@@ -1,5 +1,4 @@
-
-import { LanguageTranslations } from '@/types/interfaces';
+import { LanguageTranslations } from '@/types/interfaces/language';
 
 export const language: LanguageTranslations = {
   language: "Language",

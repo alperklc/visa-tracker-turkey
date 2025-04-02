@@ -1,0 +1,53 @@
+
+export interface FactsTranslations {
+  facts: string;
+  title: string;
+  subtitle: string;
+  general: string;
+  schengen: string;
+  comparison: {
+    aspect: string;
+    diplomaticRelations?: string;
+    historicalContext?: string;
+    title?: string;
+    paragraph1?: string;
+    subtitle?: string;
+  };
+  comparisonTitle?: string;
+  comparisonDesc?: string;
+  fees: string;
+  visaRequirements?: string;
+  visaRequirementsDesc?: string;
+  turkeyRepublic?: string;
+  idCardTravel?: string;
+  noVisaRequired?: string;
+  visaOnArrival?: string;
+  eVisa?: string;
+  visaAvailableBoth?: string;
+  visaRequired?: string;
+  destination?: string;
+  fee?: string;
+  notes?: string;
+  visaFees?: string;
+  visaFeesDesc?: string;
+  allSchengenCountries?: string;
+  standardFee?: string;
+  unitedKingdom?: string;
+  ukFeeDesc?: string;
+  unitedStates?: string;
+  usFeeDesc?: string;
+  canada?: string;
+  canadaFeeDesc?: string;
+  australia?: string;
+  australiaFeeDesc?: string;
+  historicalChanges?: string;
+  historicalChangesDesc?: string;
+  fee2014?: string;
+  fee2020?: string;
+  fee2022?: string;
+  schengenVisa?: string;
+  schengenFee?: string;
+  visaFreeCountries?: string;
+  required?: string;
+  notRequired?: string;
+}

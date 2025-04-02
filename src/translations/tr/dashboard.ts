@@ -1,5 +1,4 @@
-
-import { DashboardTranslations } from '@/types/interfaces';
+import { DashboardTranslations } from '@/types/interfaces/dashboard';
 
 export const dashboard: DashboardTranslations = {
   title: "Güncel İstatistikler",

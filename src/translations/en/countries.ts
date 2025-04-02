@@ -1,5 +1,4 @@
-
-import { CountryTranslations } from '@/types/interfaces';
+import { CountryTranslations } from '@/types/interfaces/country';
 
 export const countries: CountryTranslations = {
   germany: "Germany",

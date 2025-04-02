@@ -1,4 +1,6 @@
-export const facts = {
+import { FactsTranslations } from '@/types/interfaces/facts';
+
+export const facts: FactsTranslations = {
   title: "Facts About Schengen Visa Process",
   subtitle: "Learn about Schengen requirements and compare with other countries.",
   general: "General",

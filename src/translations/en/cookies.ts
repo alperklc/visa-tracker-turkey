@@ -1,5 +1,4 @@
-
-import { CookieTranslations } from '@/types/interfaces';
+import { CookieTranslations } from '@/types/interfaces/cookie';
 
 export const cookies: CookieTranslations = {
   title: "Cookie Notice",

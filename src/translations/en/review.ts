@@ -1,5 +1,4 @@
-
-import { ReviewTranslations } from '@/types/interfaces';
+import { ReviewTranslations } from '@/types/interfaces/review';
 
 export const review: ReviewTranslations = {
   title: "Review Entries",

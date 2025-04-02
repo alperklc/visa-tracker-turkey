@@ -1,5 +1,4 @@
-
-import { HeroTranslations } from '@/types/interfaces';
+import { HeroTranslations } from '@/types/interfaces/hero';
 
 export const hero: HeroTranslations = {
   title: "Tracking Visa Application Experiences Together",

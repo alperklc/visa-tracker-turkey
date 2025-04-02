@@ -1,5 +1,4 @@
-
-import { ActionsTranslations } from '@/types/interfaces';
+import { ActionsTranslations } from '@/types/interfaces/actions';
 
 export const actions: ActionsTranslations = {
   title: "Ne Yapabiliriz?",

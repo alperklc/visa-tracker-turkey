@@ -1,5 +1,4 @@
-
-import { FormTranslations } from '@/types/interfaces';
+import { FormTranslations } from '@/types/interfaces/form';
 
 export const form: FormTranslations = {
   detailsTitle: "Başvuru Detayları",
