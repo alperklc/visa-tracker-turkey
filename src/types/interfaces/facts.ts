@@ -50,4 +50,29 @@ export interface FactsTranslations {
   visaFreeCountries?: string;
   required?: string;
   notRequired?: string;
+  
+  // Add the missing properties used in en/facts.ts
+  keyDifferences?: string;
+  venezuelaFact?: string;
+  venezuelaFactDesc?: string;
+  russiaFact?: string;
+  russiaFactDesc?: string;
+  turkeyFact?: string;
+  turkeyFactDesc?: string;
+  georgiaFact?: string;
+  georgiaFactDesc?: string;
+  schengenFacts?: string;
+  schengenFactsDesc?: string;
+  schengenMembers?: string;
+  schengenRules?: string;
+  schengenRule1?: string;
+  schengenRule2?: string;
+  schengenRule3?: string;
+  schengenRule4?: string;
+  schengenVisaFree?: string;
+  schengenVisaFreeDesc?: string;
+  turkey?: string;
+  venezuela?: string;
+  russia?: string;
+  georgia?: string;
 }
