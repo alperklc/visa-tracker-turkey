@@ -71,7 +71,7 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
               </RadioGroup>
             </FormControl>
             <FormDescription>
-              {t('form.resultStatusDescription')}
+              {t('form.resultDescription')}
             </FormDescription>
             <FormMessage />
           </FormItem>
@@ -89,13 +89,13 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
                 <FormControl>
                   <Input 
                     type="number" 
-                    placeholder={t('form.validityDaysPlaceholder')} 
+                    placeholder={t('form.validityPlaceholder')} 
                     {...field} 
                     value={field.value || ''} 
                   />
                 </FormControl>
                 <FormDescription>
-                  {t('form.validityDaysDescription')}
+                  {t('form.validityDescription')}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -149,7 +149,7 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
                 />
               </FormControl>
               <FormDescription>
-                {t('form.rejectionReasonDescription')}
+                {t('form.rejectionDescription')}
               </FormDescription>
               <FormMessage />
             </FormItem>
