@@ -6,3 +6,4 @@ export * from './chart-legend';
 export * from './chart-style';
 export * from './types';
 export * from './utils';
+export * from './chart-context';
