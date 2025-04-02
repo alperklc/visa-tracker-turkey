@@ -167,7 +167,44 @@ export interface FormTranslations {
 
 export interface GeneralTranslations {
   appName: string;
+  tagline?: string; // Make tagline optional
+  welcome?: string;
+  loading: string;
+  error: string;
+  retry: string;
+  cancel: string;
+  save: string;
+  edit: string;
+  delete: string;
+  confirm: string;
+  search: string;
+  filter: string;
+  sortBy: string;
+  ascending: string;
+  descending: string;
+  noResults: string;
+  backToHome: string;
+  menu: string;
   home: string;
+  about: string;
+  services: string;
+  products: string;
+  blog: string;
+  contactUs: string;
+  faq: string;
+  login: string;
+  register: string;
+  logout: string;
+  profile: string;
+  settings: string;
+  notifications: string;
+  darkMode: string;
+  lightMode: string;
+  moreInfo: string;
+  readMore: string;
+  viewAll: string;
+  seeMore: string;
+  showLess: string;
   submitApplication: string;
   reviewEntries: string;
   discussions: string;
@@ -181,6 +218,19 @@ export interface HeroTranslations {
   crowdsourced: string;
   realExperiences: string;
   transparentProcess: string;
+  secondaryButton?: string;
+  // Add the additional properties used in Turkish translations
+  visaData?: string;
+  visaDataSubtitle?: string;
+  processingTime?: string;
+  processingTimeSubtitle?: string;
+  communityDriven?: string;
+  communityDrivenSubtitle?: string;
+  schengenVisa?: string;
+  schengenVisaDescription?: string;
+  nationalVisa?: string;
+  nationalVisaDescription?: string;
+  processingTitle?: string;
 }
 
 export interface DashboardTranslations {
@@ -295,9 +345,51 @@ export interface FactsTranslations {
   subtitle: string;
   general: string;
   schengen: string;
-  comparison: string;
+  comparison: {
+    aspect: string;
+    diplomaticRelations?: string;
+    historicalContext?: string;
+    title?: string;
+    paragraph1?: string;
+    subtitle?: string;
+  };
+  comparisonTitle?: string;
+  comparisonDesc?: string;
   fees: string;
-  // Add more facts translations as needed
+  visaRequirements?: string;
+  visaRequirementsDesc?: string;
+  turkeyRepublic?: string;
+  idCardTravel?: string;
+  noVisaRequired?: string;
+  visaOnArrival?: string;
+  eVisa?: string;
+  visaAvailableBoth?: string;
+  visaRequired?: string;
+  destination?: string;
+  fee?: string;
+  notes?: string;
+  visaFees?: string;
+  visaFeesDesc?: string;
+  allSchengenCountries?: string;
+  standardFee?: string;
+  unitedKingdom?: string;
+  ukFeeDesc?: string;
+  unitedStates?: string;
+  usFeeDesc?: string;
+  canada?: string;
+  canadaFeeDesc?: string;
+  australia?: string;
+  australiaFeeDesc?: string;
+  historicalChanges?: string;
+  historicalChangesDesc?: string;
+  fee2014?: string;
+  fee2020?: string;
+  fee2022?: string;
+  schengenVisa?: string;
+  schengenFee?: string;
+  visaFreeCountries?: string;
+  required?: string;
+  notRequired?: string;
 }
 
 // Add other interface categories as needed
