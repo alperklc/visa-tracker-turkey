@@ -1,3 +1,4 @@
+
 import { TableTranslations } from '@/types/interfaces/table';
 
 export const table: TableTranslations = {

@@ -22,7 +22,7 @@ const CountryCard: React.FC<CountryCardProps> = ({ country, t }) => {
       <CardHeader className="p-4 bg-muted/30">
         <CardTitle className="text-lg flex items-center gap-2">
           <span>{country.flag}</span>
-          {t(`facts.${country.country}`)}
+          {t(`countries.${country.country}`)}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4 grid gap-2 text-sm">
