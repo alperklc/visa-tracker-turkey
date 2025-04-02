@@ -47,6 +47,11 @@ export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ childr
             if (value && typeof value === 'object' && k in value) {
               value = value[k];
             } else {
+              // If key not found in the current language, try English as fallback
+              if (language !== 'en') {
+                const englishValue = t.call({ language: 'en' as Language }, key);
+                if (englishValue !== key) return englishValue;
+              }
               return key; // Key not found
             }
           }
@@ -61,6 +66,12 @@ export const LanguageProvider: React.FC<{children: React.ReactNode}> = ({ childr
         if (typeof value === 'string') {
           return value;
         }
+      }
+      
+      // If not found in the current language, try English as fallback
+      if (language !== 'en') {
+        const englishValue = t.call({ language: 'en' as Language }, key);
+        if (englishValue !== key) return englishValue;
       }
     } catch (error) {
       console.error(`Translation error for key: ${key}`, error);

@@ -1,5 +1,5 @@
-// A placeholder structure similar to the German version
-// This keeps the application working while we gradually refactor
+// Import any existing Turkish translation modules we might have created
+// If we don't have them yet, we'll create a basic structure to keep the app working
 
 export const tr = {
   // Basic translations to keep the app functioning
