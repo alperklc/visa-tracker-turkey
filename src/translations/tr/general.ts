@@ -3,7 +3,7 @@ import { GeneralTranslations } from '@/types/interfaces';
 
 export const general: GeneralTranslations = {
   appName: "Vize Takibi",
-  tagline: "Vize süreçlerini topluluk desteğiyle izle", // We made tagline optional in the interface
+  tagline: "Vize süreçlerini topluluk desteğiyle izle",
   welcome: "Visa Tracking'e Hoş Geldiniz",
   loading: "Yükleniyor...",
   error: "Bir hata oluştu",
