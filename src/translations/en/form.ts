@@ -1,3 +1,4 @@
+
 import { FormTranslations } from '@/types/interfaces/form';
 
 export const form: FormTranslations = {
@@ -53,5 +54,9 @@ export const form: FormTranslations = {
   pleaseCompleteAllFields: "Please complete all required fields",
   captchaRequired: "Please verify that you are not a robot",
   singleEntry: "Single Entry",
-  multipleEntry: "Multiple Entry"
+  multipleEntry: "Multiple Entry",
+  returnDate: "Passport Return Date",
+  returnDateDescription: "Date when your passport was returned to you",
+  passportReturned: "Has your passport been returned?",
+  passportReturnedDescription: "Indicate if you have received your passport back"
 };

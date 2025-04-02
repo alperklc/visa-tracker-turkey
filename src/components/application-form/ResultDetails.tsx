@@ -25,6 +25,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from '@/lib/LanguageContext';
 import { VisaResultStatus, EntryType } from '@/types/enums';
 import { FormValues } from './schema';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface ResultDetailsProps {
   form: UseFormReturn<FormValues>;
@@ -33,6 +40,7 @@ interface ResultDetailsProps {
 const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
   const { t } = useLanguage();
   const watchResultStatus = form.watch('resultStatus');
+  const watchPassportReturned = form.watch('passportReturned');
 
   return (
     <>
@@ -159,6 +167,75 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
           )}
         />
       )}
+
+      {/* Add Passport Return fields */}
+      <div className="border-t pt-6 mt-6">
+        <FormField
+          control={form.control}
+          name="passportReturned"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 mb-4">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel>{t('form.passportReturned')}</FormLabel>
+                <FormDescription>
+                  {t('form.passportReturnedDescription')}
+                </FormDescription>
+              </div>
+            </FormItem>
+          )}
+        />
+
+        {watchPassportReturned && (
+          <FormField
+            control={form.control}
+            name="returnDate"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>{t('form.returnDate')}</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>{t('form.pickDate')}</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value as Date}
+                      onSelect={field.onChange}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormDescription>
+                  {t('form.returnDateDescription')}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
+      </div>
     </>
   );
 };

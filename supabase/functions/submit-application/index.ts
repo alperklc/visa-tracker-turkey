@@ -45,7 +45,7 @@ serve(async (req) => {
       submission_date: body.submissionDate,
       appointment_date: body.sameAppointmentDate ? body.submissionDate : body.appointmentDate,
       passport_returned: body.passportReturned || false,
-      return_date: body.returnDate,
+      return_date: body.passportReturned ? body.returnDate : null,
       result_status: body.resultStatus,
       validity: body.validity,
       entry_type: body.entryType,

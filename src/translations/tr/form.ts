@@ -1,3 +1,4 @@
+
 import { FormTranslations } from '@/types/interfaces/form';
 
 export const form: FormTranslations = {
@@ -53,5 +54,9 @@ export const form: FormTranslations = {
   pleaseCompleteAllFields: "Lütfen tüm alanları doldurun",
   captchaRequired: "Lütfen CAPTCHA'yı tamamlayın",
   singleEntry: "Tek Giriş",
-  multipleEntry: "Çoklu Giriş"
+  multipleEntry: "Çoklu Giriş",
+  returnDate: "Pasaport İade Tarihi",
+  returnDateDescription: "Pasaportunuzun size iade edildiği tarih",
+  passportReturned: "Pasaportunuz iade edildi mi?",
+  passportReturnedDescription: "Pasaportunuzun size iade edilip edilmediğini belirtin"
 };

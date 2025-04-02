@@ -53,4 +53,8 @@ export interface FormTranslations {
   captchaRequired?: string;
   singleEntry?: string;
   multipleEntry?: string;
+  returnDate?: string;
+  returnDateDescription?: string;
+  passportReturned?: string;
+  passportReturnedDescription?: string;
 }
