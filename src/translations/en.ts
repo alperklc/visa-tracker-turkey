@@ -1,4 +1,3 @@
 
-import { en } from './en';
-
-export { en };
+// Export directly from the index file
+export { en } from './en/index';
