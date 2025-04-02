@@ -1,22 +1,22 @@
 import { HeroTranslations } from '@/types/interfaces/hero';
 
 export const hero: HeroTranslations = {
-  title: "Türkiye ve diğer ülkelerin vize uygulamaları",
-  subtitle: "Vize başvuru deneyimlerini paylaşın ve başkalarının deneyimlerinden öğrenin.",
-  // Properties added to match English translations
-  visaData: "Vize verisi",
-  visaDataSubtitle: "Gerçek başvurular",
-  processingTime: "İşlem süresi",
-  processingTimeSubtitle: "Bilgilendirici istatistikler",
-  communityDriven: "Topluluk odaklı",
-  communityDrivenSubtitle: "Deneyimlerinizi paylaşın",
-  schengenVisa: "Schengen vizesi",
-  schengenVisaDescription: "Avrupa'da 26 ülkeye serbest dolaşım",
-  nationalVisa: "Ulusal vize",
-  nationalVisaDescription: "Uzun süreli ikamet ve çalışma",
-  processingTitle: "İşlem süreleri ve istatistikler",
-  crowdsourced: "Topluluk Kaynaklı",
+  title: "Vize Başvuru Deneyimlerini Birlikte Takip Ediyoruz",
+  subtitle: "Bu platform, Türk vatandaşlarının vize başvuru süreçlerini ve sürelerini belgelemektedir. Kolektif deneyimlerimizi paylaşarak sürece şeffaflık getirmeyi ve adil muamele için farkındalık yaratmayı amaçlıyoruz.",
+  crowdsourced: "Topluluk Tarafından Oluşturulan Veri",
   realExperiences: "Gerçek Deneyimler",
   transparentProcess: "Şeffaf Süreç",
-  secondaryButton: "Kendi başvurunu ekle"
+  secondaryButton: "Başvurunu Ekle",
+  // Eklenen Türkçe çeviri özellikleri
+  visaData: "Vize Verileri",
+  visaDataSubtitle: "Gerçek başvurular",
+  processingTime: "İşlem Süresi",
+  processingTimeSubtitle: "Bilgilendirici istatistikler",
+  communityDriven: "Topluluk Destekli",
+  communityDrivenSubtitle: "Deneyimlerini paylaş",
+  schengenVisa: "Schengen Vizesi",
+  schengenVisaDescription: "26 Avrupa ülkesinde serbest dolaşım",
+  nationalVisa: "Ulusal Vize",
+  nationalVisaDescription: "Uzun süreli oturum ve çalışma izni",
+  processingTitle: "İşlem Süreleri ve İstatistikler"
 };

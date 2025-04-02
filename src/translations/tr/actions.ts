@@ -1,52 +1,53 @@
 import { ActionsTranslations } from '@/types/interfaces/actions';
 
+
 export const actions: ActionsTranslations = {
   title: "Ne Yapabiliriz?",
-  subtitle: "Vize sürecini iyileştirmeye katkıda bulunmak için çeşitli yollar var.",
+  subtitle: "Adil vize politikalarını savunmak için toplu eylemler",
   disclaimer: {
     title: "Önemli Not",
-    text: "Aşağıdaki öneriler, değişim için barışçıl ve yasal yolları temsil eder. Eylemlerinizin yerel yasalara uygun olduğundan emin olun."
+    text: "Aşağıdaki öneriler, değişim için barışçıl ve yasal yollar sunmaktadır. Her zaman eylemlerinizin yerel yasalara uygun olduğundan emin olun."
   },
   diaspora: {
-    title: "Diaspora Katılımı",
+    title: "Türk Diasporasıyla Etkileşim",
     description: "Yurtdışındaki Türk topluluklarının etkisini kullanın",
-    point1: "Karşılıklı destek için topluluk grupları oluşturun",
-    point2: "Kaynakları ve ipuçlarını diğer başvuru sahipleriyle paylaşın",
-    point3: "Daha iyi savunuculuk için veri toplayın"
+    point1: "Türk vatandaşlarıyla iletişime geçerek yerel temsilcilerle farkındalık yaratın",
+    point2: "Türk topluluklarının bulunduğu ülkelerde barışçıl gösteriler düzenleyin",
+    point3: "Diaspora organizasyonları aracılığıyla dilekçeler oluşturun"
   },
   tourism: {
-    title: "Alternatif Seyahat Planları",
-    description: "Turizm ve iş için alternatif destinasyonları düşünün",
-    point1: "Alternatif seyahat destinasyonlarını keşfedin",
-    point2: "Deneyimlerinizi tur operatörlerine bildirin",
-    point3: "Büyükelçiliklere ve konsolosluklara yapıcı geri bildirim verin"
+    title: "Alternatif Turizm",
+    description: "Turizm ve iş için alternatif destinasyonları değerlendirin",
+    point1: "Vizesiz veya daha kolay vize süreci sunan ülkeleri keşfedin",
+    point2: "Türk vatandaşlarına adil vize politikaları uygulayan ülkeleri destekleyin",
+    point3: "Alternatif destinasyonlardaki olumlu deneyimlerinizi paylaşın"
   },
   awareness: {
-    title: "Farkındalık Oluşturma",
+    title: "Farkındalık Yaratın",
     description: "Bilgi ve deneyimlerinizi paylaşın",
-    point1: "Deneyimlerinizi sosyal medyada paylaşın",
-    point2: "Yerel temsilcilerle konuşun",
-    point3: "Vize şeffaflığı için çalışan kuruluşları destekleyin"
+    point1: "Vize reddi hikayelerini sosyal medyada belgeleyin ve paylaşın",
+    point2: "Gazeteciler ve medya kuruluşlarıyla iletişime geçerek vize sorunlarını gündeme getirin",
+    point3: "Aileler ve işletmeler üzerindeki etkilerini vurgulayan içerikler oluşturun"
   },
   legal: {
-    title: "Yasal Yollar",
-    description: "Adil muamele için yasal girişimleri destekleyin",
-    point1: "Vize düzenlemeleri hakkında bilgi edinin",
-    point2: "Redler için açıklama isteyin",
-    point3: "Yasa dışı uygulamaları ilgili makamlara bildirin"
+    title: "Hukuki Mücadele",
+    description: "Adil muamele için hukuki girişimleri destekleyin",
+    point1: "Ayrımcı vize uygulamalarına karşı mücadele eden kuruluşları destekleyin",
+    point2: "Adaletsiz muamele vakalarını olası hukuki süreçler için belgeleyin",
+    point3: "Karşılıklı vize politikaları için hukuki kanallar aracılığıyla savunuculuk yapın"
   },
   alternatives: {
     title: "Alternatif Destinasyonlar",
-    description: "Türk vatandaşları için daha uygun vize politikalarına sahip bu ülkeleri düşünün:"
+    description: "Türk vatandaşları için daha avantajlı vize politikaları sunan ülkeleri değerlendirin:"
   },
   contact: {
-    title: "Katılın",
-    description: "Bu girişime katkıda bulunmak ister misiniz? Fikir ve önerilerinizle bize ulaşın.",
+    title: "Katkıda Bulunun",
+    description: "Bu girişime katkıda bulunmak mı istiyorsunuz? Fikir ve önerilerinizle bize ulaşın.",
     email: "Bize e-posta gönderin"
   },
-  shareTitle: "Bu kaynağı paylaşın",
-  shareDescription: "Başkalarının bilinçli kararlar vermesine yardımcı olun.",
+  shareTitle: "Deneyiminizi Paylaşın",
+  shareDescription: "Bu sayfayı sosyal medyada veya arkadaşlarınızla paylaşarak daha fazla insana ulaşın",
   shareButton: "Paylaş",
   copyLink: "Bağlantıyı Kopyala",
-  joinDiscussion: "Tartışmaya Katıl"
+  joinDiscussion: "Tartışmalara Katılın"
 };
