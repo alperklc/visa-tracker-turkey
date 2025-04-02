@@ -12,6 +12,7 @@ import FinancialImpact from '@/components/FinancialImpact';
 import LiteApplicationTable from '@/components/LiteApplicationTable';
 import { useStaticStats } from '@/hooks/useStaticStats';
 import { Country } from '@/types/countries';
+import HomeGraphics from '@/components/home/HomeGraphics';
 
 const Index: React.FC = () => {
   const { stats, loading } = useStaticStats();
@@ -117,6 +118,11 @@ const Index: React.FC = () => {
             />
           </div>
         </div>
+      </section>
+      
+      {/* NEW SECTION: Add the graphics above the table */}
+      <section className="container py-8 animate-fade-in">
+        <HomeGraphics />
       </section>
       
       {/* 4. Last 5 entries in the table */}

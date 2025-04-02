@@ -90,5 +90,9 @@ export const facts: FactsTranslations = {
   venezuela: "Venezuela",
   russia: "Russia",
   georgia: "Georgia",
-  facts: "Facts"
+  facts: "Facts",
+  
+  // Update the facts object to include the new translation keys
+  rejectionRate: "Rejection Rate",
+  rejectionRateByCountry: "Rejection Rates by Country",
 };

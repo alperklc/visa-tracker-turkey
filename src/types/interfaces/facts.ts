@@ -75,4 +75,8 @@ export interface FactsTranslations {
   venezuela?: string;
   russia?: string;
   georgia?: string;
+  
+  // Add rejection rate translations
+  rejectionRate?: string;
+  rejectionRateByCountry?: string;
 }

@@ -50,5 +50,7 @@ export const facts: FactsTranslations = {
   fee2014: "2014: Standart vize ücreti 60€",
   fee2020: "2020: Standart vize ücreti 80€'ya yükseldi",
   fee2022: "2022: Türkiye için yeni vize anlaşması imzalandı",
-  facts: "Gerçekler"
+  facts: "Gerçekler",
+  rejectionRate: "Ret Oranı",
+  rejectionRateByCountry: "Ülkelere Göre Ret Oranları",
 };
