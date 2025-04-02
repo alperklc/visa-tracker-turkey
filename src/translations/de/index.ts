@@ -1,20 +1,15 @@
+// Basic German translations to get started
 
-// Import individual translation modules
-// For now, this is a placeholder. In a real implementation,
-// this would have all modules like the English version.
-
-// This structure allows the application to continue functioning
-// while we gradually refactor the German translations
 export const de = {
-  // Basic translations to keep the app functioning
-  appName: "Visa-Tracker Türkei",
-  madeWith: "gemacht mit Liebe",
+  // Basic translations
+  appName: "Visum Tracking Deutschland",
+  madeWith: "mit Liebe gemacht",
   
-  // Match the structure of the English translations
+  // Structure matching English translations
   hero: {
-    title: "Visa-Antragserfahrungen gemeinsam verfolgen",
-    subtitle: "Diese Plattform dokumentiert den Visaantragsprozess und die Zeitpläne türkischer Staatsbürger. Durch das Teilen unserer gemeinsamen Erfahrungen hoffen wir, Transparenz in den Prozess zu bringen und eine faire Behandlung zu fördern.",
-    crowdsourced: "Gemeinschaftliche Daten",
+    title: "Gemeinsam verfolgen wir Visumsantragserfahrungen",
+    subtitle: "Diese Plattform dokumentiert den Visumsantragsprozess und die Zeitpläne für türkische Staatsbürger. Durch das Teilen unserer gemeinsamen Erfahrungen hoffen wir, Transparenz in den Prozess zu bringen und eine faire Behandlung zu fördern.",
+    crowdsourced: "Crowdsourced Daten",
     realExperiences: "Echte Erfahrungen",
     transparentProcess: "Transparenter Prozess"
   },
@@ -28,13 +23,13 @@ export const de = {
     latestApplication: "Neuester Antrag",
     lastupdated: "Zuletzt aktualisiert",
     processingTime: "Bearbeitungszeit",
-    processingTimeDesc: "Tage von der Antragseinreichung bis zur Passrückgabe",
+    processingTimeDesc: "Von der Antragstellung bis zur Passrückgabe",
     applicationResults: "Antragsergebnisse",
-    applicationResultsDesc: "Verteilung der Visaantragsergebnisse",
+    applicationResultsDesc: "Verteilung der Visumsantragsergebnisse",
     days: "Tage",
     approved: "Genehmigt",
     rejected: "Abgelehnt",
-    pending: "In Bearbeitung",
+    pending: "Ausstehend",
     worstCities: "Längste Wartezeiten"
   },
   
@@ -50,15 +45,15 @@ export const de = {
     days: "Tage",
     approved: "Genehmigt",
     rejected: "Abgelehnt",
-    pending: "In Bearbeitung",
-    caption: "Aktuelle Visaantragsergebnisse"
+    pending: "Ausstehend",
+    caption: "Neueste Visumsantragsergebnisse"
   },
   
   review: {
-    title: "Alle Visumanträge überprüfen",
-    subtitle: "Sehen Sie sich die Erfahrungen anderer Antragsteller an.",
-    search: "Suche",
-    searchPlaceholder: "Land oder Zweck suchen...",
+    title: "Visumsanträge überprüfen",
+    subtitle: "Entdecken Sie von der Community eingereichte Visumsantragserfahrungen",
+    search: "Suchen",
+    searchPlaceholder: "Nach Land oder Zweck suchen...",
     filterCountry: "Nach Land filtern",
     selectCountry: "Land auswählen",
     allCountries: "Alle Länder",
@@ -82,141 +77,13 @@ export const de = {
   },
   
   submit: {
-    title: "Visumantragsdetails einreichen",
-    subtitle: "Teilen Sie Ihre Erfahrungen mit der Community."
+    title: "Visumsantragsdetails einreichen",
+    subtitle: "Teilen Sie Ihre Erfahrungen mit der Community"
   },
   
-  recentApplications: {
-    community: "Community-Anträge",
-    submit: "Antrag einreichen",
-    noApplications: "Noch keine Anträge vorhanden",
-    beFirst: "Seien Sie der Erste, der Antragsdaten teilt",
-    submitApplication: "Antrag einreichen"
-  },
-  
-  discussions: {
-    title: "Community-Diskussionen",
-    subtitle: "Teilen Sie Ihre Gedanken und Erfahrungen mit anderen.",
-    community: "Community-Forum",
-    description: "Diskutieren Sie über Visaanträge, stellen Sie Fragen und teilen Sie Ihre Erfahrungen."
-  },
-  
-  actions: {
-    title: "Was können wir tun?",
-    subtitle: "Es gibt verschiedene Möglichkeiten, zur Verbesserung des Visumsprozesses beizutragen.",
-    shareTitle: "Teilen Sie diese Ressource",
-    shareDescription: "Helfen Sie anderen, informierte Entscheidungen zu treffen.",
-    shareButton: "Teilen",
-    joinDiscussion: "An Diskussion teilnehmen",
-    copied: "Link kopiert!",
-    copyLink: "Link kopieren",
-    shareText: "Sehen Sie sich diese nützliche Ressource zum Visumsprozess an:",
-    awareness: {
-      title: "Bewusstsein schaffen",
-      point1: "Teilen Sie Ihre Erfahrungen in sozialen Medien",
-      point2: "Sprechen Sie mit lokalen Vertretern",
-      point3: "Unterstützen Sie Organisationen, die für Visatransparenz arbeiten"
-    },
-    legal: {
-      title: "Rechtliche Wege",
-      point1: "Machen Sie sich mit den Visabestimmungen vertraut",
-      point2: "Fordern Sie Erklärungen für Ablehnungen an",
-      point3: "Melden Sie unrechtmäßige Praktiken bei den zuständigen Behörden"
-    },
-    tourism: {
-      title: "Veränderte Reisepläne",
-      point1: "Erkunden Sie alternative Reiseziele",
-      point2: "Informieren Sie Reiseveranstalter über Ihre Erfahrungen",
-      point3: "Geben Sie konstruktives Feedback an Botschaften und Konsulate"
-    },
-    diaspora: {
-      title: "Diaspora-Engagement",
-      point1: "Organisieren Sie Community-Gruppen für gegenseitige Unterstützung",
-      point2: "Teilen Sie Ressourcen und Tipps mit anderen Antragstellern",
-      point3: "Sammeln Sie Daten für eine bessere Interessenvertretung"
-    }
-  },
-  
-  facts: {
-    title: "Fakten zur Schengen-Visaverarbeitung",
-    subtitle: "Informieren Sie sich über die Schengen-Anforderungen und vergleichen Sie sie mit anderen Ländern.",
-    general: "Allgemein",
-    schengen: "Schengen",
-    comparison: "Vergleiche",
-    fees: "Gebühren",
-    
-    // Add more fact translations
-    visaRequirements: "Visaanforderungen",
-    visaRequirementsDesc: "Visaanforderungen für türkische Staatsbürger weltweit",
-    turkeyRepublic: "Republik Türkei",
-    idCardTravel: "Reisen mit Personalausweis möglich",
-    noVisaRequired: "Kein Visum erforderlich",
-    visaOnArrival: "Visum bei Ankunft",
-    eVisa: "E-Visum",
-    visaAvailableBoth: "Beide Visumarten verfügbar",
-    visaRequired: "Visum erforderlich",
-    
-    // Comparison tab translations
-    comparisonTitle: "Ländervergleiche",
-    comparisonDesc: "Visaanforderungen und -praktiken verschiedener Länder",
-    keyDifferences: "Wichtige Unterschiede",
-    destination: "Ziel",
-    fee: "Gebühr",
-    notes: "Anmerkungen",
-    
-    // Schengen tab translations
-    schengenFacts: "Fakten zum Schengen-Raum",
-    schengenFactsDesc: "Grundlegende Informationen zum Schengen-Raum und zu Visaanforderungen",
-    schengenMembers: "Schengen-Mitgliedstaaten",
-    schengenRules: "Grundlegende Schengen-Regeln",
-    schengenRule1: "Maximaler Aufenthalt von 90 Tagen in einem beliebigen Zeitraum von 180 Tagen",
-    schengenRule2: "Erste Einreise in der Regel über das Land, bei dem der Antrag gestellt wurde",
-    schengenRule3: "Freie Bewegung innerhalb des Gebiets",
-    schengenRule4: "Einheitliches Antragsformular in allen Mitgliedstaaten",
-    schengenVisaFree: "Länder mit visumfreiem Zugang zum Schengen-Raum",
-    schengenVisaFreeDesc: "Bürger dieser Länder können ohne Visum in den Schengen-Raum einreisen",
-    
-    // Visa fees tab translations
-    visaFees: "Visagebühren",
-    visaFeesDesc: "Vergleich der Visagebühren verschiedener Länder",
-    standardFee: "Standardgebühr",
-    ukFeeDesc: "Variiert je nach Visumart",
-    usFeeDesc: "Für Touristen-/Geschäftsvisum (B1/B2)",
-    canadaFeeDesc: "Befristetes Besuchervisum",
-    australiaFeeDesc: "Besuchervisum",
-    historicalChanges: "Historische Änderungen",
-    historicalChangesDesc: "Änderungen der Schengen-Visagebühren im Laufe der Zeit",
-    fee2014: "2014: Standardvisagebühr 60€",
-    fee2020: "2020: Standardvisagebühr auf 80€ erhöht",
-    fee2022: "2022: Neuer Visakodex implementiert",
-    
-    // Country related translations
-    allSchengenCountries: "Alle Schengen-Länder",
-    unitedKingdom: "Vereinigtes Königreich",
-    unitedStates: "Vereinigte Staaten",
-    canada: "Kanada",
-    australia: "Australien",
-    
-    // Fact comparison translations
-    schengenVisa: "Schengen-Visum",
-    schengenFee: "Schengen-Gebühr",
-    visaFreeCountries: "Visumfreie Länder",
-    
-    // More fact translations
-    venezuelaFact: "Venezuela-Pass in der Türkei",
-    venezuelaFactDesc: "Venezolanische Staatsbürger können ohne Visum in die Türkei einreisen, während türkische Staatsbürger ein Visum für Venezuela benötigen.",
-    russiaFact: "Türkei und Russland",
-    russiaFactDesc: "Türkische Geschäftsleute können seit 2017 mit einer offiziellen Einladung visumfrei nach Russland einreisen.",
-    turkeyFact: "Türkische Visapolitik",
-    turkeyFactDesc: "Die Türkei gewährt Bürgern von mehr als 90 Ländern visumfreien oder E-Visum-Zugang.",
-    georgiaFact: "Türkei und Georgien",
-    georgiaFactDesc: "Türkische Staatsbürger können mit ihrem Personalausweis nach Georgien einreisen."
-  },
-  
-  // Add more structure to match English
   form: {
     detailsTitle: "Antragsdetails",
-    detailsDescription: "Informationen zu Ihrem Visumantrag",
+    detailsDescription: "Geben Sie Informationen zu Ihrem Visumsantrag an",
     country: "Land",
     selectCountry: "Land auswählen",
     countryDescription: "Für welches Land haben Sie einen Antrag gestellt?",
@@ -225,10 +92,10 @@ export const de = {
     cityDescription: "Bei welchem Konsulat/welcher Botschaft haben Sie den Antrag gestellt?",
     duration: "Dauer",
     durationPlaceholder: "Anzahl der Tage eingeben",
-    durationDescription: "Geplante Aufenthaltsdauer",
+    durationDescription: "Ihre geplante Aufenthaltsdauer",
     purpose: "Zweck",
     selectPurpose: "Zweck auswählen",
-    purposeDescription: "Zweck Ihres Besuchs",
+    purposeDescription: "Der Zweck Ihres Besuchs",
     submitDate: "Einreichungsdatum",
     pickDate: "Datum auswählen",
     submitDateDescription: "Wann haben Sie den Antrag eingereicht?",
@@ -238,21 +105,21 @@ export const de = {
     sameAppointmentDate: "Sind Einreichungs- und Termindatum identisch?",
     sameAppointmentDateDescription: "Waren Antragseinreichung und biometrischer Termin am selben Tag?",
     appointmentDate: "Termindatum",
-    appointmentDateDescription: "Wann war Ihr biometrischer/Dokumententermin?",
+    appointmentDateDescription: "Wann war Ihr biometrischer/Dokument-Termin?",
     resultStatus: "Ergebnisstatus",
     selectResultStatus: "Ergebnis auswählen",
-    resultDescription: "Ergebnis Ihres Antrags",
+    resultDescription: "Das Ergebnis Ihres Antrags",
     validity: "Gültigkeit",
     validityPlaceholder: "Anzahl der Tage eingeben",
-    validityDescription: "Gültigkeitsdauer Ihres Visums (in Tagen)",
+    validityDescription: "Die Gültigkeitsdauer Ihres Visums (in Tagen)",
     entryType: "Einreisetyp",
     selectEntryType: "Einreisetyp auswählen",
-    entryTypeDescription: "Haben Sie Anspruch auf einmalige oder mehrfache Einreise?",
+    entryTypeDescription: "Haben Sie eine einmalige oder mehrfache Einreiseberechtigung?",
     rejectionReason: "Ablehnungsgrund",
     rejectionReasonPlaceholder: "Ablehnungsgrund eingeben (optional)",
-    rejectionDescription: "Grund für die Visumablehnung (falls bekannt)",
+    rejectionDescription: "Grund für die Visumsablehnung (falls bekannt)",
     successMessage: "Antrag eingereicht!",
-    successDescription: "Vielen Dank, dass Sie Ihre Visumerfahrung geteilt haben.",
+    successDescription: "Vielen Dank für das Teilen Ihrer Visum-Erfahrung.",
     errorMessage: "Fehler!",
     submitting: "Wird eingereicht...",
     submit: "Einreichen",
@@ -260,12 +127,12 @@ export const de = {
     back: "Zurück",
     resultTitle: "Ergebnisdetails",
     resultStatusDescription: "Was ist das Ergebnis Ihres Antrags?",
-    validityDaysDescription: "Gültigkeitsdauer Ihres Visums (in Tagen)",
+    validityDaysDescription: "Die Gültigkeitsdauer Ihres Visums (in Tagen)",
     validityDaysPlaceholder: "z.B. 90, 180, 365",
     captchaTitle: "Sicherheitsüberprüfung",
     captchaDescription: "Bitte bestätigen Sie, dass Sie ein Mensch sind",
     pleaseCompleteAllFields: "Bitte füllen Sie alle Felder aus",
-    captchaRequired: "Bitte vervollständigen Sie das CAPTCHA",
+    captchaRequired: "Bitte schließen Sie die CAPTCHA-Überprüfung ab",
     singleEntry: "Einmalige Einreise",
     multipleEntry: "Mehrfache Einreise"
   },
@@ -356,14 +223,135 @@ export const de = {
     description: "Diese Website verwendet Cookies, um Ihr Surferlebnis zu verbessern.",
     accept: "Akzeptieren",
     decline: "Ablehnen",
-    preferences: "Präferenzen",
+    preferences: "Einstellungen",
     privacy: "Datenschutzrichtlinie",
     necessary: "Notwendige Cookies",
-    analytics: "Analytics-Cookies",
+    analytics: "Analyse-Cookies",
     marketing: "Marketing-Cookies",
     acceptSelected: "Ausgewählte akzeptieren",
     acceptAll: "Alle akzeptieren",
     close: "Schließen"
+  },
+  
+  actions: {
+    title: "Was können wir tun?",
+    subtitle: "Es gibt verschiedene Möglichkeiten, zum Visumsprozess beizutragen.",
+    shareTitle: "Diese Ressource teilen",
+    shareDescription: "Helfen Sie anderen, informierte Entscheidungen zu treffen.",
+    shareButton: "Teilen",
+    joinDiscussion: "An der Diskussion teilnehmen",
+    copied: "Link kopiert!",
+    copyLink: "Link kopieren",
+    shareText: "Schauen Sie sich diese nützliche Ressource zum Visumsprozess an:",
+    awareness: {
+      title: "Bewusstsein schaffen",
+      point1: "Teilen Sie Ihre Erfahrungen in sozialen Medien",
+      point2: "Sprechen Sie mit lokalen Vertretern",
+      point3: "Unterstützen Sie Organisationen, die sich für Visumstransparenz einsetzen"
+    },
+    legal: {
+      title: "Rechtliche Wege",
+      point1: "Informieren Sie sich über Visumsvorschriften",
+      point2: "Fordern Sie Erklärungen für Ablehnungen an",
+      point3: "Melden Sie illegale Praktiken an die zuständigen Behörden"
+    },
+    tourism: {
+      title: "Geänderte Reisepläne",
+      point1: "Erkunden Sie alternative Reiseziele",
+      point2: "Teilen Sie Ihre Erfahrungen mit Reiseveranstaltern",
+      point3: "Geben Sie Botschaften und Konsulaten konstruktives Feedback"
+    },
+    diaspora: {
+      title: "Diaspora-Engagement",
+      point1: "Bilden Sie Gemeinschaftsgruppen für gegenseitige Unterstützung",
+      point2: "Teilen Sie Ressourcen und Tipps mit anderen Antragstellern",
+      point3: "Sammeln Sie Daten für bessere Interessenvertretung"
+    }
+  },
+  
+  discussion: {
+    title: "Community-Diskussionen",
+    subtitle: "Teilen Sie Ihre Gedanken und Erfahrungen mit anderen.",
+    community: "Community-Forum",
+    description: "Diskutieren Sie über Visumsanträge, stellen Sie Fragen und teilen Sie Ihre Erfahrungen."
+  },
+  
+  facts: {
+    title: "Fakten zum Schengen-Visumsprozess",
+    subtitle: "Erfahren Sie mehr über Schengen-Anforderungen und vergleichen Sie mit anderen Ländern.",
+    general: "Allgemein",
+    schengen: "Schengen",
+    comparison: "Vergleiche",
+    fees: "Gebühren",
+    comparison: {
+      aspect: "Aspekt",
+    },
+    
+    visaRequirements: "Visumsanforderungen",
+    visaRequirementsDesc: "Visumsanforderungen für türkische Staatsbürger weltweit",
+    turkeyRepublic: "Republik Türkei",
+    idCardTravel: "Reisen mit Personalausweis möglich",
+    noVisaRequired: "Kein Visum erforderlich",
+    visaOnArrival: "Visum bei Ankunft",
+    eVisa: "E-Visum",
+    visaAvailableBoth: "Beide Visumarten verfügbar",
+    visaRequired: "Visum erforderlich",
+    
+    comparisonTitle: "Ländervergleiche",
+    comparisonDesc: "Visumsanforderungen und -praktiken verschiedener Länder",
+    keyDifferences: "Hauptunterschiede",
+    destination: "Ziel",
+    fee: "Gebühr",
+    notes: "Hinweise",
+    
+    schengenFacts: "Fakten zum Schengen-Raum",
+    schengenFactsDesc: "Grundlegende Informationen zum Schengen-Raum und Visumsanforderungen",
+    schengenMembers: "Schengen-Mitgliedstaaten",
+    schengenRules: "Grundlegende Schengen-Regeln",
+    schengenRule1: "Maximaler Aufenthalt von 90 Tagen in einem beliebigen Zeitraum von 180 Tagen",
+    schengenRule2: "Erste Einreise sollte in der Regel über das Land erfolgen, bei dem der Antrag gestellt wurde",
+    schengenRule3: "Freie Bewegung innerhalb des Raums",
+    schengenRule4: "Einheitliches Antragsformular in allen Mitgliedstaaten",
+    schengenVisaFree: "Länder mit visumfreiem Zugang zum Schengen-Raum",
+    schengenVisaFreeDesc: "Bürger dieser Länder können ohne Visum in den Schengen-Raum einreisen",
+    
+    visaFees: "Visumsgebühren",
+    visaFeesDesc: "Vergleich der Visumsgebühren verschiedener Länder",
+    standardFee: "Standardgebühr",
+    ukFeeDesc: "Variiert je nach Visumstyp",
+    usFeeDesc: "Für Touristen-/Geschäftsvisum (B1/B2)",
+    canadaFeeDesc: "Temporäres Besuchervisum",
+    australiaFeeDesc: "Besuchervisum",
+    historicalChanges: "Historische Änderungen",
+    historicalChangesDesc: "Änderungen der Schengen-Visumsgebühren im Laufe der Zeit",
+    fee2014: "2014: Standardvisumsgebühr 60€",
+    fee2020: "2020: Standardvisumsgebühr auf 80€ erhöht",
+    fee2022: "2022: Neuer Visumskodex implementiert",
+    
+    allSchengenCountries: "Alle Schengen-Länder",
+    unitedKingdom: "Vereinigtes Königreich",
+    unitedStates: "Vereinigte Staaten",
+    canada: "Kanada",
+    australia: "Australien",
+    
+    schengenVisa: "Schengen-Visum",
+    schengenFee: "Schengen-Gebühr",
+    visaFreeCountries: "Visumfreie Länder",
+    
+    venezuelaFact: "Venezuela-Pass für die Türkei",
+    venezuelaFactDesc: "Venezolanische Staatsbürger können visumfrei in die Türkei einreisen, aber türkische Staatsbürger benötigen ein Visum für Venezuela.",
+    russiaFact: "Türkei und Russland",
+    russiaFactDesc: "Türkische Geschäftsleute können seit 2017 mit einer offiziellen Einladung visumfrei nach Russland einreisen.",
+    turkeyFact: "Türkische Visumspraxis",
+    turkeyFactDesc: "Die Türkei gewährt Bürgern von über 90 Ländern visumfreien oder E-Visum-Zugang.",
+    georgiaFact: "Türkei und Georgien",
+    georgiaFactDesc: "Türkische Staatsbürger können mit ihrem Personalausweis nach Georgien einreisen.",
+    
+    required: "Erforderlich",
+    notRequired: "Nicht erforderlich",
+    turkey: "Türkei",
+    venezuela: "Venezuela",
+    russia: "Russland",
+    georgia: "Georgien"
   }
 };
-
