@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,13 +15,13 @@ const HomeGraphics: React.FC<HomeGraphicsProps> = ({
 }) => {
   const { t } = useLanguage();
 
-  // Data for the first graphic - Application counts by country
-  const applicationCountData = [
-    { country: "Çin", count: 1117365 },
-    { country: "Türkiye", count: 1055885 },
-    { country: "Hindistan", count: 966687 },
-    { country: "Fas", count: 591401 },
-    { country: "Rusya", count: 520387 }
+  // Data for the first graphic - Approval rates by country
+  const approvalRateData = [
+    { country: "Çin", rate: 95.6 },
+    { country: "Türkiye", rate: 83.2 },
+    { country: "Hindistan", rate: 88.4 },
+    { country: "Fas", rate: 78.9 },
+    { country: "Rusya", rate: 82.1 }
   ];
 
   // Data for the second graphic - Rejection rates by German consulate city
@@ -35,22 +36,22 @@ const HomeGraphics: React.FC<HomeGraphicsProps> = ({
     return (
       <Card>
         <CardHeader>
-          <CardTitle>{t('dashboard.totalApplications')}</CardTitle>
+          <CardTitle>{t('dashboard.approvalRate')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>{t('table.country')}</TableHead>
-                <TableHead className="text-right">2023 {t('dashboard.applications')}</TableHead>
+                <TableHead className="text-right">{t('dashboard.approvalRate')} (%)</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {applicationCountData.map((item) => (
+              {approvalRateData.map((item) => (
                 <TableRow key={item.country}>
                   <TableCell>{item.country}</TableCell>
                   <TableCell className="text-right font-medium">
-                    {item.count.toLocaleString()}
+                    {item.rate}%
                   </TableCell>
                 </TableRow>
               ))}
@@ -97,25 +98,25 @@ const HomeGraphics: React.FC<HomeGraphicsProps> = ({
     <div className="space-y-8 mb-10">
       {/* First row with 3 cards in a row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Application counts by country */}
+        {/* Approval rates by country */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('dashboard.totalApplications')}</CardTitle>
+            <CardTitle>{t('dashboard.approvalRate')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>{t('table.country')}</TableHead>
-                  <TableHead className="text-right">2023 {t('dashboard.applications')}</TableHead>
+                  <TableHead className="text-right">{t('dashboard.approvalRate')} (%)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {applicationCountData.map((item) => (
+                {approvalRateData.map((item) => (
                   <TableRow key={item.country}>
                     <TableCell>{item.country}</TableCell>
                     <TableCell className="text-right font-medium">
-                      {item.count.toLocaleString()}
+                      {item.rate}%
                     </TableCell>
                   </TableRow>
                 ))}
