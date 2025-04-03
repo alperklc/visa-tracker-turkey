@@ -24,7 +24,7 @@ export const dashboard: DashboardTranslations = {
   applications: "Applications",
   dataFromYou: "Data From Your Submissions",
   financial: {
-    title: "Financial Impact",
+    title: "Financial Impact (2023)",
     subtitle: "Economic cost of visa applications",
     applications: "Annual Applications",
     cost: "Annual Cost",

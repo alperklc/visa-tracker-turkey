@@ -84,7 +84,7 @@ const Index: React.FC = () => {
       {/* 2. General Overview Title (New) */}
       <section className="container py-8 animate-fade-in">
         <h2 className="text-3xl font-bold mb-8 text-center">
-          {t('general.overview')}
+          {t('overview')}
         </h2>
       </section>
       

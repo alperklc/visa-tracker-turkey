@@ -54,7 +54,7 @@ export const general: GeneralTranslations = {
     submit: "Einreichen"
   },
   financial: {
-    title: "Finanzielle Auswirkungen",
+    title: "Finanzielle Auswirkungen (2023)",
     subtitle: "Wirtschaftliche Kosten der Visumanträge",
     applications: "Jährliche Anträge",
     cost: "Jährliche Kosten",

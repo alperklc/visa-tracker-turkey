@@ -24,7 +24,7 @@ export const dashboard: DashboardTranslations = {
   applications: "Anträge",
   dataFromYou: "Daten aus Ihren Einreichungen",
   financial: {
-    title: "Finanzielle Auswirkungen",
+    title: "Finanzielle Auswirkungen (2023)",
     subtitle: "Wirtschaftliche Kosten von Visumanträgen",
     applications: "Jährliche Anträge",
     cost: "Jährliche Kosten",

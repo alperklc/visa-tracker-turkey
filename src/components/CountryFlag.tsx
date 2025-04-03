@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { CountryCode } from '@/types/enums';
-import { Country } from '@/types/countries';
+import { CountriesOnForm, Country } from '@/types/countries';
 
 interface CountryFlagProps {
-  country: Country;
+  country: Country | CountriesOnForm;
   size?: number;
   showName?: boolean;
   className?: string;

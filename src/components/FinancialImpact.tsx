@@ -29,7 +29,7 @@ const FinancialImpact: React.FC<FinancialImpactProps> = ({
   const fiveYearCost = 5114000000; // EUR - 10 yılda 5.114 milyar Euro (kaynak: karar.com)
   
   // Son yılın maliyeti (ortalamanın biraz üzerinde alındı)
-  const realAnnualCost = 619000000; // EUR - 2023 yılında 619 milyon Euro (kaynak: patronlardunyasi.com)
+  const realAnnualCost = 84000000; // EUR - 2023 yılında 619 milyon Euro (kaynak: patronlardunyasi.com)
   
   return (
     <Card className="h-full hover:shadow-md transition-shadow">
@@ -71,22 +71,6 @@ const FinancialImpact: React.FC<FinancialImpactProps> = ({
             </div>
           </div>
           <Progress value={70} className="h-2" />
-        </div>
-        
-        <div className="space-y-2 pt-2">
-          <div className="bg-accent/30 rounded-lg p-3">
-            <div className="text-sm font-medium mb-1">{t('financial.breakdown')}</div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div>{t('financial.visaFee')}:</div>
-              <div className="text-right font-medium">€{visaFee}</div>
-              <div>{t('financial.serviceFee')}:</div>
-              <div className="text-right font-medium">€{serviceFee}</div>
-              <div>{t('financial.otherCosts')}:</div>
-              <div className="text-right font-medium">€{additionalCosts}</div>
-              <div className="font-medium">{t('financial.perVisit')}:</div>
-              <div className="text-right font-medium">€{totalPerApplication}</div>
-            </div>
-          </div>
         </div>
         
         <div className="text-[10px] text-muted-foreground mt-4">

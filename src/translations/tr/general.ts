@@ -54,7 +54,7 @@ export const general: GeneralTranslations = {
     submit: "Başvuru Yap"
   },
   financial: {
-    title: "Ekonomik Etki",
+    title: "Ekonomik Etki (2023)",
     subtitle: "Vize başvurularının ekonomik maliyeti",
     applications: "Yıllık Başvurular",
     cost: "Yıllık Maliyet",

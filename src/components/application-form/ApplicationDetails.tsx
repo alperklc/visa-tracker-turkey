@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Country } from '@/types/countries';
+import { CountriesOnForm, Country } from '@/types/countries';
 import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
 import { FormValues, cityToCountriesMap } from './schema';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -83,7 +83,7 @@ const ApplicationDetails: React.FC<ApplicationDetailsProps> = ({ form }) => {
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {Object.values(Country).map((country) => (
+                {Object.values(CountriesOnForm).map((country) => (
                   <SelectItem key={country} value={country}>
                     <div className="flex items-center gap-2">
                       <CountryFlag country={country} size={16} />
