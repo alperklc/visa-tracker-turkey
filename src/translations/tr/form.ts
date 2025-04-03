@@ -61,8 +61,11 @@ export const form: FormTranslations = {
   passportReturnedDescription: "Pasaportunuzun size iade edilip edilmediğini belirtin",
   visaEndDate: "Vize Bitiş Tarihi",
   visaEndDateDescription: "Vizenizin sona erdiği tarih",
+  visaStartDate: "Vize Başlangıç Tarihi",
+  visaStartDateDescription: "Vizenizin geçerli olmaya başladığı tarih",
   daysAllowed: "İzin Verilen Gün Sayısı",
   daysAllowedDescription: "Kalmanıza izin verilen gün sayısı",
   daysAllowedPlaceholder: "Örn. 90, 180, 365",
-  futureReturnDateError: "İade tarihi gelecekte olamaz"
+  futureReturnDateError: "İade tarihi gelecekte olamaz",
+  visaStartDateError: "Başlangıç tarihi bitiş tarihinden sonra olamaz"
 };

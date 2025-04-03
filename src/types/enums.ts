@@ -1,4 +1,3 @@
-
 export enum PurposeOfVisit {
   Tourism = "Tourism",
   Business = "Business",
@@ -29,8 +28,7 @@ export enum ApplicationCenterCity {
 
 export enum VisaResultStatus {
   Approved = "Approved",
-  Rejected = "Rejected",
-  Pending = "Pending"
+  Rejected = "Rejected"
 }
 
 export enum EntryType {

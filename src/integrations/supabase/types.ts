@@ -28,6 +28,7 @@ export type Database = {
           updated_at: string
           validity: string | null
           visa_end_date: string | null
+          visa_start_date: string | null
         }
         Insert: {
           appointment_date?: string | null
@@ -47,6 +48,7 @@ export type Database = {
           updated_at?: string
           validity?: string | null
           visa_end_date?: string | null
+          visa_start_date?: string | null
         }
         Update: {
           appointment_date?: string | null
@@ -66,6 +68,7 @@ export type Database = {
           updated_at?: string
           validity?: string | null
           visa_end_date?: string | null
+          visa_start_date?: string | null
         }
         Relationships: []
       }

@@ -51,7 +51,7 @@ serve(async (req) => {
       entry_type: body.entryType,
       rejection_reason: body.rejectionReason,
       visa_end_date: body.visaEndDate || null,
-      days_allowed: body.daysAllowed || null
+      visa_start_date: body.visaStartDate || null
     };
 
     // Insert data into the visa_applications table

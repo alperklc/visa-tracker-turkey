@@ -1,4 +1,3 @@
-
 import * as z from 'zod';
 import { Country } from '@/types/countries';
 import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
@@ -99,12 +98,21 @@ export const applicationSchema = z.object({
   entryType: z.string().optional(),
   rejectionReason: z.string().optional(),
   visaEndDate: z.date().optional(),
-  daysAllowed: z.coerce.number().optional(),
+  visaStartDate: z.date().optional(),
   
   // Captcha
   captcha: z.string().min(1, {
     message: "Please complete the captcha verification"
   }),
+}).refine((data) => {
+  // Only validate if both dates are present
+  if (data.visaStartDate && data.visaEndDate) {
+    return data.visaStartDate <= data.visaEndDate;
+  }
+  return true;
+}, {
+  message: "Start date cannot be after end date",
+  path: ["visaStartDate"]
 });
 
 // Export the form type

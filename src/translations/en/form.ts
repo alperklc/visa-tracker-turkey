@@ -61,8 +61,11 @@ export const form: FormTranslations = {
   passportReturnedDescription: "Indicate if you have received your passport back",
   visaEndDate: "Visa End Date",
   visaEndDateDescription: "The date when your visa expires",
+  visaStartDate: "Visa Start Date",
+  visaStartDateDescription: "The date when your visa becomes valid",
   daysAllowed: "Days Allowed",
   daysAllowedDescription: "Number of days you are allowed to stay",
   daysAllowedPlaceholder: "e.g. 90, 180, 365",
-  futureReturnDateError: "Return date cannot be in the future"
+  futureReturnDateError: "Return date cannot be in the future",
+  visaStartDateError: "Start date cannot be after end date"
 };
