@@ -3,7 +3,7 @@ import { FormTranslations } from '@/types/interfaces/form';
 
 export const form: FormTranslations = {
   detailsTitle: "Application Details",
-  detailsDescription: "Share the basic information about your visa application",
+  detailsDescription: "Share the basic information about your completed visa application",
   country: "Country",
   selectCountry: "Select country",
   countryDescription: "The country you applied for a visa to",

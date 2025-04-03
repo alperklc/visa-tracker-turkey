@@ -46,7 +46,7 @@ const ResultStatusField: React.FC<ResultStatusFieldProps> = ({ form }) => {
             <SelectContent>
               {Object.values(VisaResultStatus).map((status) => (
                 <SelectItem key={status} value={status}>
-                  {t(`resultStatus.${status.toLowerCase()}`)}
+                  {t(`dashboard.${status.toLowerCase()}`)}
                 </SelectItem>
               ))}
             </SelectContent>

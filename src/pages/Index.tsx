@@ -145,7 +145,7 @@ const Index: React.FC = () => {
             </Link>
             <Link to="/review">
               <Button>
-                {t('review.seeAll')}
+                {t('seeAllData')}
               </Button>
             </Link>
           </div>

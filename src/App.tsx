@@ -14,8 +14,7 @@ import { useState, useEffect } from 'react';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import CookieBanner from './components/CookieBanner';
 
-// Google Analytics Measurement ID (örnek ID, gerçek ID ile değiştirilmeli)
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+const GA_MEASUREMENT_ID = 'G-W57FTBF7EZ';
 
 function App() {
   const [cookieConsent, setCookieConsent] = useState({

@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: t('home'), path: '/' },
-    { name: t('facts'), path: '/facts' },
+    { name: t('facts.title'), path: '/facts' },
     { name: t('discussions'), path: '/discussions' },
     { name: t('seeAllData'), path: '/review' },
     { name: t('actions.title'), path: '/what-can-we-do' },
@@ -52,11 +52,8 @@ const Navbar: React.FC = () => {
       <div className="container py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-semibold text-xl tracking-tight">{t('appName').split(' ')[0]}</span>
-            <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-medium">
-              {t('appName').split(' ')[1]}
-            </span>
-          </Link>
+            <span className="font-semibold text-xl tracking-tight">{t('appName')}</span>
+            </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">

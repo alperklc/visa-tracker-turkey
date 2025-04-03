@@ -87,7 +87,7 @@ const ApplicationTable: React.FC = () => {
               className="flex items-center gap-1"
             >
               <RefreshCw className="h-4 w-4" />
-              {t('common.refresh')}
+              {t('review.common.refresh')}
             </Button>
           </div>
         </div>

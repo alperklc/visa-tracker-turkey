@@ -11,9 +11,9 @@ const SubmitApplication: React.FC = () => {
     <Layout className="py-12">
       <div className="container max-w-4xl">
         <div className="text-center mb-12 animate-slide-down">
-          <h1 className="text-3xl font-bold mb-4">{t('submit.title')}</h1>
+          <h1 className="text-3xl font-bold mb-4">{t('form.detailsTitle')}</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t('submit.subtitle')}
+            {t('form.detailsDescription')}
           </p>
         </div>
         

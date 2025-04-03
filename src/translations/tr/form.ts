@@ -3,7 +3,7 @@ import { FormTranslations } from '@/types/interfaces/form';
 
 export const form: FormTranslations = {
   detailsTitle: "Başvuru Detayları",
-  detailsDescription: "Vize başvurunuz hakkında bilgi verin",
+  detailsDescription: "Sonuçlanmış vize başvurunuz hakkında bilgi verin",
   country: "Ülke",
   selectCountry: "Ülke seçin",
   countryDescription: "Hangi ülkeye başvurdunuz?",

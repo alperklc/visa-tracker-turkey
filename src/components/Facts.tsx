@@ -7,11 +7,13 @@ import GeneralTab from './facts/GeneralTab';
 import SchengenTab from './facts/SchengenTab';
 import ComparisonTab from './facts/ComparisonTab';
 import FeesTab from './facts/FeesTab';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Facts: React.FC = () => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('general');
-  
+  const isMobile = useIsMobile();
+
   return (
     <div className="container py-8 max-w-5xl">
       <div className="text-center mb-8">
@@ -22,10 +24,10 @@ const Facts: React.FC = () => {
       </div>
       
       <Tabs defaultValue="general" className="w-full" onValueChange={setActiveTab} value={activeTab}>
-        <TabsList className="grid grid-cols-4 mb-8">
+      <TabsList className={`${isMobile ? 'flex flex-col space-y-1 w-full h-auto' : 'grid grid-cols-4'} mb-6`}>
           <TabsTrigger value="general">{t('facts.general')}</TabsTrigger>
           <TabsTrigger value="schengen">{t('facts.schengen')}</TabsTrigger>
-          <TabsTrigger value="comparison">{t('facts.comparison')}</TabsTrigger>
+          <TabsTrigger value="comparison">{t('facts.tabcomparison')}</TabsTrigger>
           <TabsTrigger value="fees">{t('facts.fees')}</TabsTrigger>
         </TabsList>
         

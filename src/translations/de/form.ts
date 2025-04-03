@@ -3,7 +3,7 @@ import { FormTranslations } from '@/types/interfaces/form';
 
 export const form: FormTranslations = {
   detailsTitle: "Antragsdetails",
-  detailsDescription: "Teilen Sie Informationen zu Ihrem Visumantrag",
+  detailsDescription: "Teilen Sie Informationen zu Ihrem abgeschlossenen Visumantrag",
   country: "Land",
   selectCountry: "Land auswählen",
   countryDescription: "Für welches Land haben Sie ein Visum beantragt?",
