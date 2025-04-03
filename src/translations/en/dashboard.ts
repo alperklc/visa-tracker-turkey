@@ -1,3 +1,4 @@
+
 import { DashboardTranslations } from '@/types/interfaces/dashboard';
 
 export const dashboard: DashboardTranslations = {
@@ -17,4 +18,16 @@ export const dashboard: DashboardTranslations = {
   rejected: "Rejected",
   pending: "Pending",
   worstCities: "Longest Wait Times",
+  lastUpdated: "Last updated",
+  financial: {
+    title: "Financial Impact",
+    subtitle: "Economic cost of visa applications",
+    applications: "Annual Applications",
+    cost: "Annual Cost",
+    breakdown: "Cost Breakdown",
+    visaFee: "Visa Fee",
+    serviceFee: "Service Fee",
+    otherCosts: "Other Costs",
+    perVisit: "Total per Visit",
+  }
 };

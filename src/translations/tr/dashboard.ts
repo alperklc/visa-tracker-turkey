@@ -1,3 +1,4 @@
+
 import { DashboardTranslations } from '@/types/interfaces/dashboard';
 
 export const dashboard: DashboardTranslations = {
@@ -16,5 +17,17 @@ export const dashboard: DashboardTranslations = {
   approved: "Onaylandı",
   rejected: "Reddedildi",
   pending: "Beklemede",
-  worstCities: "En Uzun Bekleme Süreleri"
+  worstCities: "En Uzun Bekleme Süreleri",
+  lastUpdated: "Son Güncelleme",
+  financial: {
+    title: "Ekonomik Etki",
+    subtitle: "Vize başvurularının ekonomik maliyeti",
+    applications: "Yıllık Başvurular",
+    cost: "Yıllık Maliyet",
+    breakdown: "Maliyet Dağılımı",
+    visaFee: "Vize Ücreti",
+    serviceFee: "Hizmet Ücreti",
+    otherCosts: "Diğer Masraflar",
+    perVisit: "Ziyaret Başına Toplam",
+  }
 };

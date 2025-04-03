@@ -16,4 +16,16 @@ export interface DashboardTranslations {
   rejected: string;
   pending: string;
   worstCities: string;
+  lastUpdated: string;
+  financial: {
+    title: string;
+    subtitle: string;
+    applications: string;
+    cost: string;
+    breakdown: string;
+    visaFee: string;
+    serviceFee: string;
+    otherCosts: string;
+    perVisit: string;
+  };
 }
