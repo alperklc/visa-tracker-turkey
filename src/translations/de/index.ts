@@ -1,9 +1,8 @@
 
-// Import any existing German translation modules we might have created
-// If we don't have them yet, we'll create a basic structure to keep the app working
+import { facts } from './facts';
 
 export const de = {
-  // Basic translations to keep the app functioning
+  // Temel çeviriler - Ana işlevselliği korumak için
   appName: "Visum Tracker Türkei",
   tagline: "Visumsprozesse mit Community-Unterstützung verfolgen",
   welcome: "Willkommen bei Visa Tracker",
@@ -49,7 +48,7 @@ export const de = {
   seeAllData: "Alle Daten anzeigen",
   madeWith: "gemacht mit",
   
-  // Match the structure of the English translations
+  // İngilizce çevirilerin yapısına uygun şekilde
   hero: {
     title: "Nachverfolgung von Visumsanträgen gemeinsam",
     subtitle: "Diese Plattform dokumentiert den Visumantragsprozess und Zeitpläne für türkische Staatsbürger. Durch die gemeinsame Nutzung unserer Erfahrungen hoffen wir, Transparenz in den Prozess zu bringen und für eine faire Behandlung einzutreten.",
@@ -71,7 +70,7 @@ export const de = {
   },
   
   dashboard: {
-    title: "Aktuelle Statistiken",
+    title: "Anwendungen aus der Community",
     allCountries: "Alle Länder",
     totalApplications: "Gesamtanträge",
     avgProcessingTime: "Durchschn. Bearbeitungszeit",
@@ -86,7 +85,19 @@ export const de = {
     approved: "Genehmigt",
     rejected: "Abgelehnt",
     pending: "Ausstehend",
-    worstCities: "Längste Wartezeiten"
+    worstCities: "Längste Wartezeiten",
+    lastUpdated: "Zuletzt aktualisiert",
+    financial: {
+      title: "Finanzielle Auswirkungen",
+      subtitle: "Wirtschaftliche Kosten von Visumanträgen",
+      applications: "Jährliche Anträge",
+      cost: "Jährliche Kosten",
+      breakdown: "Kostenaufschlüsselung",
+      visaFee: "Visumgebühr",
+      serviceFee: "Servicegebühr",
+      otherCosts: "Andere Kosten",
+      perVisit: "Gesamt pro Besuch",
+    }
   },
   
   table: {
@@ -185,7 +196,20 @@ export const de = {
     pleaseCompleteAllFields: "Bitte füllen Sie alle Felder aus",
     captchaRequired: "Bitte füllen Sie das CAPTCHA aus",
     singleEntry: "Einmalige Einreise",
-    multipleEntry: "Mehrfache Einreise"
+    multipleEntry: "Mehrfache Einreise",
+    returnDate: "Passlückgabedatum",
+    returnDateDescription: "Datum, an dem Ihr Pass zurückgegeben wurde",
+    passportReturned: "Wurde Ihr Pass zurückgegeben?",
+    passportReturnedDescription: "Geben Sie an, ob Sie Ihren Pass zurückerhalten haben",
+    visaEndDate: "Visum Enddatum",
+    visaEndDateDescription: "Das Datum, an dem Ihr Visum abläuft",
+    visaStartDate: "Visum Startdatum",
+    visaStartDateDescription: "Das Datum, an dem Ihr Visum gültig wird",
+    daysAllowed: "Erlaubte Tage",
+    daysAllowedDescription: "Anzahl der Tage, die Sie bleiben dürfen",
+    daysAllowedPlaceholder: "z.B. 90, 180, 365",
+    futureReturnDateError: "Rückgabedatum kann nicht in der Zukunft liegen",
+    visaStartDateError: "Startdatum kann nicht nach dem Enddatum liegen"
   },
   
   pagination: {
@@ -204,59 +228,6 @@ export const de = {
     work: "Arbeit",
     medical: "Medizinisch",
     other: "Andere"
-  },
-  
-  facts: {
-    title: "Fakten zum Schengen-Visumsprozess",
-    subtitle: "Erfahren Sie mehr über Schengen-Anforderungen und vergleichen Sie mit anderen Ländern.",
-    general: "Allgemein",
-    schengen: "Schengen",
-    comparisonTitle: "Ländervergleich",
-    comparisonDesc: "Vergleich von Visabestimmungen verschiedener Länder",
-    visaRequirements: "Visaanforderungen",
-    visaRequirementsDesc: "Visaanforderungen weltweit für türkische Staatsbürger",
-    turkeyRepublic: "Republik Türkei",
-    idCardTravel: "Reisen mit Personalausweis möglich",
-    noVisaRequired: "Kein Visum erforderlich",
-    visaOnArrival: "Visum bei Ankunft",
-    eVisa: "E-Visum",
-    visaAvailableBoth: "Beide Visumtypen verfügbar",
-    visaRequired: "Visum erforderlich",
-    destination: "Ziel",
-    fee: "Gebühr",
-    notes: "Anmerkungen",
-    visaFees: "Visumgebühren",
-    visaFeesDesc: "Vergleich der Visumgebühren für verschiedene Länder",
-    allSchengenCountries: "Alle Schengen-Länder",
-    standardFee: "Standardgebühr",
-    unitedKingdom: "Vereinigtes Königreich",
-    ukFeeDesc: "Variiert je nach Visumtyp",
-    unitedStates: "Vereinigte Staaten",
-    usFeeDesc: "Für Touristen-/Geschäftsvisum (B1/B2)",
-    canada: "Kanada",
-    canadaFeeDesc: "Temporäres Besuchervisum",
-    australia: "Australien",
-    australiaFeeDesc: "Besuchervisum",
-    historicalChanges: "Historische Änderungen",
-    historicalChangesDesc: "Änderungen der Schengen-Visumgebühren im Laufe der Zeit",
-    fee2014: "2014: Standardvisumgebühr betrug 60€",
-    fee2020: "2020: Standardvisumgebühr auf 80€ erhöht",
-    fee2022: "2022: Neuer Visakodex implementiert",
-    comparison: {
-      aspect: "Aspekt",
-      diplomaticRelations: "Diplomatische Beziehungen",
-      historicalContext: "Historischer Kontext",
-      title: "Ländervergleich",
-      paragraph1: "Unten ist ein Vergleich der Visaregime und Reisefreiheiten im Schengen-Raum für mehrere Länder.",
-      subtitle: "Politische Unterschiede"
-    },
-    fees: "Gebühren",
-    schengenVisa: "Schengen-Visum",
-    schengenFee: "Schengen-Gebühr",
-    visaFreeCountries: "Visafreie Länder",
-    required: "Erforderlich",
-    notRequired: "Nicht erforderlich",
-    facts: "Fakten"
   },
   
   countries: {
@@ -339,50 +310,50 @@ export const de = {
   
   actions: {
     title: "Was können wir tun?",
-    subtitle: "Verschiedene Wege, um zur Verbesserung des Visumprozesses beizutragen.",
+    subtitle: "Kollektive Maßnahmen für faire Visapolitik",
     disclaimer: {
       title: "Wichtiger Hinweis",
       text: "Die folgenden Vorschläge sind friedliche und rechtmäßige Wege, um Veränderungen zu fördern. Stellen Sie sicher, dass Ihre Aktionen den lokalen Gesetzen entsprechen."
     },
     diaspora: {
-      title: "Engagement der Diaspora",
+      title: "Engagement der türkischen Diaspora",
       description: "Nutzen Sie den Einfluss türkischer Gemeinschaften im Ausland",
-      point1: "Bilden Sie Gemeinschaftsgruppen für gegenseitige Unterstützung",
-      point2: "Teilen Sie Ressourcen und Tipps mit anderen Antragstellern",
-      point3: "Sammeln Sie Daten für bessere Interessenvertretung"
+      point1: "Kontaktieren Sie im Ausland lebende türkische Staatsbürger, um ihre lokalen Vertreter zu sensibilisieren",
+      point2: "Organisieren Sie friedliche Demonstrationen in Ländern mit türkischen Gemeinschaften",
+      point3: "Erstellen Sie Petitionen durch Diaspora-Organisationen"
     },
     tourism: {
-      title: "Alternative Reiseplanung",
+      title: "Alternativer Tourismus",
       description: "Erwägen Sie alternative Ziele für Tourismus und Geschäftsreisen",
-      point1: "Erkunden Sie alternative Reiseziele",
-      point2: "Melden Sie Ihre Erfahrungen an Reiseveranstalter",
-      point3: "Geben Sie konstruktives Feedback an Botschaften und Konsulate"
+      point1: "Erkunden Sie visafreie Länder oder solche mit einfacheren Visaverfahren",
+      point2: "Unterstützen Sie Länder, die faire Visabestimmungen für türkische Staatsbürger beibehalten",
+      point3: "Teilen Sie positive Erfahrungen aus alternativen Reisezielen"
     },
     awareness: {
       title: "Bewusstsein schaffen",
       description: "Teilen Sie Informationen und Erfahrungen",
-      point1: "Teilen Sie Ihre Erfahrungen in sozialen Medien",
-      point2: "Sprechen Sie mit lokalen Vertretern",
-      point3: "Unterstützen Sie Organisationen, die für Visumstransparenz arbeiten"
+      point1: "Dokumentieren und teilen Sie Visa-Ablehnungsgeschichten in sozialen Medien",
+      point2: "Kontaktieren Sie Journalisten und Medien, um über Visaprobleme zu berichten",
+      point3: "Erstellen Sie Inhalte, die die Auswirkungen auf Familien und Unternehmen hervorheben"
     },
     legal: {
-      title: "Rechtliche Wege",
+      title: "Rechtliche Interessenvertretung",
       description: "Unterstützen Sie rechtliche Initiativen für faire Behandlung",
-      point1: "Informieren Sie sich über Visumsbestimmungen",
-      point2: "Fordern Sie Erklärungen für Ablehnungen",
-      point3: "Melden Sie illegale Praktiken an die zuständigen Behörden"
+      point1: "Unterstützen Sie Organisationen, die diskriminierende Visapraktiken anfechten",
+      point2: "Dokumentieren Sie Fälle unfairer Behandlung für mögliche rechtliche Schritte",
+      point3: "Setzen Sie sich über rechtliche Kanäle für gegenseitige Visapolitik ein"
     },
     alternatives: {
-      title: "Alternative Ziele",
-      description: "Erwägen Sie diese Länder mit günstigeren Visumspolitiken für türkische Staatsbürger:"
+      title: "Alternative Reiseziele",
+      description: "Berücksichtigen Sie diese Länder mit günstigeren Visabestimmungen für türkische Staatsbürger:"
     },
     contact: {
       title: "Mitmachen",
       description: "Möchten Sie zu dieser Initiative beitragen? Kontaktieren Sie uns mit Ihren Ideen und Vorschlägen.",
       email: "Senden Sie uns eine E-Mail"
     },
-    shareTitle: "Teilen Sie diese Ressource",
-    shareDescription: "Helfen Sie anderen, informierte Entscheidungen zu treffen.",
+    shareTitle: "Teilen Sie Ihre Erfahrung",
+    shareDescription: "Teilen Sie diese Seite in sozialen Medien oder mit Freunden, um mehr Menschen zu erreichen",
     shareButton: "Teilen",
     copyLink: "Link kopieren",
     joinDiscussion: "An Diskussionen teilnehmen"
@@ -393,5 +364,7 @@ export const de = {
     title: "Community-Diskussionen",
     subtitle: "Teilen Sie Ihre Gedanken und Erfahrungen mit anderen.",
     description: "Diskutieren Sie über Visumsanträge, stellen Sie Fragen und teilen Sie Ihre Erfahrungen."
-  }
+  },
+  
+  facts: facts
 };
