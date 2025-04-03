@@ -1,6 +1,8 @@
 
 import React from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { format } from 'date-fns';
+import { UseFormReturn, useWatch } from 'react-hook-form';
+import { CalendarIcon } from 'lucide-react';
 import { 
   FormField,
   FormItem,
@@ -10,10 +12,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import {
-  RadioGroup,
-  RadioGroupItem
-} from '@/components/ui/radio-group';
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -21,16 +19,19 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Textarea } from "@/components/ui/textarea";
-import { useLanguage } from '@/lib/LanguageContext';
-import { VisaResultStatus, EntryType } from '@/types/enums';
-import { FormValues } from './schema';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { CalendarIcon } from 'lucide-react';
-import { format } from 'date-fns';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { VisaResultStatus, EntryType } from '@/types/enums';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/LanguageContext';
+import { FormValues } from './schema';
 
 interface ResultDetailsProps {
   form: UseFormReturn<FormValues>;
@@ -38,106 +39,96 @@ interface ResultDetailsProps {
 
 const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
   const { t } = useLanguage();
-  const watchResultStatus = form.watch('resultStatus');
-  const today = new Date();
   
-  // Set passportReturned to true by default since we're only accepting completed applications
-  React.useEffect(() => {
-    form.setValue('passportReturned', true);
-  }, [form]);
-
+  // Watch for result status changes
+  const resultStatus = useWatch({
+    control: form.control,
+    name: 'resultStatus',
+  });
+  
+  const isApproved = resultStatus === VisaResultStatus.Approved;
+  const isRejected = resultStatus === VisaResultStatus.Rejected;
+  
   return (
-    <>
+    <div className="space-y-6">
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">{t('form.resultTitle')}</h2>
-      </div>
+        {/* Return Date Field - Moved to top */}
+        <FormField
+          control={form.control}
+          name="returnDate"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>{t('form.returnDate')}</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>{t('form.pickDate')}</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) => date > new Date()}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormDescription>
+                {t('form.returnDateDescription')}
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      {/* Passport Return Date Field - Now at the top */}
-      <FormField
-        control={form.control}
-        name="returnDate"
-        render={({ field }) => (
-          <FormItem className="flex flex-col">
-            <FormLabel>{t('form.returnDate')}</FormLabel>
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-full pl-3 text-left font-normal",
-                      !field.value && "text-muted-foreground"
-                    )}
-                  >
-                    {field.value ? (
-                      format(field.value, "PPP")
-                    ) : (
-                      <span>{t('form.pickDate')}</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={field.value as Date}
-                  onSelect={field.onChange}
-                  disabled={(date) => date > today}
-                  initialFocus
-                  className={cn("p-3 pointer-events-auto")}
-                />
-              </PopoverContent>
-            </Popover>
-            <FormDescription>
-              {t('form.returnDateDescription')}
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="resultStatus"
-        render={({ field }) => (
-          <FormItem className="space-y-3">
-            <FormLabel>{t('form.resultStatus')}</FormLabel>
-            <FormControl>
-              <RadioGroup
+        <FormField
+          control={form.control}
+          name="resultStatus"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('form.resultStatus')}</FormLabel>
+              <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-col space-y-1"
               >
-                <FormItem className="flex items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <RadioGroupItem value={VisaResultStatus.Approved} />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    {t('table.approved')}
-                  </FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <RadioGroupItem value={VisaResultStatus.Rejected} />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    {t('table.rejected')}
-                  </FormLabel>
-                </FormItem>
-              </RadioGroup>
-            </FormControl>
-            <FormDescription>
-              {t('form.resultDescription')}
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder={t('form.selectResultStatus')} />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.values(VisaResultStatus).map((status) => (
+                    <SelectItem key={status} value={status}>
+                      {t(`resultStatus.${status.toLowerCase()}`)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                {t('form.resultStatusDescription')}
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      {watchResultStatus === VisaResultStatus.Approved && (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {isApproved && (
+          <>
             <FormField
               control={form.control}
               name="validity"
@@ -146,14 +137,12 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
                   <FormLabel>{t('form.validity')}</FormLabel>
                   <FormControl>
                     <Input 
-                      type="number" 
-                      placeholder={t('form.validityPlaceholder')} 
                       {...field} 
-                      value={field.value || ''} 
+                      placeholder={t('form.validityDaysPlaceholder')} 
                     />
                   </FormControl>
                   <FormDescription>
-                    {t('form.validityDescription')}
+                    {t('form.validityDaysDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -162,38 +151,25 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
 
             <FormField
               control={form.control}
-              name="entryType"
+              name="daysAllowed"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('form.entryType')}</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value || undefined}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder={t('form.selectEntryType')} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem key={EntryType.Single} value={EntryType.Single}>
-                        {t('form.singleEntry')}
-                      </SelectItem>
-                      <SelectItem key={EntryType.Multiple} value={EntryType.Multiple}>
-                        {t('form.multipleEntry')}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>{t('form.daysAllowed')}</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number"
+                      {...field} 
+                      placeholder={t('form.daysAllowedPlaceholder')} 
+                    />
+                  </FormControl>
                   <FormDescription>
-                    {t('form.entryTypeDescription')}
+                    {t('form.daysAllowedDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
               name="visaEndDate"
@@ -206,7 +182,7 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-full pl-3 text-left font-normal",
+                            "pl-3 text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
                         >
@@ -222,10 +198,9 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={field.value as Date}
+                        selected={field.value || undefined}
                         onSelect={field.onChange}
                         initialFocus
-                        className={cn("p-3 pointer-events-auto")}
                       />
                     </PopoverContent>
                   </Popover>
@@ -239,53 +214,58 @@ const ResultDetails: React.FC<ResultDetailsProps> = ({ form }) => {
 
             <FormField
               control={form.control}
-              name="daysAllowed"
+              name="entryType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('form.daysAllowed')}</FormLabel>
-                  <FormControl>
-                    <Input 
-                      type="number" 
-                      placeholder={t('form.daysAllowedPlaceholder')} 
-                      {...field} 
-                      value={field.value || ''} 
-                    />
-                  </FormControl>
+                  <FormLabel>{t('form.entryType')}</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder={t('form.selectEntryType')} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value={EntryType.Single}>{t('form.singleEntry')}</SelectItem>
+                      <SelectItem value={EntryType.Multiple}>{t('form.multipleEntry')}</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormDescription>
-                    {t('form.daysAllowedDescription')}
+                    {t('form.entryTypeDescription')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
-        </>
-      )}
+          </>
+        )}
 
-      {watchResultStatus === VisaResultStatus.Rejected && (
-        <FormField
-          control={form.control}
-          name="rejectionReason"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('form.rejectionReason')}</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder={t('form.rejectionReasonPlaceholder')}
-                  className="resize-none"
-                  {...field}
-                  value={field.value || ''}
-                />
-              </FormControl>
-              <FormDescription>
-                {t('form.rejectionDescription')}
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      )}
-    </>
+        {isRejected && (
+          <FormField
+            control={form.control}
+            name="rejectionReason"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('form.rejectionReason')}</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    placeholder={t('form.rejectionReasonPlaceholder')} 
+                    className="resize-none"
+                    {...field} 
+                  />
+                </FormControl>
+                <FormDescription>
+                  {t('form.rejectionDescription')}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 

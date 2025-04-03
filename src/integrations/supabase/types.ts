@@ -15,6 +15,7 @@ export type Database = {
           city: string
           country: string
           created_at: string
+          days_allowed: number | null
           duration: number
           entry_type: string | null
           id: string
@@ -26,12 +27,14 @@ export type Database = {
           submission_date: string
           updated_at: string
           validity: string | null
+          visa_end_date: string | null
         }
         Insert: {
           appointment_date?: string | null
           city: string
           country: string
           created_at?: string
+          days_allowed?: number | null
           duration: number
           entry_type?: string | null
           id?: string
@@ -43,12 +46,14 @@ export type Database = {
           submission_date: string
           updated_at?: string
           validity?: string | null
+          visa_end_date?: string | null
         }
         Update: {
           appointment_date?: string | null
           city?: string
           country?: string
           created_at?: string
+          days_allowed?: number | null
           duration?: number
           entry_type?: string | null
           id?: string
@@ -60,6 +65,7 @@ export type Database = {
           submission_date?: string
           updated_at?: string
           validity?: string | null
+          visa_end_date?: string | null
         }
         Relationships: []
       }
