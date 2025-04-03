@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
@@ -6,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Card } from '@/components/ui/card';
 import StatsOverview from '@/components/dashboard/StatsOverview';
-import ProcessingTrends from '@/components/ProcessingTrends';
 import FinancialImpact from '@/components/FinancialImpact';
 import LiteApplicationTable from '@/components/LiteApplicationTable';
 import { useStaticStats } from '@/hooks/useStaticStats';
@@ -101,27 +101,27 @@ const Index: React.FC = () => {
         )}
       </section>
       
-      {/* 3. Waiting times for worst cities and economic effects */}
+      {/* 3. Financial Impact and other data (modified to be in one row) */}
       <section className="container py-8 animate-fade-in">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-          <div className="lg:col-span-2">
-            <ProcessingTrends 
-              trendsData={formatStats().trendsLastThreeMonths}
-              worstCities={formatStats().worstCities}
-            />
-          </div>
+          {/* Financial Impact */}
           <div className="lg:col-span-1">
             <FinancialImpact 
               totalAnnualApplications={formatStats().totalAnnualApplications}
               totalAnnualCost={formatStats().totalAnnualCost}
             />
           </div>
+          
+          {/* First card from HomeGraphics (Total Applications) */}
+          <div className="lg:col-span-1">
+            <HomeGraphics showOnlyFirst={true} />
+          </div>
+          
+          {/* Second card from HomeGraphics (German Consulate Data) */}
+          <div className="lg:col-span-1">
+            <HomeGraphics showOnlySecond={true} />
+          </div>
         </div>
-      </section>
-      
-      {/* NEW SECTION: Add the graphics above the table */}
-      <section className="container py-8 animate-fade-in">
-        <HomeGraphics />
       </section>
       
       {/* 4. Last 5 entries in the table */}
