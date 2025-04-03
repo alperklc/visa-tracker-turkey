@@ -1,4 +1,3 @@
-
 export interface GeneralTranslations {
   appName: string;
   tagline?: string;
@@ -44,4 +43,18 @@ export interface GeneralTranslations {
   discussions: string;
   seeAllData: string;
   madeWith: string;
+  overview: string;
+  recentApplications: {
+    community: string;
+    noApplications: string;
+    beFirst: string;
+    submitApplication: string;
+    submit: string;
+  };
+  financial: {
+    title: string;
+    subtitle: string;
+    applications: string;
+    cost: string;
+  };
 }

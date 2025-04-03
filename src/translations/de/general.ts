@@ -1,4 +1,3 @@
-
 import { GeneralTranslations } from '@/types/interfaces/general';
 
 export const general: GeneralTranslations = {
@@ -46,5 +45,18 @@ export const general: GeneralTranslations = {
   discussions: "Diskussionen",
   seeAllData: "Alle Daten anzeigen",
   madeWith: "gemacht mit",
-  overview: "Allgemeiner Überblick"
+  overview: "Allgemeiner Überblick",
+  recentApplications: {
+    community: "Community-Anträge",
+    noApplications: "Noch keine Anträge",
+    beFirst: "Seien Sie der Erste",
+    submitApplication: "Antrag einreichen",
+    submit: "Einreichen"
+  },
+  financial: {
+    title: "Finanzielle Auswirkungen",
+    subtitle: "Wirtschaftliche Kosten der Visumanträge",
+    applications: "Jährliche Anträge",
+    cost: "Jährliche Kosten",
+  }
 };

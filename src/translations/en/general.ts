@@ -1,4 +1,3 @@
-
 import { GeneralTranslations } from '@/types/interfaces/general';
 
 export const general: GeneralTranslations = {
@@ -46,5 +45,18 @@ export const general: GeneralTranslations = {
   discussions: "Discussions",
   seeAllData: "See All Data",
   madeWith: "made with",
-  overview: "General Overview"
+  overview: "General Overview",
+  recentApplications: {
+    community: "Community Applications",
+    noApplications: "No applications yet",
+    beFirst: "Be the first to submit",
+    submitApplication: "Submit Application",
+    submit: "Submit"
+  },
+  financial: {
+    title: "Financial Impact",
+    subtitle: "Economic cost of visa applications",
+    applications: "Annual Applications",
+    cost: "Annual Cost",
+  }
 };
