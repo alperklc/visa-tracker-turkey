@@ -81,27 +81,14 @@ const Index: React.FC = () => {
       {/* 1. Banner on top */}
       <Hero />
       
-      {/* 2. Tiles with application numbers */}
-      <section className="container py-10 animate-fade-in">
-        <h2 className="text-3xl font-bold mb-8 text-center">{t('dashboard.title')}</h2>
-        {loading ? (
-          <div className="animate-pulse grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-24 bg-muted rounded-lg"></div>
-            ))}
-          </div>
-        ) : (
-          <StatsOverview stats={formatStats()} applications={recentApplications} />
-        )}
-        
-        {stats && (
-          <div className="text-center text-sm text-muted-foreground mt-2">
-            {t('dashboard.lastUpdated')}: {new Date(stats.lastUpdated || Date.now()).toLocaleString()}
-          </div>
-        )}
+      {/* 2. General Overview Title (New) */}
+      <section className="container py-8 animate-fade-in">
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          {t('general.overview')}
+        </h2>
       </section>
       
-      {/* 3. Financial Impact and other data (modified to be in one row) */}
+      {/* 3. Financial Impact and other data in one row */}
       <section className="container py-8 animate-fade-in">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* Financial Impact */}
@@ -124,7 +111,29 @@ const Index: React.FC = () => {
         </div>
       </section>
       
-      {/* 4. Last 5 entries in the table */}
+      {/* 4. Stats Overview moved here (Previously "Güncel İstatistikler", now "Sizden Gelen Veriler") */}
+      <section className="container py-10 animate-fade-in">
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          {t('dashboard.dataFromYou')}
+        </h2>
+        {loading ? (
+          <div className="animate-pulse grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-24 bg-muted rounded-lg"></div>
+            ))}
+          </div>
+        ) : (
+          <StatsOverview stats={formatStats()} applications={recentApplications} />
+        )}
+        
+        {stats && (
+          <div className="text-center text-sm text-muted-foreground mt-2">
+            {t('dashboard.lastUpdated')}: {new Date(stats.lastUpdated || Date.now()).toLocaleString()}
+          </div>
+        )}
+      </section>
+      
+      {/* 5. Last 5 entries in the table */}
       <section className="container py-8 animate-fade-in">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">{t('recentApplications.community')}</h2>

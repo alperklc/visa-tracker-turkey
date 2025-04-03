@@ -45,5 +45,6 @@ export const general: GeneralTranslations = {
   reviewEntries: "Einträge überprüfen",
   discussions: "Diskussionen",
   seeAllData: "Alle Daten anzeigen",
-  madeWith: "gemacht mit"
+  madeWith: "gemacht mit",
+  overview: "Allgemeiner Überblick"
 };

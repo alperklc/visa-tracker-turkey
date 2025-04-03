@@ -22,6 +22,7 @@ export const dashboard: DashboardTranslations = {
   topRejectionCountries: "Top Rejection Countries",
   topApprovalCountries: "Top Approval Countries",
   applications: "Applications",
+  dataFromYou: "Data From Your Submissions",
   financial: {
     title: "Financial Impact",
     subtitle: "Economic cost of visa applications",

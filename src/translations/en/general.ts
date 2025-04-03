@@ -1,3 +1,4 @@
+
 import { GeneralTranslations } from '@/types/interfaces/general';
 
 export const general: GeneralTranslations = {
@@ -44,5 +45,6 @@ export const general: GeneralTranslations = {
   reviewEntries: "Review Entries",
   discussions: "Discussions",
   seeAllData: "See All Data",
-  madeWith: "made with"
+  madeWith: "made with",
+  overview: "General Overview"
 };

@@ -22,6 +22,7 @@ export const dashboard: DashboardTranslations = {
   topRejectionCountries: "En Çok Red Veren Ülkeler",
   topApprovalCountries: "En Çok Kabul Veren 5 Ülke",
   applications: "Başvurular",
+  dataFromYou: "Sizden Gelen Veriler",
   financial: {
     title: "Ekonomik Etki",
     subtitle: "Vize başvurularının ekonomik maliyeti",

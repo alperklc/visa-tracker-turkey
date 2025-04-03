@@ -22,6 +22,7 @@ export const dashboard: DashboardTranslations = {
   topRejectionCountries: "Länder mit höchsten Ablehnungsraten",
   topApprovalCountries: "Länder mit höchsten Genehmigungsraten",
   applications: "Anträge",
+  dataFromYou: "Daten aus Ihren Einreichungen",
   financial: {
     title: "Finanzielle Auswirkungen",
     subtitle: "Wirtschaftliche Kosten von Visumanträgen",
