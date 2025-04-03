@@ -22,7 +22,7 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ countryComparisonData
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[180px]">{t('facts.comparison.aspect')}</TableHead>
+            <TableHead className="w-[180px]">{t('facts.aspect')}</TableHead>
             {countryComparisonData.map((country) => (
               <TableHead key={country.country}>
                 <div className="flex items-center gap-2">
