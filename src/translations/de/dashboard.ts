@@ -19,6 +19,9 @@ export const dashboard: DashboardTranslations = {
   pending: "Ausstehend",
   worstCities: "Längste Wartezeiten",
   lastUpdated: "Zuletzt aktualisiert",
+  topRejectionCountries: "Länder mit höchsten Ablehnungsraten",
+  topApprovalCountries: "Länder mit höchsten Genehmigungsraten",
+  applications: "Anträge",
   financial: {
     title: "Finanzielle Auswirkungen",
     subtitle: "Wirtschaftliche Kosten von Visumanträgen",

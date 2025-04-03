@@ -19,6 +19,9 @@ export const dashboard: DashboardTranslations = {
   pending: "Beklemede",
   worstCities: "En Uzun Bekleme Süreleri",
   lastUpdated: "Son Güncelleme",
+  topRejectionCountries: "En Çok Red Veren Ülkeler",
+  topApprovalCountries: "En Çok Kabul Veren 5 Ülke",
+  applications: "Başvurular",
   financial: {
     title: "Ekonomik Etki",
     subtitle: "Vize başvurularının ekonomik maliyeti",

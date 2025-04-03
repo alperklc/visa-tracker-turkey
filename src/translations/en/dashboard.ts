@@ -19,6 +19,9 @@ export const dashboard: DashboardTranslations = {
   pending: "Pending",
   worstCities: "Longest Wait Times",
   lastUpdated: "Last updated",
+  topRejectionCountries: "Top Rejection Countries",
+  topApprovalCountries: "Top Approval Countries",
+  applications: "Applications",
   financial: {
     title: "Financial Impact",
     subtitle: "Economic cost of visa applications",

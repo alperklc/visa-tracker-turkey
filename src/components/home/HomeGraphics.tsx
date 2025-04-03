@@ -38,7 +38,7 @@ const HomeGraphics: React.FC = () => {
     { city: "İzmir", rejectionRate: 13.1 }
   ];
 
-  // Data for the third graphic - Rejection rates by country
+  // Data for rejection rates by country
   const rejectionRateData = [
     { country: "Estonya", rejectionRate: 42.5 },
     { country: "Danimarka", rejectionRate: 39.4 },
@@ -58,6 +58,18 @@ const HomeGraphics: React.FC = () => {
     { country: "Slovakya", rejectionRate: 6.6 }
   ].sort((a, b) => b.rejectionRate - a.rejectionRate);
 
+  // Top 5 countries with highest rejection rates
+  const topRejectionCountries = rejectionRateData.slice(0, 5);
+  
+  // Bottom 5 countries with lowest rejection rates (highest approval rates)
+  const topApprovalCountries = [...rejectionRateData]
+    .slice(-5)
+    .reverse()
+    .map(country => ({
+      country: country.country,
+      approvalRate: (100 - country.rejectionRate).toFixed(1)
+    }));
+
   // Custom formatter for large numbers
   const formatLargeNumber = (num: number) => {
     if (num >= 1000000) {
@@ -70,11 +82,12 @@ const HomeGraphics: React.FC = () => {
 
   return (
     <div className="space-y-8 mb-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* First graphic - Application counts by country */}
+      {/* First row with 3 cards in a row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Application counts by country */}
         <Card>
           <CardHeader>
-            <CardTitle>2023 {t('dashboard.totalApplications')}</CardTitle>
+            <CardTitle>{t('dashboard.totalApplications')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Table>
@@ -98,7 +111,7 @@ const HomeGraphics: React.FC = () => {
           </CardContent>
         </Card>
 
-        {/* Second graphic - Rejection rates by German consulate city */}
+        {/* German consulate rejection rates */}
         <Card>
           <CardHeader>
             <CardTitle>{t('countries.germany')} {t('table.city')} / {t('facts.rejectionRate')}</CardTitle>
@@ -124,73 +137,164 @@ const HomeGraphics: React.FC = () => {
             </Table>
           </CardContent>
         </Card>
+
+        {/* Financial Impact card (moved from bottom to be in the first row) */}
+        <Card className="h-full hover:shadow-md transition-shadow">
+          <CardHeader>
+            <CardTitle className="text-lg font-semibold">{t('financial.title')}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <div className="space-y-1">
+                <span className="text-sm text-muted-foreground">{t('financial.applications')}</span>
+                <div className="text-2xl font-bold">1,054,000</div>
+              </div>
+              
+              <div className="space-y-1 mt-4">
+                <span className="text-sm text-muted-foreground">{t('financial.cost')}</span>
+                <div className="text-2xl font-bold">€619,000,000</div>
+              </div>
+              
+              <div className="bg-accent/30 rounded-lg p-3 mt-4">
+                <div className="text-sm font-medium mb-1">{t('financial.breakdown')}</div>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>{t('financial.visaFee')}:</div>
+                  <div className="text-right font-medium">€80</div>
+                  <div>{t('financial.serviceFee')}:</div>
+                  <div className="text-right font-medium">€35</div>
+                  <div>{t('financial.otherCosts')}:</div>
+                  <div className="text-right font-medium">€185</div>
+                  <div className="font-medium">{t('financial.perVisit')}:</div>
+                  <div className="text-right font-medium">€300</div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Third graphic - Rejection rates by country */}
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('facts.rejectionRateByCountry')}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[400px]">
-            <ChartContainer 
-              config={{
-                approval: {
-                  theme: {
-                    light: "hsl(var(--primary))",
-                    dark: "hsl(var(--primary))",
+      {/* Second row with 2 charts: Top rejection and approval countries */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Top 5 countries with highest rejection rates */}
+        <Card>
+          <CardHeader>
+            <CardTitle>En Çok Red Veren Ülkeler</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[350px]">
+              <ChartContainer 
+                config={{
+                  rejection: {
+                    theme: {
+                      light: "hsl(var(--destructive))",
+                      dark: "hsl(var(--destructive))",
+                    },
                   },
-                },
-                rejection: {
-                  theme: {
-                    light: "hsl(var(--destructive))",
-                    dark: "hsl(var(--destructive))",
-                  },
-                },
-              }}
-            >
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={rejectionRateData}
-                  layout="vertical"
-                  margin={{ top: 10, right: 30, left: 100, bottom: 10 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
-                  <XAxis type="number" domain={[0, 50]} tickFormatter={(value) => `${value}%`} />
-                  <YAxis 
-                    type="category" 
-                    dataKey="country" 
-                    width={90}
-                    tick={{ fontSize: 12 }}
-                  />
-                  <Tooltip
-                    content={({ active, payload }) => {
-                      if (active && payload && payload.length) {
-                        return (
-                          <div className="rounded-lg border bg-background p-2 shadow-sm">
-                            <div className="font-medium">{payload[0].payload.country}</div>
-                            <div className="text-muted-foreground">
-                              {t('facts.rejectionRate')}: {payload[0].value}%
-                            </div>
-                          </div>
-                        );
-                      }
-                      return null;
-                    }}
-                  />
-                  <Bar 
-                    dataKey="rejectionRate" 
-                    fill="hsl(var(--destructive))" 
-                    radius={[0, 4, 4, 0]}
+                }}
+              >
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={topRejectionCountries}
+                    layout="vertical"
+                    margin={{ top: 10, right: 30, left: 80, bottom: 10 }}
                   >
-                    <LabelList dataKey="rejectionRate" position="right" formatter={(value: number) => `${value}%`} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </div>
-        </CardContent>
-      </Card>
+                    <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                    <XAxis type="number" domain={[0, 50]} tickFormatter={(value) => `${value}%`} />
+                    <YAxis 
+                      type="category" 
+                      dataKey="country" 
+                      width={70}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length) {
+                          return (
+                            <div className="rounded-lg border bg-background p-2 shadow-sm">
+                              <div className="font-medium">{payload[0].payload.country}</div>
+                              <div className="text-muted-foreground">
+                                {t('facts.rejectionRate')}: {payload[0].value}%
+                              </div>
+                            </div>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
+                    <Bar 
+                      dataKey="rejectionRate" 
+                      fill="hsl(var(--destructive))" 
+                      radius={[0, 4, 4, 0]}
+                    >
+                      <LabelList dataKey="rejectionRate" position="right" formatter={(value: number) => `${value}%`} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Top 5 countries with highest approval rates */}
+        <Card>
+          <CardHeader>
+            <CardTitle>En Çok Kabul Veren 5 Ülke</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[350px]">
+              <ChartContainer 
+                config={{
+                  approval: {
+                    theme: {
+                      light: "hsl(var(--success))",
+                      dark: "hsl(var(--success))",
+                    },
+                  },
+                }}
+              >
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={topApprovalCountries}
+                    layout="vertical"
+                    margin={{ top: 10, right: 30, left: 80, bottom: 10 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                    <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
+                    <YAxis 
+                      type="category" 
+                      dataKey="country" 
+                      width={70}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length) {
+                          return (
+                            <div className="rounded-lg border bg-background p-2 shadow-sm">
+                              <div className="font-medium">{payload[0].payload.country}</div>
+                              <div className="text-muted-foreground">
+                                {t('facts.approvalRate')}: {payload[0].value}%
+                              </div>
+                            </div>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
+                    <Bar 
+                      dataKey="approvalRate" 
+                      fill="#4ade80" 
+                      radius={[0, 4, 4, 0]}
+                    >
+                      <LabelList dataKey="approvalRate" position="right" formatter={(value: string) => `${value}%`} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };

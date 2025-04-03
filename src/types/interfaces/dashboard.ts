@@ -17,6 +17,9 @@ export interface DashboardTranslations {
   pending: string;
   worstCities: string;
   lastUpdated: string;
+  topRejectionCountries: string;
+  topApprovalCountries: string;
+  applications: string;
   financial: {
     title: string;
     subtitle: string;
