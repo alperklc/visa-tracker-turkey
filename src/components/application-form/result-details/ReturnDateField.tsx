@@ -60,8 +60,16 @@ const ReturnDateField: React.FC<ReturnDateFieldProps> = ({ form }) => {
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) => date > new Date()}
+                disabled={(date) => {
+                  // Disable future dates
+                  if (date > new Date()) return true;
+                  
+                  // Disable dates before submission date
+                  const submissionDate = form.getValues('submissionDate');
+                  return submissionDate ? date < submissionDate : false;
+                }}
                 initialFocus
+                className={cn("p-3 pointer-events-auto")}
               />
             </PopoverContent>
           </Popover>

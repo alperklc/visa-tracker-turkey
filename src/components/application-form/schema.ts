@@ -1,3 +1,4 @@
+
 import * as z from 'zod';
 import { Country } from '@/types/countries';
 import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
@@ -80,8 +81,13 @@ export const applicationSchema = z.object({
   // Appointment Details
   submissionDate: z.date({
     required_error: "Please select a submission date",
+  }).refine(date => date <= new Date(), {
+    message: "Submission date cannot be in the future",
   }),
-  appointmentDate: z.date().optional(),
+  appointmentDate: z.date().optional()
+    .refine(date => !date || date <= new Date(), {
+      message: "Appointment date cannot be in the future",
+    }),
   sameAppointmentDate: z.boolean().default(true),
   
   // Result Details
@@ -97,23 +103,57 @@ export const applicationSchema = z.object({
   validity: z.string().optional(),
   entryType: z.string().optional(),
   rejectionReason: z.string().optional(),
-  visaEndDate: z.date().optional(),
-  visaStartDate: z.date().optional(),
+  visaEndDate: z.date().optional()
+    .refine(date => !date || date <= new Date().setFullYear(new Date().getFullYear() + 10), {
+      message: "Visa end date cannot be more than 10 years in the future",
+    }),
+  visaStartDate: z.date().optional()
+    .refine(date => !date || date <= new Date().setFullYear(new Date().getFullYear() + 10), {
+      message: "Visa start date cannot be more than 10 years in the future",
+    }),
   
   // Captcha
   captcha: z.string().min(1, {
     message: "Please complete the captcha verification"
   }),
-}).refine((data) => {
-  // Only validate if both dates are present
-  if (data.visaStartDate && data.visaEndDate) {
-    return data.visaStartDate <= data.visaEndDate;
+}).refine(
+  // Ensure appointment date is after or equal to submission date
+  (data) => {
+    if (data.sameAppointmentDate) return true;
+    if (data.appointmentDate && data.submissionDate) {
+      return data.appointmentDate >= data.submissionDate;
+    }
+    return true;
+  },
+  {
+    message: "Appointment date must be on or after the submission date",
+    path: ["appointmentDate"],
   }
-  return true;
-}, {
-  message: "Start date cannot be after end date",
-  path: ["visaStartDate"]
-});
+).refine(
+  // Ensure return date is after or equal to submission date
+  (data) => {
+    if (data.returnDate && data.submissionDate) {
+      return data.returnDate >= data.submissionDate;
+    }
+    return true;
+  },
+  {
+    message: "Return date must be on or after the submission date",
+    path: ["returnDate"],
+  }
+).refine(
+  // Validate visa start and end dates
+  (data) => {
+    if (data.visaStartDate && data.visaEndDate) {
+      return data.visaStartDate <= data.visaEndDate;
+    }
+    return true;
+  },
+  {
+    message: "Visa start date cannot be after visa end date",
+    path: ["visaStartDate"],
+  }
+);
 
 // Export the form type
 export type ApplicationForm = z.infer<typeof applicationSchema>;

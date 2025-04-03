@@ -60,8 +60,16 @@ const VisaDateFields: React.FC<VisaDateFieldsProps> = ({ form }) => {
                 <Calendar
                   mode="single"
                   selected={field.value || undefined}
-                  onSelect={field.onChange}
+                  onSelect={(date) => {
+                    field.onChange(date);
+                    // If end date is set and is before the new start date, update it
+                    const endDate = form.getValues('visaEndDate');
+                    if (date && endDate && endDate < date) {
+                      form.setValue('visaEndDate', date);
+                    }
+                  }}
                   initialFocus
+                  className={cn("p-3 pointer-events-auto")}
                 />
               </PopoverContent>
             </Popover>
@@ -103,7 +111,12 @@ const VisaDateFields: React.FC<VisaDateFieldsProps> = ({ form }) => {
                   mode="single"
                   selected={field.value || undefined}
                   onSelect={field.onChange}
+                  disabled={(date) => {
+                    const startDate = form.getValues('visaStartDate');
+                    return startDate ? date < startDate : false;
+                  }}
                   initialFocus
+                  className={cn("p-3 pointer-events-auto")}
                 />
               </PopoverContent>
             </Popover>
