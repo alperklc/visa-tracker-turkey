@@ -3,6 +3,16 @@ import React from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { 
+  LineChart, 
+  Line, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer 
+} from 'recharts';
 
 interface HomeGraphicsProps {
   showOnlyFirst?: boolean;
@@ -15,13 +25,18 @@ const HomeGraphics: React.FC<HomeGraphicsProps> = ({
 }) => {
   const { t } = useLanguage();
 
-  // Data for the first graphic - Approval rates by country
-  const approvalRateData = [
-    { country: "Çin", rate: 95.6 },
-    { country: "Türkiye", rate: 83.2 },
-    { country: "Hindistan", rate: 88.4 },
-    { country: "Fas", rate: 78.9 },
-    { country: "Rusya", rate: 82.1 }
+  // Data for the first graphic - Schengen visa applications for Turkish residents (2014-2023)
+  const schengenVisaData = [
+    { year: "2014", applications: 813339, approved: 775532, denied: 35971 },
+    { year: "2015", applications: 900789, approved: 863336, denied: 34956 },
+    { year: "2016", applications: 937487, approved: 892639, denied: 41353 },
+    { year: "2017", applications: 971710, approved: 905021, denied: 63122 },
+    { year: "2018", applications: 879240, approved: 800706, denied: 74321 },
+    { year: "2019", applications: 906862, approved: 813498, denied: 87651 },
+    { year: "2020", applications: 229282, approved: 198312, denied: 28826 },
+    { year: "2021", applications: 271977, approved: 221125, denied: 45016 },
+    { year: "2022", applications: 778409, approved: 647691, denied: 120876 },
+    { year: "2023", applications: 1055885, approved: 881257, denied: 169514 },
   ];
 
   // Data for the second graphic - Rejection rates by German consulate city
@@ -36,27 +51,40 @@ const HomeGraphics: React.FC<HomeGraphicsProps> = ({
     return (
       <Card>
         <CardHeader>
-          <CardTitle>{t('dashboard.approvalRate')}</CardTitle>
+          <CardTitle>{t('facts.schengenVisaTrends')}</CardTitle>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{t('table.country')}</TableHead>
-                <TableHead className="text-right">{t('dashboard.approvalRate')} (%)</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {approvalRateData.map((item) => (
-                <TableRow key={item.country}>
-                  <TableCell>{item.country}</TableCell>
-                  <TableCell className="text-right font-medium">
-                    {item.rate}%
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <CardContent className="h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart
+              data={schengenVisaData}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="year" />
+              <YAxis />
+              <Tooltip formatter={(value) => new Intl.NumberFormat().format(value)} />
+              <Legend />
+              <Line 
+                type="monotone" 
+                dataKey="applications" 
+                name={t('facts.applications')}
+                stroke="rgb(54,162,235)" 
+                activeDot={{ r: 8 }} 
+              />
+              <Line 
+                type="monotone" 
+                dataKey="approved" 
+                name={t('dashboard.approved')}
+                stroke="rgb(105,216,65)" 
+              />
+              <Line 
+                type="monotone" 
+                dataKey="denied" 
+                name={t('dashboard.rejected')}
+                stroke="rgb(255,99,132)" 
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </CardContent>
       </Card>
     );
@@ -98,30 +126,43 @@ const HomeGraphics: React.FC<HomeGraphicsProps> = ({
     <div className="space-y-8 mb-10">
       {/* First row with 3 cards in a row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Approval rates by country */}
+        {/* Schengen visa trends for Turkish residents */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('dashboard.approvalRate')}</CardTitle>
+            <CardTitle>{t('facts.schengenVisaTrends')}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t('table.country')}</TableHead>
-                  <TableHead className="text-right">{t('dashboard.approvalRate')} (%)</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {approvalRateData.map((item) => (
-                  <TableRow key={item.country}>
-                    <TableCell>{item.country}</TableCell>
-                    <TableCell className="text-right font-medium">
-                      {item.rate}%
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <CardContent className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={schengenVisaData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip formatter={(value) => new Intl.NumberFormat().format(value)} />
+                <Legend />
+                <Line 
+                  type="monotone" 
+                  dataKey="applications" 
+                  name={t('facts.applications')}
+                  stroke="rgb(54,162,235)" 
+                  activeDot={{ r: 8 }} 
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="approved" 
+                  name={t('dashboard.approved')}
+                  stroke="rgb(105,216,65)" 
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="denied" 
+                  name={t('dashboard.rejected')}
+                  stroke="rgb(255,99,132)" 
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
 
