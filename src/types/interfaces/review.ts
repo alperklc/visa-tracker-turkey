@@ -21,6 +21,8 @@ export interface ReviewTranslations {
   seeall: string;
   noApplicationsFound: string;
   applications: string;
+  exportCSV: string;
+  exportExcel: string;
   common: {
     refresh: string;
   };

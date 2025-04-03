@@ -1,3 +1,4 @@
+
 import { ReviewTranslations } from '@/types/interfaces/review';
 
 export const review: ReviewTranslations = {
@@ -22,6 +23,8 @@ export const review: ReviewTranslations = {
   seeall: "See All",
   noApplicationsFound: "No applications found",
   applications: "Applications",
+  exportCSV: "Export as CSV",
+  exportExcel: "Export as Excel",
   common: {
     refresh: "Refresh"
   }
