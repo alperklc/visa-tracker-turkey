@@ -1,3 +1,4 @@
+
 import * as z from 'zod';
 import { Country } from '@/types/countries';
 import { ApplicationCenterCity, PurposeOfVisit } from '@/types/enums';
@@ -85,12 +86,20 @@ export const applicationSchema = z.object({
   sameAppointmentDate: z.boolean().default(true),
   
   // Result Details
-  passportReturned: z.boolean().default(false),
-  returnDate: z.date().optional(),
-  resultStatus: z.string().optional(),
+  passportReturned: z.boolean().default(true), // Always true now
+  returnDate: z.date({
+    required_error: "Please select a return date",
+  }).refine(date => date <= new Date(), {
+    message: "Return date cannot be in the future",
+  }),
+  resultStatus: z.string({
+    required_error: "Please select a result status",
+  }),
   validity: z.string().optional(),
   entryType: z.string().optional(),
   rejectionReason: z.string().optional(),
+  visaEndDate: z.date().optional(),
+  daysAllowed: z.coerce.number().optional(),
   
   // Captcha
   captcha: z.string().min(1, {

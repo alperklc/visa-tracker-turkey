@@ -57,4 +57,10 @@ export interface FormTranslations {
   returnDateDescription?: string;
   passportReturned?: string;
   passportReturnedDescription?: string;
+  visaEndDate?: string;
+  visaEndDateDescription?: string;
+  daysAllowed?: string;
+  daysAllowedDescription?: string;
+  daysAllowedPlaceholder?: string;
+  futureReturnDateError?: string;
 }

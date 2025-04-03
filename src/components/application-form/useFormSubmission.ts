@@ -14,6 +14,15 @@ export const useFormSubmission = () => {
     setIsSubmitting(true);
     
     try {
+      // Prepare the data for submission, making sure returnDate is not in the future
+      const today = new Date();
+      if (data.returnDate && data.returnDate > today) {
+        throw new Error(t('form.futureReturnDateError'));
+      }
+      
+      // Always set passportReturned to true
+      data.passportReturned = true;
+      
       // Call our Supabase edge function to submit the application
       const { data: responseData, error } = await supabase.functions.invoke('submit-application', {
         body: data

@@ -26,7 +26,7 @@ serve(async (req) => {
     console.log('Received application data:', body);
 
     // Validate required fields
-    const requiredFields = ['country', 'city', 'duration', 'purpose', 'submissionDate'];
+    const requiredFields = ['country', 'city', 'duration', 'purpose', 'submissionDate', 'returnDate', 'resultStatus'];
     for (const field of requiredFields) {
       if (!body[field]) {
         return new Response(
@@ -44,12 +44,14 @@ serve(async (req) => {
       purpose: body.purpose,
       submission_date: body.submissionDate,
       appointment_date: body.sameAppointmentDate ? body.submissionDate : body.appointmentDate,
-      passport_returned: body.passportReturned || false,
-      return_date: body.passportReturned ? body.returnDate : null,
+      passport_returned: true, // Always true now
+      return_date: body.returnDate,
       result_status: body.resultStatus,
       validity: body.validity,
       entry_type: body.entryType,
       rejection_reason: body.rejectionReason,
+      visa_end_date: body.visaEndDate || null,
+      days_allowed: body.daysAllowed || null
     };
 
     // Insert data into the visa_applications table
