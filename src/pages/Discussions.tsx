@@ -65,9 +65,9 @@ const Discussions: React.FC = () => {
     <Layout className="py-12">
       <div className="container max-w-4xl">
         <div className="text-center mb-12 animate-slide-down">
-          <h1 className="text-3xl font-bold mb-4">{t('discussions.title')}</h1>
+          <h1 className="text-3xl font-bold mb-4">{t('discussion.title')}</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t('discussions.subtitle')}
+            {t('discussion.subtitle')}
           </p>
         </div>
         
@@ -75,10 +75,10 @@ const Discussions: React.FC = () => {
           <CardHeader className="bg-primary/5">
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5" />
-              {t('discussions.community')}
+              {t('discussion.community')}
             </CardTitle>
             <CardDescription>
-              {t('discussions.description')}
+              {t('discussion.description')}
             </CardDescription>
           </CardHeader>
           <CardContent className="py-6">
