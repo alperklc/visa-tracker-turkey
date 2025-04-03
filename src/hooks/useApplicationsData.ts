@@ -68,41 +68,44 @@ export const useApplicationsData = (initialFilter: Partial<ApplicationsFilter> =
         params.append('search', filter.search);
       }
 
-      // The proper way to use URL parameters with supabase functions
-      const url = `get-applications?${params.toString()}`;
-      const { data: responseData, error } = await supabase.functions.invoke(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
+      // Fetch applications directly from the table as a temporary solution
+      const { data, error } = await supabase
+        .from('visa_applications')
+        .select('*')
+        .order(filter.sortBy, { ascending: filter.sortOrder === 'asc' })
+        .range(
+          (filter.page - 1) * filter.pageSize,
+          filter.page * filter.pageSize - 1
+        );
 
       if (error) {
         throw new Error(error.message);
       }
 
-      const response = responseData as ApplicationsResponse;
-      
-      // Convert dates from strings to Date objects
-      const formattedApplications = response.data.map(app => ({
-        ...app,
-        applicationSubmitDate: new Date(app.submission_date),
-        appointmentDate: app.appointment_date ? new Date(app.appointment_date) : null,
-        passportReturnDate: app.return_date ? new Date(app.return_date) : null,
-        result: app.result_status ? {
-          status: app.result_status,
-          validity: app.validity,
-          entryType: app.entry_type,
-          rejectionReason: app.rejection_reason
-        } : null,
-        createdAt: new Date(app.created_at)
-      }));
+      // Get total count for pagination
+      const { count, error: countError } = await supabase
+        .from('visa_applications')
+        .select('*', { count: 'exact', head: true });
 
-      setApplications(formattedApplications);
-      setPagination(response.pagination);
+      if (countError) {
+        console.warn('Error fetching count:', countError);
+      }
+
+      const totalCount = count || 0;
+      const totalPages = Math.ceil(totalCount / filter.pageSize);
+
+      // Set the applications and pagination
+      setApplications(data || []);
+      setPagination({
+        page: filter.page,
+        pageSize: filter.pageSize,
+        total: totalCount,
+        totalPages: totalPages > 0 ? totalPages : 1
+      });
     } catch (err) {
       console.error('Error fetching applications:', err);
       setError(err instanceof Error ? err : new Error('Failed to fetch applications'));
+      setApplications([]);
     } finally {
       setLoading(false);
     }
