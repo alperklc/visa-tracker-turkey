@@ -79,27 +79,51 @@ export const useApplicationsData = (initialFilter: Partial<ApplicationsFilter> =
 
       const response = responseData as ApplicationsResponse;
       
-      // Convert dates from strings to Date objects
-      const formattedApplications = response.data.map(app => ({
-        ...app,
-        applicationSubmitDate: app.submission_date ? new Date(app.submission_date) : null,
-        appointmentDate: app.appointment_date ? new Date(app.appointment_date) : null,
-        passportReturnDate: app.return_date ? new Date(app.return_date) : null,
-        result: app.result_status ? {
-          status: app.result_status,
-          validity: app.validity,
-          entryType: app.entry_type,
-          rejectionReason: app.rejection_reason
-        } : null,
-        createdAt: new Date(app.created_at)
-      }));
+      if (!response || !response.data || !Array.isArray(response.data)) {
+        console.error('Invalid response format:', response);
+        throw new Error('Invalid response format from server');
+      }
+      
+      // Convert dates from strings to Date objects and ensure all required fields exist
+      const formattedApplications = response.data.map(app => {
+        if (!app) return null;
+        
+        return {
+          id: app.id || `temp-${Math.random().toString(36).substring(2, 9)}`,
+          country: app.country || '',
+          city: app.city || '',
+          purpose: app.purpose || '',
+          applicationSubmitDate: app.submission_date ? new Date(app.submission_date) : null,
+          appointmentDate: app.appointment_date ? new Date(app.appointment_date) : null,
+          passportReturnDate: app.return_date ? new Date(app.return_date) : null,
+          result: app.result_status ? {
+            status: app.result_status,
+            validity: app.validity || '',
+            entryType: app.entry_type || '',
+            rejectionReason: app.rejection_reason || ''
+          } : null,
+          createdAt: app.created_at ? new Date(app.created_at) : new Date(),
+          duration: app.duration || 0
+        };
+      }).filter(Boolean); // Remove any null entries
 
       setApplications(formattedApplications);
-      setPagination(response.pagination);
+      setPagination(response.pagination || {
+        page: filter.page,
+        pageSize: filter.pageSize,
+        total: formattedApplications.length,
+        totalPages: Math.ceil(formattedApplications.length / filter.pageSize) || 1
+      });
     } catch (err) {
       console.error('Error fetching applications:', err);
       setError(err instanceof Error ? err : new Error('Failed to fetch applications'));
       setApplications([]);
+      setPagination({
+        page: 1,
+        pageSize: 10,
+        total: 0,
+        totalPages: 1
+      });
     } finally {
       setLoading(false);
     }

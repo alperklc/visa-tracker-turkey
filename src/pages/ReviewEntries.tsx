@@ -1,13 +1,17 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import ApplicationTable from '@/components/ApplicationTable';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { RefreshCw } from 'lucide-react';
+import { useApplicationsData } from '@/hooks/useApplicationsData';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
 
 const ReviewEntries: React.FC = () => {
   const { t } = useLanguage();
+  const { refresh, error } = useApplicationsData();
   
   return (
     <Layout className="py-12">
@@ -19,8 +23,18 @@ const ReviewEntries: React.FC = () => {
           </p>
         </div>
         
+        {error && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              {error.message || 'An error occurred while loading applications'}
+            </AlertDescription>
+          </Alert>
+        )}
+        
         <div className="flex justify-end mb-4">
-          <Button variant="outline" size="sm" className="gap-2">
+          <Button variant="outline" size="sm" className="gap-2" onClick={refresh}>
             <RefreshCw className="h-4 w-4" />
             {t('review.common.refresh')}
           </Button>

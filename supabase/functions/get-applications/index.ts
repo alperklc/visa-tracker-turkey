@@ -57,12 +57,21 @@ serve(async (req) => {
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;
     
+    // Make sure we're selecting ALL fields from the table
     const { data, error } = await query
+      .select('*') // Explicitly select all fields
       .order(sortBy, { ascending: sortOrder === 'asc' })
       .range(from, to);
     
     if (error) {
       throw new Error(`Data fetch error: ${error.message}`);
+    }
+
+    // Log the first item for debugging
+    if (data && data.length > 0) {
+      console.log('First item data structure:', JSON.stringify(data[0], null, 2));
+    } else {
+      console.log('No data returned from query');
     }
     
     return new Response(

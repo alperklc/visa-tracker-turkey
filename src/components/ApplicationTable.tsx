@@ -39,6 +39,10 @@ const ApplicationTable: React.FC = () => {
   } = useApplicationsData();
   
   const getProcessingDays = (app: any) => {
+    if (!app || !app.applicationSubmitDate) {
+      return 0; // Default if no valid dates
+    }
+    
     if (!app.passportReturnDate) {
       const today = new Date();
       return Math.floor((today.getTime() - app.applicationSubmitDate.getTime()) / (1000 * 60 * 60 * 24));
@@ -47,6 +51,8 @@ const ApplicationTable: React.FC = () => {
   };
 
   const getRowColorClass = (app: any) => {
+    if (!app) return "";
+    
     // First check if the application is completed and has a result
     if (app.result) {
       if (app.result.status === "Approved") return "bg-green-100"; // Light green for approved
@@ -67,7 +73,7 @@ const ApplicationTable: React.FC = () => {
   };
   
   const getResultBadge = (app: any) => {
-    if (!app.result) return <Badge variant="outline">{t('table.pending')}</Badge>;
+    if (!app || !app.result) return <Badge variant="outline">{t('table.pending')}</Badge>;
     
     if (app.result.status === "Approved") {
       return <Badge className="bg-green-500">{t('table.approved')}</Badge>;
@@ -294,18 +300,24 @@ const ApplicationTable: React.FC = () => {
               </TableRow>
             ) : (
               applications.map((app) => (
-                <TableRow key={app.id} className={getRowColorClass(app)}>
+                <TableRow key={app?.id || 'unknown'} className={getRowColorClass(app)}>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <CountryFlag country={app.country} size={20} />
-                      {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
-                    </div>
+                    {app?.country ? (
+                      <div className="flex items-center gap-2">
+                        <CountryFlag country={app.country} size={20} />
+                        {t(`countries.${app.country.replace(/\s+/g, '').toLowerCase()}`)}
+                      </div>
+                    ) : (
+                      'Unknown'
+                    )}
                   </TableCell>
-                  <TableCell>{app.city}</TableCell>
-                  <TableCell>{t(`purpose.${app.purpose.toLowerCase()}`)}</TableCell>
-                  <TableCell>{formatDate(app.applicationSubmitDate)}</TableCell>
-                  <TableCell>{formatDate(app.appointmentDate)}</TableCell>
-                  <TableCell>{formatDate(app.passportReturnDate)}</TableCell>
+                  <TableCell>{app?.city || 'Unknown'}</TableCell>
+                  <TableCell>
+                    {app?.purpose ? t(`purpose.${app.purpose.toLowerCase()}`) : 'Unknown'}
+                  </TableCell>
+                  <TableCell>{formatDate(app?.applicationSubmitDate || null)}</TableCell>
+                  <TableCell>{formatDate(app?.appointmentDate || null)}</TableCell>
+                  <TableCell>{formatDate(app?.passportReturnDate || null)}</TableCell>
                   <TableCell>
                     <Badge 
                       variant={getProcessingDays(app) > 90 ? "destructive" : "outline"}
