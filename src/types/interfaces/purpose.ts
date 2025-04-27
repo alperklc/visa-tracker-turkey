@@ -2,7 +2,7 @@
 export interface PurposeTranslations {
   tourism: string;
   business: string;
-  familyReunification: string;
+  familyreunification: string;
   visit: string;
   transit: string;
   study: string;

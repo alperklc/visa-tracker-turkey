@@ -8,7 +8,6 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from '@/components/ui/form';
 import { Calendar } from '@/components/ui/calendar';
@@ -73,9 +72,6 @@ const ReturnDateField: React.FC<ReturnDateFieldProps> = ({ form }) => {
               />
             </PopoverContent>
           </Popover>
-          <FormDescription>
-            {t('form.returnDateDescription')}
-          </FormDescription>
           <FormMessage />
         </FormItem>
       )}

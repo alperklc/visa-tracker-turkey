@@ -73,7 +73,7 @@ const ApplicationTableRow: React.FC<ApplicationTableRowProps> = ({ application }
       </TableCell>
       <TableCell>{application?.city || 'Unknown'}</TableCell>
       <TableCell>
-        {application?.purpose ? t(`purpose.${application.purpose.toLowerCase()}`) : 'Unknown'}
+        {application?.purpose ? t(`purposes.${application.purpose.toLowerCase()}`) : 'Unknown'}
       </TableCell>
       <TableCell>{formatDate(application?.applicationSubmitDate || null)}</TableCell>
       <TableCell>{formatDate(application?.appointmentDate || null)}</TableCell>

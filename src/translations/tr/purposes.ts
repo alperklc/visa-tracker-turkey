@@ -3,7 +3,7 @@ import { PurposeTranslations } from '@/types/interfaces/purpose';
 export const purposes: PurposeTranslations = {
   tourism: "Turizm",
   business: "İş",
-  familyReunification: "Aile Birleşimi",
+  familyreunification: "Aile Birleşimi",
   visit: "Ziyaret",
   transit: "Transit",
   study: "Eğitim",

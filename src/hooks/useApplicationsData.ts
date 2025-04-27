@@ -27,7 +27,7 @@ export const useApplicationsData = (initialFilter: Partial<ApplicationsFilter> =
   const [filter, setFilter] = useState<ApplicationsFilter>({
     page: initialFilter.page || 1,
     pageSize: initialFilter.pageSize || 10,
-    sortBy: initialFilter.sortBy || 'created_at',
+    sortBy: initialFilter.sortBy || 'return_date',
     sortOrder: initialFilter.sortOrder || 'desc',
     country: initialFilter.country,
     purpose: initialFilter.purpose,

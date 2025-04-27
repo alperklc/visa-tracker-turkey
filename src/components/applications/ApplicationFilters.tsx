@@ -2,7 +2,7 @@
 import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Country } from '@/types/countries';
+import { CountriesOnForm, Country } from '@/types/countries';
 import { PurposeOfVisit } from '@/types/enums';
 import { useLanguage } from '@/lib/LanguageContext';
 import CountryFlag from '../CountryFlag';
@@ -59,10 +59,10 @@ const ApplicationFilters: React.FC<ApplicationFiltersProps> = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="All">{t('review.allCountries')}</SelectItem>
-            {Object.values(Country).map((country) => (
+            {Object.values(CountriesOnForm).map((country) => (
               <SelectItem key={country as string} value={country as string}>
                 <div className="flex items-center gap-2">
-                  <CountryFlag country={country as Country} size={16} />
+                  <CountryFlag country={country as CountriesOnForm} size={16} />
                   {t(`countries.${(country as string).replace(/\s+/g, '').toLowerCase()}`)}
                 </div>
               </SelectItem>
@@ -84,7 +84,7 @@ const ApplicationFilters: React.FC<ApplicationFiltersProps> = ({
             <SelectItem value="All">{t('review.allPurposes')}</SelectItem>
             {Object.values(PurposeOfVisit).map((purpose) => (
               <SelectItem key={purpose} value={purpose}>
-                {t(`purpose.${purpose.toLowerCase()}`)}
+                {t(`purposes.${purpose.toLowerCase()}`)}
               </SelectItem>
             ))}
           </SelectContent>

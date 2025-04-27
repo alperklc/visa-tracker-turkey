@@ -1,7 +1,7 @@
 export enum PurposeOfVisit {
   Tourism = "Tourism",
   Business = "Business",
-  FamilyReunification = "Family Reunification",
+  FamilyReunification = "FamilyReunification",
   Visit = "Visit",
   Study = "Study",
   Work = "Work",

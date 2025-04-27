@@ -54,7 +54,9 @@ const AppointmentDetails: React.FC<AppointmentDetailsProps> = ({ form }) => {
             <FormLabel>{t('form.appointmentDateQuestion')}</FormLabel>
             <FormControl>
               <RadioGroup
-                onValueChange={(value) => field.onChange(value === "true")}
+                onValueChange={(value) => {
+                  field.onChange(value === "true")
+                }}
                 defaultValue={field.value ? "true" : "false"}
                 className="flex flex-col space-y-1"
               >
@@ -72,9 +74,6 @@ const AppointmentDetails: React.FC<AppointmentDetailsProps> = ({ form }) => {
                 </div>
               </RadioGroup>
             </FormControl>
-            <FormDescription>
-              {t('form.sameAppointmentDateDescription')}
-            </FormDescription>
           </FormItem>
         )}
       />
