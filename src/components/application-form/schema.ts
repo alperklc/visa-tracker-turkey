@@ -51,13 +51,6 @@ export const cityToCountriesMap: Record<ApplicationCenterCity, Country[]> = {
     Country.Germany,
     Country.France
   ],
-  [ApplicationCenterCity.Moscow]: [Country.Turkey],
-  [ApplicationCenterCity.SaintPetersburg]: [Country.Turkey],
-  [ApplicationCenterCity.Caracas]: [Country.Turkey],
-  [ApplicationCenterCity.Tbilisi]: [Country.Turkey],
-  [ApplicationCenterCity.Batumi]: [Country.Turkey],
-  [ApplicationCenterCity.Skopje]: [Country.Turkey],
-  [ApplicationCenterCity.Chisinau]: [Country.Turkey],
 };
 
 // Form validation schema

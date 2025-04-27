@@ -22,7 +22,7 @@ const ApplicationFormComponent = () => {
   const form = useForm<ApplicationForm>({
     resolver: zodResolver(applicationSchema),
     defaultValues: {
-      duration: 0,
+      sameAppointmentDate: false,
       passportReturned: false,
     },
     mode: 'onChange',
